@@ -1,0 +1,161 @@
+{
+   "Version" : 0.2,
+   "ModuleName" : "naji_gui",
+   "Options" : {
+      "Warnings" : "All",
+      "TargetType" : "Executable",
+      "TargetFileName" : "naji_gui",
+      "Libraries" : [
+         "ecere"
+      ]
+   },
+   "Configurations" : [
+      {
+         "Name" : "Debug",
+         "Options" : {
+            "Debug" : true,
+            "Optimization" : "None",
+            "PreprocessorDefinitions" : [
+               "_DEBUG"
+            ]
+         }
+      },
+      {
+         "Name" : "Release",
+         "Options" : {
+            "Debug" : false,
+            "MemoryGuard" : true,
+            "NoLineNumbers" : true,
+            "Optimization" : "Speed"
+         }
+      },
+      {
+         "Name" : "Static",
+         "Options" : {
+            "MemoryGuard" : true,
+            "NoLineNumbers" : true,
+            "Optimization" : "Speed",
+            "PreprocessorDefinitions" : [
+               "ECERE_STATIC"
+            ],
+            "ObjectsDirectory" : "",
+            "Libraries" : [
+               "ecereVanilla",
+               "winmm",
+               "kernel32",
+               "user32",
+               "gdi32",
+               "mpr",
+               "advapi32",
+               "shell32",
+               "imm32",
+               "png",
+               "z",
+               "naji_gui-icon.o"
+            ]
+         }
+      }
+   ],
+   "Files" : [
+      {
+         "FileName" : "najiform.ec",
+         "Configurations" : [
+            {
+               "Name" : "Static",
+               "Options" : {
+                  "Optimization" : "Speed"
+               }
+            }
+         ]
+      },
+      "najicmds.ec",
+      "naji_ttt.ec",
+      "naji_uni.eh",
+      "naji_gui.eh",
+      "najicalc.ec",
+      "najihelp.ec",
+      "naji_mp3.c"
+   ],
+   "ResourcesPath" : "",
+   "Resources" : [
+      {
+         "Folder" : "ecere",
+         "Files" : [
+            {
+               "Folder" : "actions",
+               "Files" : [
+                  "../../ecereRes/actions/folderNew.png",
+                  "../../ecereRes/actions/goUp.png"
+               ]
+            },
+            {
+               "Folder" : "devices",
+               "Files" : [
+                  "../../ecereRes/devices/computer.png",
+                  "../../ecereRes/devices/driveHardDisk.png",
+                  "../../ecereRes/devices/driveRemovableMedia.png",
+                  "../../ecereRes/devices/mediaFloppy.png",
+                  "../../ecereRes/devices/mediaOptical.png"
+               ]
+            },
+            {
+               "Folder" : "elements",
+               "Files" : [
+                  "../../ecereRes/elements/areaClose.png",
+                  "../../ecereRes/elements/areaMaximize.png",
+                  "../../ecereRes/elements/areaMinimize.png",
+                  "../../ecereRes/elements/areaRestore.png",
+                  "../../ecereRes/elements/arrowDown.png",
+                  "../../ecereRes/elements/arrowLeft.png",
+                  "../../ecereRes/elements/arrowRight.png",
+                  "../../ecereRes/elements/arrowUp.png",
+                  "../../ecereRes/elements/checkBox.png",
+                  "../../ecereRes/elements/checkBoxChecked.png",
+                  "../../ecereRes/elements/checkBoxDisabled.png",
+                  "../../ecereRes/elements/checkBoxDisabledChecked.png",
+                  "../../ecereRes/elements/optionBoxDisabled.png",
+                  "../../ecereRes/elements/optionBoxDisabledSelected.png",
+                  "../../ecereRes/elements/optionBoxDown.png",
+                  "../../ecereRes/elements/optionBoxSelected.png",
+                  "../../ecereRes/elements/optionBoxSelectedDown.png",
+                  "../../ecereRes/elements/optionBoxSelectedUp.png",
+                  "../../ecereRes/elements/optionBoxUp.png",
+                  "../../ecereRes/elements/orderAscending.png",
+                  "../../ecereRes/elements/orderCategorized.png",
+                  "../../ecereRes/elements/orderDescending.png"
+               ]
+            },
+            {
+               "Folder" : "mimeTypes",
+               "Files" : [
+                  "../../ecereRes/mimeTypes/file.png"
+               ]
+            },
+            {
+               "Folder" : "places",
+               "Files" : [
+                  "../../ecereRes/places/driveRemote.png",
+                  "../../ecereRes/places/folder.png",
+                  "../../ecereRes/places/folderRemote.png",
+                  "../../ecereRes/places/networkServer.png",
+                  "../../ecereRes/places/networkWorkgroup.png"
+               ]
+            },
+            {
+               "Folder" : "status",
+               "Files" : [
+                  "../../ecereRes/status/folderOpen.png"
+               ]
+            }
+         ]
+      },
+      "english_flag.pcx",
+      "najitool.pcx",
+      "player_o.pcx",
+      "player_x.pcx",
+      "ttt_board.pcx",
+      "turkish_flag.pcx",
+      "naji_gui.png",
+      "resources.rc"
+   ]
+}
