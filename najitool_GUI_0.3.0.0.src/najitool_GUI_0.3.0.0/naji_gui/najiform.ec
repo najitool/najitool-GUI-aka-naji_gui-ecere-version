@@ -136,7 +136,7 @@ enum najitool_languages
 
 TabControl tabcontrol_naji_gui
 {
-      //nativeDecorations = true;
+      nativeDecorations = true;
 
 text = "najitool GUI 0.3.0.0 Made By NECDET COKYAZICI And Contributors, Public Domain 2003-2011";
 background = { r = 110, g = 161, b = 180 };
@@ -9812,7 +9812,7 @@ class HexEditor : Window
          a = 0;
          aa = 0;                     
       
-         SetCaret(x, y, 24);
+         SetCaret(x, y, 12);
       
         
          patch_load_file_dialog.type=open;
@@ -9887,7 +9887,7 @@ class HexEditor : Window
             if (i >= buffer_size)
             return;
 
-            surface.WriteTextf( ( (x) + (xx) * (24) ), ((y)+(yy)*(24)), "%02X ", read_buffer[i]); 
+            surface.WriteTextf( ( (x) + (xx) * (24) ), ((y)+(yy)*(12)), "%02X ", read_buffer[i]); 
             i++;
 
 
@@ -9905,28 +9905,45 @@ class HexEditor : Window
    bool OnKeyHit(Key key, unichar ch)
    {
       if (key == left)
+      if (xxx >= 8)
       {
-      xxx-=32;
-      SetCaret(x+xxx, y, 24);
+      xxx-=8;
+      SetCaret(x+xxx, y+yyy, 12);
       }
+      else
+      {
+      xxx = 376;
+      SetCaret(x+xxx, y+yyy, 12);
+      }
+
 
       if (key == right)
+      if (xxx < 376)
       {
-      xxx+=32;
-      SetCaret(x+xxx, y, 24);
+      xxx+=8;
+      SetCaret(x+xxx, y+yyy, 12);
+      }
+      else
+      {
+      xxx = 0;
+      SetCaret(x+xxx, y+yyy, 12);
       }
 
-      if (yyy >= 32)
+
+
+
+
+      if (yyy >= 12)
       if (key == up)
       {
-      yyy-=32;
-      SetCaret(x, y+yyy, 24);
+      yyy-=12;
+      SetCaret(x+xxx, y+yyy, 12);
       }
 
       if (key == down)
       {
-      yyy+=32;
-      SetCaret(x, y+yyy, 24);
+      yyy+=12;
+      SetCaret(x+xxx, y+yyy, 12);
       }
       
       Update(null);
