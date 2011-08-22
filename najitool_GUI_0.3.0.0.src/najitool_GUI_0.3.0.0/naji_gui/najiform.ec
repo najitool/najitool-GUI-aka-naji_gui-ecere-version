@@ -808,8 +808,8 @@ return;
    charbefr(input_file_1_path, output_file_1_path, parameter_1_string[0]);
 
    if (! strcmp(najitool_command, "charfile") )
-   charfile(output_file_1_path, atoi(parameter_1_string), parameter_2_string[0]);
-
+   charfile(output_file_1_path, atoi(parameter_2_string), parameter_1_string[0]);
+   
    if (! strcmp(najitool_command, "charsort") )
    charsort(input_file_1_path, output_file_1_path);
    
@@ -9757,62 +9757,53 @@ MessageBox { text = the_text, contents = the_contents }.Modal();
 
 class HexEditor : Window
 {
-  
    size = { 1024, 768 };
-   hasHorzScroll = true;
    hasVertScroll = true;
-   tabCycle = false;
+   dontHideScroll = true;
+   dontScrollVert = true;
 
    char patch_load_file_path[MAX_LOCATION];
    byte read_buffer[1000];
-   int i;
-   int a;
-   int ii;
-   int x;
-   int y;
-   int buffer_size;
-   int xx;
-   int yy;
-   char aa;
+   byte a;  
+   
+   unsigned long long i;
+   unsigned long long ii;
+   unsigned long long x;
+   unsigned long long y;
+   unsigned long long buffer_size;
+   unsigned long long xx;
+   unsigned long long yy;
+
+
+
    i=0;
    buffer_size=0;
-   x = 472;
+   x = 340;
    y = 24;
    ii=0;
+
    a = 0;
-   aa = 0;
 
-                           
+   unsigned long long int xxx;
+   unsigned long long int yyy;
 
- int xxx;
- int yyy;
-
-
-
-
-
-
-
-
-
-
-   EditBox patch_load_file_edit_box { this, text = "patch_load_file_edit_box", size = { 270, 19 }, position = { 136, 184 }, readOnly = true, noCaret = true };
+   EditBox patch_load_file_edit_box { this, text = "patch_load_file_edit_box", size = { 94, 19 }, position = { 16, 24 }, readOnly = true, noCaret = true };
    Button patch_load_file_button
    {
-      this, text = "Load File:", font = { "Verdana", 8.25f, bold = true }, clientSize = { 104, 21 }, position = { 24, 184 };
+      this, text = "Load File:", font = { "Verdana", 8.25f, bold = true }, clientSize = { 104, 21 }, position = { 8 };
 
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
       
          i=0;
          buffer_size=0;
-         x = 472;
+         x = 340;
          y = 24;
          ii=0;
-         a = 0;
-         aa = 0;                     
+  
+         a = 0;                     
       
-         SetCaret(x, y, 12);
+         SetCaret(400, y, 12);
       
         
          patch_load_file_dialog.type=open;
@@ -9827,12 +9818,12 @@ class HexEditor : Window
 
          for (ii=0; ii<512; ii++)
          {
-         patch_load_file.Get(aa);
+         patch_load_file.Get(a);
 
          if (patch_load_file.eof == true)
          break;
 
-         read_buffer[buffer_size] = aa;
+         read_buffer[buffer_size] = a;
        
          buffer_size++;
          }
@@ -9880,18 +9871,57 @@ class HexEditor : Window
       {
  
 
+            
+ 
+
+
  
          for (xx=0; xx<16; xx++)
          {
 
             if (i >= buffer_size)
-            return;
+            break;
 
-            surface.WriteTextf( ( (x) + (xx) * (24) ), ((y)+(yy)*(12)), "%02X ", read_buffer[i]); 
+            
+            surface.WriteTextf((x-24), ( y / 12), "Offset:           0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F     0 1 2 3 4 5 6 7 8 9 A B C D E F"); 
+
+
+
+            surface.WriteTextf((x-24), ((y)+(yy)*(12)), "%08X ", yy * 16);
+
+
+            surface.WriteTextf( ( ( (x) + (xx) * (24) ) + 60), ((y)+(yy)*(12)), "%02X ", read_buffer[i]); 
             i++;
 
 
          }
+
+         if (i >= buffer_size)
+         i -= buffer_size;
+
+
+         for (xx=0; xx<16; xx++)
+         {
+
+            if (i >= buffer_size)
+            return;
+            
+            if ( ( (read_buffer[i] > ' ') && (read_buffer[i] < '~') ) )
+            surface.WriteTextf( ( ( (x) + (xx) * (12)) + 450), ((y)+(yy)*(12)), "%c", read_buffer[i]); 
+
+            else
+            surface.WriteTextf( ( ( (x) + (xx) * (12)) + 350), ((y)+(yy)*(12)), "%.", read_buffer[i]); 
+
+
+
+            i++;
+
+
+         }
+         
+
+            if (i >= buffer_size)
+            return;
 
             
       }
@@ -9899,34 +9929,31 @@ class HexEditor : Window
 
    };
 
-
-  
-
    bool OnKeyHit(Key key, unichar ch)
    {
       if (key == left)
       if (xxx >= 8)
       {
       xxx-=8;
-      SetCaret(x+xxx, y+yyy, 12);
+      SetCaret(400+xxx, y+yyy, 12);
       }
       else
       {
-      xxx = 376;
-      SetCaret(x+xxx, y+yyy, 12);
+      xxx = 368;
+      SetCaret(400+xxx, y+yyy, 12);
       }
 
 
       if (key == right)
-      if (xxx < 376)
+      if (xxx < 368)
       {
       xxx+=8;
-      SetCaret(x+xxx, y+yyy, 12);
+      SetCaret(400+xxx, y+yyy, 12);
       }
       else
       {
       xxx = 0;
-      SetCaret(x+xxx, y+yyy, 12);
+      SetCaret(400+xxx, y+yyy, 12);
       }
 
 
@@ -9937,26 +9964,18 @@ class HexEditor : Window
       if (key == up)
       {
       yyy-=12;
-      SetCaret(x+xxx, y+yyy, 12);
+      SetCaret(400+xxx, y+yyy, 12);
       }
 
       if (key == down)
       {
       yyy+=12;
-      SetCaret(x+xxx, y+yyy, 12);
+      SetCaret(400+xxx, y+yyy, 12);
       }
       
       Update(null);
       return false;
    };
-          
-
-
-
-
-
-
-
 }
 
 
