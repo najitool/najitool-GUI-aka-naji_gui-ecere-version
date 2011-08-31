@@ -9773,7 +9773,11 @@ class HexEditor : Window
    unsigned long long buffer_size;
    unsigned long long xx;
    unsigned long long yy;
+   int left_double;
+   int right_double;
 
+   left_double = 0;
+   right_double = 0;
 
 
    i=0;
@@ -9934,26 +9938,51 @@ class HexEditor : Window
       if (key == left)
       if (xxx >= 8)
       {
+      
+      if (left_double == 2)
+      {
+      xxx-=16;
+      left_double = 0;
+      right_double = 1;
+      }
+      else
       xxx-=8;
       SetCaret(400+xxx, y+yyy, 12);
+      
+      
+      left_double++;
       }
       else
       {
       xxx = 368;
       SetCaret(400+xxx, y+yyy, 12);
+      left_double = 1;
+      right_double = 0;
       }
 
 
       if (key == right)
       if (xxx < 368)
       {
+      
+      if (right_double == 2)
+      {
+      xxx+=16;
+      left_double = 1; 
+      right_double = 0;
+      }
+      else
       xxx+=8;
       SetCaret(400+xxx, y+yyy, 12);
+      
+      right_double++;
       }
       else
       {
       xxx = 0;
       SetCaret(400+xxx, y+yyy, 12);
+      left_double = 0;
+      right_double = 1;
       }
 
 
