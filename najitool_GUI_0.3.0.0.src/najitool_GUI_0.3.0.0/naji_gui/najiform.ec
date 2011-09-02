@@ -186,7 +186,7 @@ class tab_main : Tab
    time_t time_value;
    struct tm *date_time;
    najitool_languages lang;
-
+   
 
 
 
@@ -3673,7 +3673,7 @@ najinclose();
 najin2close();
 }
 
-   int findi_line(const char *line, const char *str)
+int ::findi_line(const char *line, const char *str)
 {
 char *straux;
 char *lineaux;
@@ -3694,7 +3694,7 @@ find_matches++;
 return 1;
 }
 
-   int find_line(const char *line, const char *str)
+int ::find_line(const char *line, const char *str)
 {
 
    if (strstr(line, str) == NULL)
@@ -3704,6 +3704,9 @@ find_matches++;
 return 1;
 }
 
+
+
+
    void find_basis(char *namein, char *str, bool sensitive, bool show_matches)
 {
 long pos;
@@ -3711,8 +3714,19 @@ int i;
 int c;
 int found;
 char *line;
-
+int (*fl_ptr)(const char *line, const char *str);
+   
 find_matches = 0;
+
+
+
+        if (sensitive == true)
+        fl_ptr = find_line;
+
+        else if (sensitive == false)
+        fl_ptr = findi_line;
+
+
 
         help_edit_box.Clear();
 
@@ -3736,16 +3750,8 @@ find_matches = 0;
             fseek(naji_input, pos, SEEK_SET);
             fgets(line, (i+1), naji_input);
 
- 
 
-        if (sensitive == true)
-        find_line(line, str);
-
-        else
-        findi_line(line, str);
-
-
-
+            found = fl_ptr(line, str);
        
             if (found)
             help_edit_box.Printf("%s\n", line);
@@ -9751,47 +9757,140 @@ MessageBox { text = the_text, contents = the_contents }.Modal();
 }
 
 
+class HexEditorTop : Window 
+{
+   size = { 1024, 24 };
+   disabled = true;
 
 
+   Label hex_top_label { this, text = "Offset:           0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F     0 1 2 3 4 5 6 7 8 9 A B C D E F" , position = { 316, 2}};
+}
 
 
 class HexEditor : Window
 {
+ 
    size = { 1024, 768 };
-   hasVertScroll = true;
-   dontHideScroll = true;
-   dontScrollVert = true;
 
    char patch_load_file_path[MAX_LOCATION];
-   byte read_buffer[1000];
-   byte a;  
-   
+   byte a;
    unsigned long long i;
    unsigned long long ii;
-   unsigned long long x;
-   unsigned long long y;
    unsigned long long buffer_size;
-   unsigned long long xx;
-   unsigned long long yy;
+   unsigned long long offset;
    int left_double;
    int right_double;
-
+   uint patch_load_file_size;
+   uint x;
+   uint y;
+   uint xx;
+   uint yy;
+   uint xxx;
+   uint yyy;
+   byte * read_buffer;
+   uint scroll_pos;
+   
    left_double = 0;
    right_double = 0;
-
-
    i=0;
    buffer_size=0;
    x = 340;
    y = 24;
    ii=0;
-
    a = 0;
+   scroll_pos = 0;
+   offset = 0;
 
-   unsigned long long int xxx;
-   unsigned long long int yyy;
+     
+   Button scroll_down
+   {
+      this, text = "Scroll Down", size = { 104, 21 }, position = { 8, 128 };
 
-   EditBox patch_load_file_edit_box { this, text = "patch_load_file_edit_box", size = { 94, 19 }, position = { 16, 24 }, readOnly = true, noCaret = true };
+      bool NotifyClicked(Button button, int x, int y, Modifiers mods)
+      {
+
+        scroll_pos-=1;
+        
+        if (scroll_pos < 0)
+        scroll_pos = 0;
+                   
+        
+
+        Scroll(0, scroll_pos);
+        Update(null);
+
+         return true;
+      }
+   };
+   Button scroll_up 
+   {      
+      this, text = "Scroll Up", size = { 104, 21 }, position = { 8, 88 };
+
+      bool NotifyClicked(Button button, int x, int y, Modifiers mods)
+      {
+
+
+        
+        if (scroll_pos > 0)
+        scroll_pos+=1;
+        
+                   
+        
+        Scroll(0, scroll_pos);
+        Update(null);
+
+
+
+
+         return true;
+      }
+   };
+
+   void OnRedraw(Surface surface)
+   {
+
+         
+     
+      i=0;
+
+      for (offset=0, yy=scroll_pos; ;yy++, offset++)
+      {
+ 
+   
+         for (xx=0; xx<16; xx++)
+         {
+
+            if (i >= buffer_size)
+            break;
+      
+
+
+            surface.WriteTextf((x-24), ((y)+(yy)*(12)-24), "%08X ", (offset * 16));
+
+
+            surface.WriteTextf(  ( (x) + (xx) * (24)  + 60 ), ((y)+(yy)*(12)-24), "%02X ", read_buffer[i]); 
+            i++;
+
+
+            if ( ( (read_buffer[i] >= ' ') && (read_buffer[i] <= '~') ) )
+            surface.WriteTextf( ( ( (x) + (xx) * (12)) + 455), ((y)+(yy)*(12)-24), "%c", read_buffer[i]); 
+
+            else
+            surface.WriteTextf( ( ( (x) + (xx) * (12)) + 455), ((y)+(yy)*(12)-24), ".");
+
+         }
+
+         
+      
+
+            if (i >= buffer_size)
+            return;
+
+      }
+
+
+   };
+   EditBox patch_load_file_edit_box { this, text = "patch_load_file_edit_box", size = { 104, 19 }, position = { 8, 24 }, readOnly = true, noCaret = true };
    Button patch_load_file_button
    {
       this, text = "Load File:", font = { "Verdana", 8.25f, bold = true }, clientSize = { 104, 21 }, position = { 8 };
@@ -9807,7 +9906,7 @@ class HexEditor : Window
   
          a = 0;                     
       
-         SetCaret(400, y, 12);
+         SetCaret(400, 0, 12);
       
         
          patch_load_file_dialog.type=open;
@@ -9817,10 +9916,14 @@ class HexEditor : Window
          patch_load_file = FileOpenBuffered(patch_load_file_path, read); 
 
 
-         for (ii=0; ii<1000; ii++)
-         read_buffer[ii] = '\0';
 
-         for (ii=0; ii<512; ii++)
+
+        patch_load_file_size =  patch_load_file.GetSize();
+
+         read_buffer = new byte[patch_load_file_size];
+         
+                          
+         for (ii=0; ii<patch_load_file_size; ii++)
          {
          patch_load_file.Get(a);
 
@@ -9834,15 +9937,6 @@ class HexEditor : Window
 
 
          patch_load_file.Close();
-
-         return true;
-      }
-
-      bool NotifyDoubleClick(Button button, int x, int y, Modifiers mods)
-      {
-
-
-
 
          return true;
       }
@@ -9866,149 +9960,96 @@ class HexEditor : Window
       return true;
    }
 
-   void OnRedraw(Surface surface)
-   {
-
-      i=0;
-
-      for (yy=0; yy < 21; yy++)      
-      {
- 
-
-            
- 
-
-
- 
-         for (xx=0; xx<16; xx++)
-         {
-
-            if (i >= buffer_size)
-            break;
-
-            
-            surface.WriteTextf((x-24), ( y / 12), "Offset:           0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F     0 1 2 3 4 5 6 7 8 9 A B C D E F"); 
-
-
-
-            surface.WriteTextf((x-24), ((y)+(yy)*(12)), "%08X ", yy * 16);
-
-
-            surface.WriteTextf( ( ( (x) + (xx) * (24) ) + 60), ((y)+(yy)*(12)), "%02X ", read_buffer[i]); 
-            i++;
-
-
-         }
-
-         if (i >= buffer_size)
-         i -= buffer_size;
-
-
-         for (xx=0; xx<16; xx++)
-         {
-
-            if (i >= buffer_size)
-            return;
-            
-            if ( ( (read_buffer[i] > ' ') && (read_buffer[i] < '~') ) )
-            surface.WriteTextf( ( ( (x) + (xx) * (12)) + 450), ((y)+(yy)*(12)), "%c", read_buffer[i]); 
-
-            else
-            surface.WriteTextf( ( ( (x) + (xx) * (12)) + 350), ((y)+(yy)*(12)), "%.", read_buffer[i]); 
-
-
-
-            i++;
-
-
-         }
-         
-
-            if (i >= buffer_size)
-            return;
-
-            
-      }
-
-
-   };
-
+   
    bool OnKeyHit(Key key, unichar ch)
    {
+      
       if (key == left)
-      if (xxx >= 8)
       {
       
-      if (left_double == 2)
-      {
-      xxx-=16;
-      left_double = 0;
-      right_double = 1;
-      }
-      else
-      xxx-=8;
-      SetCaret(400+xxx, y+yyy, 12);
+         if (xxx >= 8)
+         {
       
+            if (left_double == 2)
+            {
+               xxx-=16;
+               left_double = 0;
+               right_double = 1;
+            }
+            else
+            {
+               xxx-=8;
+            }
+            
+            SetCaret(400+xxx, ((y+yyy)-24), 12);
+            left_double++;
+         }
       
-      left_double++;
-      }
-      else
-      {
-      xxx = 368;
-      SetCaret(400+xxx, y+yyy, 12);
-      left_double = 1;
-      right_double = 0;
-      }
+         else
+         {
+            xxx = 368;
+            SetCaret(400+xxx, ((y+yyy)-24), 12);
+         
+            left_double = 1;
+            right_double = 0;
+         }
 
-
+      }
+      
       if (key == right)
-      if (xxx < 368)
       {
+         if (xxx < 368)
+         {
       
-      if (right_double == 2)
-      {
-      xxx+=16;
-      left_double = 1; 
-      right_double = 0;
+            if (right_double == 2)
+            {
+               xxx+=16;
+               left_double = 1; 
+               right_double = 0;
+            }
+            else
+            {
+               xxx+=8;
+            }
+            SetCaret(400+xxx, ((y+yyy)-24), 12);
+            right_double++;
       }
-      else
-      xxx+=8;
-      SetCaret(400+xxx, y+yyy, 12);
       
-      right_double++;
-      }
       else
       {
-      xxx = 0;
-      SetCaret(400+xxx, y+yyy, 12);
-      left_double = 0;
-      right_double = 1;
+         xxx = 0;
+         SetCaret(400+xxx, ((y+yyy)-24), 12);
+         left_double = 0;
+         right_double = 1;
       }
 
 
-
+      }
 
 
       if (yyy >= 12)
-      if (key == up)
       {
-      yyy-=12;
-      SetCaret(400+xxx, y+yyy, 12);
+      
+         if (key == up)
+         {
+         yyy-=12;
+         SetCaret(400+xxx, ((y+yyy)-24), 12);
+         }
+
       }
 
       if (key == down)
       {
-      yyy+=12;
-      SetCaret(400+xxx, y+yyy, 12);
+         yyy+=12;
+         SetCaret(400+xxx, ((y+yyy)-24), 12);
       }
-      
-      Update(null);
+
       return false;
-   };
+   }
+   
+
+
 }
-
-
-
 
 
 
@@ -10017,16 +10058,12 @@ class HexEditor : Window
 
 class tab_hex : Tab
 {
-
    text = "hex";
    background = { r = 110, g = 161, b = 180 };
    font = { "Verdana", 8.25f, bold = true };
    size = { 1024, 768 };
 
-HexEditor najihex { this, anchor = { 0,0,0,0 }};
-
-
-
-}   
-
-
+   
+   HexEditorTop najihexTop { this, anchor = { 0, 0, 0, 0 } };
+   HexEditor najihex { this, anchor = { 0, 0, 0, 0 }, position = { 0, 24}};
+}
