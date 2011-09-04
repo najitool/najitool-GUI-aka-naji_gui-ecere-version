@@ -130,14 +130,9 @@ enum najitool_languages
 
 
 
-
-
-
-
 TabControl tabcontrol_naji_gui
 {
-      nativeDecorations = true;
-
+nativeDecorations = true;
 text = "najitool GUI 0.3.0.0 Made By NECDET COKYAZICI And Contributors, Public Domain 2003-2011";
 background = { r = 110, g = 161, b = 180 };
 borderStyle = fixedBevel;
@@ -169,7 +164,6 @@ class tab_main : Tab
    background = { r = 110, g = 161, b = 180 };
    font = { "Verdana", 8.25f, bold = true };
    size = { 1024, 768 };
-   position = { 24, -4 };
 
    char input_file_1_path[MAX_LOCATION];
    char input_file_2_path[MAX_LOCATION];
@@ -10069,3 +10063,10 @@ class tab_hex : Tab
    HexEditorTop najihexTop { this, anchor = { 0, 0, 0, 0 } };
    HexEditor najihex { this, anchor = { 0, 0, 0, 0 }, position = { 0, 24}};
 }
+
+
+
+ class naji_gui : GuiApplication
+ {
+ driver = "OpenGL";
+ }

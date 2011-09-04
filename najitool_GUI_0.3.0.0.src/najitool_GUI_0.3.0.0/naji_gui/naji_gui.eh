@@ -1,6 +1,7 @@
 #ifndef __NAJITOOL__NAJI_GUI_EH__NAJI__
 #define __NAJITOOL__NAJI_GUI_EH__NAJI__
 
+#define uint _uint
 #include <math.h>
 #include <time.h>
 #include <ctype.h>
@@ -8,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#undef uint
 
 #define NAJI_FALSE 0
 #define NAJI_TRUE  1
