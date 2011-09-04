@@ -9878,6 +9878,8 @@ class HexEditor : Window
             else
             surface.WriteTextf( ( ( (x) + (xx) * (12)) + 455), ((y)+(yy)*(12)-24), ".");
 
+         
+         SetCaret(400+xxx, ((y+yyy)-24), 12);
          }
 
          
