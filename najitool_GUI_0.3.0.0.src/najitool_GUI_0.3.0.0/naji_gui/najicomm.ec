@@ -84,12 +84,21 @@ void najitool_gui_credits()
        }.Modal();
 
 
+}
 
 
 
+void addfilestolistbox(char * path, ListBox listbox)
+{
+FileListing listing { path };
 
-
-
-
+   while (listing.Find())
+   {
+      if (listing.stats.attribs.isDirectory)
+      addfilestolistbox(listing.path, listbox);
+   
+      else
+      listbox.AddString(listing.path);
+   }
 
 }

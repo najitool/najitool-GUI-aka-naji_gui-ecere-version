@@ -9645,32 +9645,20 @@ class tab_batch : Tab
    background = { r = 110, g = 161, b = 180 };
    font = { "Verdana", 8.25f, bold = true };
    size = { 1024, 768 };
-   anchor = { horz = -3, vert = 6210 };
 
    char add_file_path[MAX_LOCATION];
    char add_folder_path[MAX_LOCATION];
    char output_folder_path[MAX_LOCATION];
    char processing_output_file_path[MAX_LOCATION];
-   
    char batchfilelist[MAX_LOCATION][1000];
-
    char naji_buffer[4096];
-   
    char parameter_1_string[4096];
    char parameter_2_string[4096];
-   
    char najitool_command[4096];
    char najitool_category[4096];
-
-   
    unsigned long batchfilenumber;
-
    najitool_languages lang;
-
-
    batchfilenumber=0;
-
-
 
    Label help_label { this, text = "Help/Output:", size = { 89, 16 }, position = { 288, 680 } };
    Label najitool_homepage_label
@@ -9724,7 +9712,7 @@ class tab_batch : Tab
    };
    Button add_file_button
    {
-      this, text = "Add File:", size = { 106, 20 }, position = { 288, 360 };
+      this, text = "Add File:", size = { 106, 20 }, position = { 288, 328 };
 
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
@@ -9740,8 +9728,8 @@ class tab_batch : Tab
       }
    };
    ListBox najbatch_list_box
-   {      
-      this, text = "najbatch_list_box", size = { 702, 338 }, position = { 288, 16 };
+   {
+      this, text = "najbatch_list_box", size = { 702, 314 }, position = { 288, 8 }, dontHideScroll = true, hasHorzScroll = true, hasVertScroll = true;
 
       bool NotifySelect(ListBox listBox, DataRow row, Modifiers mods)
       {
@@ -9751,7 +9739,7 @@ class tab_batch : Tab
    };
    Button add_folder_button 
    {
-      this, text = "Add Folder:", size = { 106, 20 }, position = { 288, 384 };
+      this, text = "Add Folder:", size = { 106, 20 }, position = { 288, 352 };
 
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
@@ -9762,14 +9750,15 @@ class tab_batch : Tab
          strcpy(add_folder_path, add_folder_dialog.filePath);
          add_folder_edit_box.contents = add_folder_dialog.filePath;
 
-
+         addfilestolistbox(add_folder_path, najbatch_list_box);
+         
 
          return true;
       }
    };
    Button output_folder_button 
    {
-      this, text = "Output Folder:", size = { 119, 15 }, position = { 472, 408 }, isRadio = true;
+      this, text = "Output Folder:", size = { 119, 15 }, position = { 464, 376 }, isRadio = true;
 
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
@@ -9785,7 +9774,7 @@ class tab_batch : Tab
    };
    EditBox add_file_edit_box
    {
-      this, text = "add_file_edit_box", size = { 598, 19 }, position = { 392, 360 }, readOnly = true, maxNumLines = 1;
+      this, text = "add_file_edit_box", size = { 598, 19 }, position = { 392, 328 }, readOnly = true, maxNumLines = 1;
 
       bool NotifyModified(EditBox editBox)
       {
@@ -9796,7 +9785,7 @@ class tab_batch : Tab
    };
    EditBox add_folder_edit_box 
    {
-      this, text = "add_folder_edit_box", size = { 598, 19 }, position = { 392, 384 }, readOnly = true, maxNumLines = 1;
+      this, text = "add_folder_edit_box", size = { 598, 19 }, position = { 392, 352 }, readOnly = true, maxNumLines = 1;
 
       bool NotifyModified(EditBox editBox)
       {
@@ -9808,7 +9797,7 @@ class tab_batch : Tab
    };
    EditBox output_folder_edit_box 
    {
-      this, text = "output_folder_edit_box", size = { 398, 19 }, position = { 592, 408 }, maxNumLines = 1;
+      this, text = "output_folder_edit_box", size = { 398, 19 }, position = { 592, 376 }, maxNumLines = 1;
 
       bool NotifyModified(EditBox editBox)
       {
@@ -9816,10 +9805,14 @@ class tab_batch : Tab
          return true;
       }
    };
-   Button same_folder_as_files { this, text = "Same Folder As Files:", size = { 167, 15 }, position = { 288, 408 }, isRadio = true };
+   EditBox new_files_prefix_edit_box { this, text = "new_files_prefix_edit_box", size = { 238, 19 }, position = { 400, 400 } };
+   Label new_files_prefix_label { this, text = "New Files Prefix:", position = { 288, 402 } };
+   EditBox new_files_suffix_edit_box { this, text = "new_files_suffix_edit_box", size = { 238, 19 }, position = { 752, 400 } };
+   Label new_files_suffix_label { this, text = "New Files Suffix:", position = { 640, 402 } };
+   Button same_folder_as_files { this, text = "Same Folder As Files:", size = { 167, 15 }, position = { 288, 376 }, isRadio = true };
    EditBox parameter_1_edit_box
    {
-      this, text = "parameter_1_edit_box", size = { 351, 19 }, position = { 288, 448 }, maxNumLines = 1;
+      this, text = "parameter_1_edit_box", size = { 350, 19 }, position = { 288, 448 }, maxNumLines = 1;
 
       bool NotifyModified(EditBox editBox)
       {
@@ -9831,7 +9824,7 @@ class tab_batch : Tab
    };
    EditBox parameter_2_edit_box
    {
-      this, text = "parameter_2_edit_box", size = { 351, 19 }, position = { 640, 448 }, maxNumLines = 1;
+      this, text = "parameter_2_edit_box", size = { 350, 19 }, position = { 640, 448 }, maxNumLines = 1;
 
       bool NotifyModified(EditBox editBox)
       {
