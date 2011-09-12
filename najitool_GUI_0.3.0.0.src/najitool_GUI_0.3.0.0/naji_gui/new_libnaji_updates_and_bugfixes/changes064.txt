@@ -1,0 +1,23 @@
+
+
+  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  najitool 0.8.4 and libnaji 0.6.4 Changes
+  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+added weakrypt - NECDET COKYAZICI
+added sp2ce2sp - NECDET COKYAZICI
+added sp2re2sp - NECDET COKYAZICI
+added istrael  - NECDET COKYAZICI
+added istreml  - NECDET COKYAZICI
+added sort     - NECDET COKYAZICI
+added sortlast - NECDET COKYAZICI
+added lineback - NECDET COKYAZICI
+added longline - NECDET COKYAZICI
+added howline  - NECDET COKYAZICI
+added rndlines - NECDET COKYAZICI
+fixed revlines - NECDET COKYAZICI
+fixed sreverse - NECDET COKYAZICI
+added addline  - NECDET COKYAZICI
+added removel  - NECDET COKYAZICI
+added spyramid - NECDET COKYAZICI
+added replacel - NECDET COKYAZICI

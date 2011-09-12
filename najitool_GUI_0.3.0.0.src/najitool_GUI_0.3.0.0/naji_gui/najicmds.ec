@@ -8039,3 +8039,94 @@ unsigned char result = 0;
 
 return result;
 }
+
+
+   void allfiles(int size, char *outputdir)
+{
+int i;
+int ii;
+unsigned char *buffer;
+
+int x=0;
+FILE *naji_output_a;
+char filename[1000];
+char error[1000];
+
+
+    buffer = (unsigned char *) malloc( (size) * ( sizeof(unsigned char) ) );
+
+    if (buffer == NULL)
+    {
+    
+    if (!strcmp(najitool_language, "English"))
+    {
+    sprintf(error, "Error, could not allocate %i bytes of memory.", size);
+    MessageBox { text = "najitool GUI allfiles error:", contents = error }.Modal();
+    }
+    
+    else if (!strcmp(najitool_language, "Turkish"))
+    {
+    sprintf(error, "Hata, %i bayt hafiza ayrilamadi.", size);
+    MessageBox { text = "najitool GUI allfiles hata:", contents = error }.Modal();
+    }
+    
+    
+    exit(9);
+    }
+
+    for (i=0; i<=size; i++)
+    buffer[i] = (unsigned char) 0;
+
+    while (*buffer <= 0)
+    {
+
+        for (i=0; i<=255; i++)
+        {
+        buffer[size] = (unsigned char) i;
+
+        sprintf(filename, "%s/%i", outputdir, x);
+        naji_output_a = fopen(filename, "wb");
+        if (naji_output_a == NULL)
+        {
+        
+        if (!strcmp(najitool_language, "English"))
+        {
+        sprintf(error, "Error opening file %s : %s", filename, strerror(errno));
+        MessageBox { text = "najitool GUI allfiles error:", contents = error }.Modal();
+        }
+        
+        else if (!strcmp(najitool_language, "Turkish"))
+        {
+        sprintf(error, "Dosya acilirken hata %s : %s", filename, strerror(errno));
+        MessageBox { text = "najitool GUI allfiles hata:", contents = error }.Modal();
+        }
+        
+        exit(1);
+        }
+
+        for (ii=1; ii<=size; ii++)
+        fputc(buffer[ii], naji_output_a);
+
+        fclose(naji_output_a);
+        x++;
+        }
+
+        if (buffer[size] >= 255)
+        {
+        buffer[size] = (unsigned char) 0;
+        buffer[size-1]++;
+        }
+
+                for (i = (size-1); i >= 0; i--)
+                {
+                        if (buffer[i] >= 255)
+                        {
+                        buffer[i] = (unsigned char) 0;
+                        buffer[i-1]++;
+                        }
+                }
+
+        } /* end of while loop */
+
+return;
+}

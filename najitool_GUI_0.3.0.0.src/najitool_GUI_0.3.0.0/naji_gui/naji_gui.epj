@@ -74,7 +74,8 @@
       "naji_gui.eh",
       "najicalc.ec",
       "najihelp.ec",
-      "naji_mp3.c"
+      "naji_mp3.c",
+      "najicomm.ec"
    ],
    "ResourcesPath" : "",
    "Resources" : [

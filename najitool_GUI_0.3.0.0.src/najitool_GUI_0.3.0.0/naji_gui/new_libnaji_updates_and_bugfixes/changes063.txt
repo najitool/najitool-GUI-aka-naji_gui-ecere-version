@@ -1,0 +1,20 @@
+
+
+  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  najitool 0.8.3 and libnaji 0.6.3 Changes
+  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+fixed allfiles - NECDET COKYAZICI
+added allbmp16 - NECDET COKYAZICI
+added listlowr - NECDET COKYAZICI
+added listuppr - NECDET COKYAZICI
+added listdigt - NECDET COKYAZICI
+added listprnt - NECDET COKYAZICI
+added charsort - NECDET COKYAZICI
+added lcvfiles - NECDET COKYAZICI
+added rcvfiles - NECDET COKYAZICI
+added bytsplit - NECDET COKYAZICI
+added kbsplit  - NECDET COKYAZICI
+added mbsplit  - NECDET COKYAZICI
+added gbsplit  - NECDET COKYAZICI
+added mjoin    - NECDET COKYAZICI
