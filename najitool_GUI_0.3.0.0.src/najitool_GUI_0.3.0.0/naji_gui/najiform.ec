@@ -320,9 +320,11 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
          
-         input_file_1_dialog.Modal();
+         if (input_file_1_dialog.Modal() == ok)
+         {
          strcpy(input_file_1_path, input_file_1_dialog.filePath);
          input_file_1_edit_box.contents = input_file_1_dialog.filePath;
+         }
               
          return true;
       }
@@ -334,10 +336,11 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
 
-         input_file_2_dialog.Modal();
+         if (input_file_2_dialog.Modal() == ok)
+         {
          strcpy(input_file_2_path, input_file_2_dialog.filePath);
          input_file_2_edit_box.contents = input_file_2_dialog.filePath;
-
+         }
          return true;
       }
    };
@@ -348,12 +351,13 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
 
-
          input_folder_dialog.type=selectDir;
-         input_folder_dialog.Modal();
+
+         if (input_folder_dialog.Modal() == ok)
+         {
          strcpy(input_folder_path, input_folder_dialog.filePath);
          input_folder_edit_box.contents = input_folder_dialog.filePath;
-
+         }
 
 
          return true;
@@ -368,10 +372,12 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
 
 
          output_file_1_dialog.type=save;
-         output_file_1_dialog.Modal();
+         
+         if (output_file_1_dialog.Modal() == ok)
+         {
          strcpy(output_file_1_path, output_file_1_dialog.filePath);
          output_file_1_edit_box.contents = output_file_1_dialog.filePath;
-
+         }
          return true;
       }
    };
@@ -383,10 +389,12 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
       {
 
          output_file_2_dialog.type=save;
-         output_file_2_dialog.Modal();
+         
+         if (output_file_2_dialog.Modal() == ok)
+         {
          strcpy(output_file_2_path, output_file_2_dialog.filePath);
          output_file_2_edit_box.contents = output_file_2_dialog.filePath;
-
+         }
 
          return true;
       }
@@ -399,10 +407,12 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
       {
 
          output_folder_dialog.type=selectDir;
-         output_folder_dialog.Modal();
+         
+         if (output_folder_dialog.Modal() == ok)
+         {
          strcpy(output_folder_path, output_folder_dialog.filePath);
          output_folder_edit_box.contents = output_folder_dialog.filePath;
-         
+         }
 
          return true;
       }
@@ -5860,9 +5870,12 @@ class tab_crypt : Tab
 
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
-         input_file_1_dialog.Modal();
+         
+         if (input_file_1_dialog.Modal() == ok)
+         {
          strcpy(najcrypt_input_file_path, input_file_1_dialog.filePath);
          najcrypt_input_file_edit_box.contents = input_file_1_dialog.filePath;
+         }
 
          return true;
       }
@@ -5874,9 +5887,12 @@ class tab_crypt : Tab
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
          output_file_1_dialog.type=save;
-         output_file_1_dialog.Modal();
+         
+         if (output_file_1_dialog.Modal() == ok)
+         {
          strcpy(najcrypt_output_file_path, output_file_1_dialog.filePath);
          najcrypt_output_file_edit_box.contents = output_file_1_dialog.filePath;
+         }
 
          return true;
       }
@@ -7141,10 +7157,13 @@ class tab_split : Tab
 
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
-         input_file_1_dialog.Modal();
+
+         if (input_file_1_dialog.Modal() == ok)
+         {
          strcpy(splitter_a_split_file_path, input_file_1_dialog.filePath);
          splitter_a_split_file_edit_box.contents = input_file_1_dialog.filePath;
-         
+         }
+
          return true;
       }
    };
@@ -7155,9 +7174,12 @@ class tab_split : Tab
 
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
-         input_file_1_dialog.Modal();
+         
+         if (input_file_1_dialog.Modal() == ok)
+         {
          strcpy(splitter_input_file_path, input_file_1_dialog.filePath);
          splitter_input_file_edit_box.contents = input_file_1_dialog.filePath;
+         }
 
          return true;
       }
@@ -7251,9 +7273,12 @@ class tab_split : Tab
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
          output_file_1_dialog.type=save;
-         output_file_1_dialog.Modal();
+
+         if (output_file_1_dialog.Modal() == ok)
+         {
          strcpy(splitter_join_output_file_path, output_file_1_dialog.filePath);
          splitter_join_output_file_edit_box.contents = output_file_1_dialog.filePath;
+         }
 
          return true;
       }
@@ -7275,10 +7300,13 @@ class tab_split : Tab
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
          output_folder_dialog.type=selectDir;
-         output_folder_dialog.Modal();
+         
+         if (output_folder_dialog.Modal() == ok)
+         {
          strcpy(splitter_output_folder_path, output_folder_dialog.filePath);
          splitter_output_folder_edit_box.contents = output_folder_dialog.filePath;
- 
+         }
+
          return true;
       }
    };
@@ -8685,7 +8713,9 @@ number_of_children_edit_box.Clear();
       {
 
          naji_db_append_file_dialog.type=save; 
-         naji_db_append_file_dialog.Modal();
+         
+         if (naji_db_append_file_dialog.Modal() == ok)
+         {
          strcpy(naji_db_filepath_buffer, naji_db_append_file_dialog.filePath);
          file_to_append_naji_db_edit_box.contents = naji_db_append_file_dialog.filePath;
  
@@ -8730,7 +8760,7 @@ number_of_children_edit_box.Clear();
 
          }
               
- 
+         }
          return true;
       }
    };
@@ -9345,10 +9375,10 @@ class tab_patch : Tab
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
 
-
-
          patch_save_as_dialog.type=save;
-         patch_save_as_dialog.Modal();
+         
+         if (patch_save_as_dialog.Modal() == ok)
+         {
          strcpy(patch_save_as_path, patch_save_as_dialog.filePath);
          patch_save_as_edit_box.contents = patch_save_as_dialog.filePath;
          
@@ -9403,7 +9433,7 @@ class tab_patch : Tab
         delete patch_loaded_hex_contents;
 
 
-
+         }
 
          return true;
       }
@@ -9434,9 +9464,10 @@ class tab_patch : Tab
          patch_save_as_hex_edit_box.Clear();
          patch_load_file_edit_box.Clear();
 
-         patch_load_file_dialog.Modal();
-
-        
+         
+         if (patch_load_file_dialog.Modal() == ok)
+         {
+                
          strcpy(patch_load_file_path, patch_load_file_dialog.filePath);
          
          patch_load_file_edit_box.contents = patch_load_file_path;
@@ -9577,6 +9608,8 @@ class tab_patch : Tab
        //patch_loaded_hex_edit_box.Update(null);
 
          delete patch_load_file;
+
+         }
                     
          return true;
       }
@@ -9588,7 +9621,9 @@ class tab_patch : Tab
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
         patch_save_as_hex_dialog.type=save;
-         patch_save_as_hex_dialog.Modal();
+         
+         if (patch_save_as_hex_dialog.Modal() == ok)
+         {
          strcpy(patch_save_as_hex_path, patch_save_as_hex_dialog.filePath);
          patch_save_as_hex_edit_box.contents = patch_save_as_hex_dialog.filePath;
          
@@ -9599,7 +9634,8 @@ class tab_patch : Tab
          patch_loaded_hex_edit_box.Save(patch_save_as_hex_file, true);
             
          delete patch_save_as_hex_file;
-         
+         }
+
          return true;
         }
    };
@@ -9669,26 +9705,14 @@ class tab_batch : Tab
    char newfileprefix[4096];
    char newfilesuffix[4096];
    char newfileextrax[4096];
-   
-
-
    int temp_len;
-   char dirsep[2];
-   
-   dirsep[0] = DIR_SEP;
-   dirsep[1] = '\0';
-
    temp_len = 0;
+
    najitool_languages lang;
    batchfilenumber=0;
    batchfilemaxitems=0;
 
-
-
-   DataRow row;   
-   
-
-           
+   DataRow row;
 
    void addfilestolistbox(char * path, ListBox listbox)
 {
@@ -9766,10 +9790,12 @@ FileListing listing { path };
 
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
-            add_file_dialog.Modal();
+            
+            if (add_file_dialog.Modal() == ok)
+            {
             strcpy(add_file_path, add_file_dialog.filePath);
 
-            if (FileExists(add_file_path).isDirectory == false)
+            if ((FileExists(add_file_path).isDirectory == false) && (FileExists(add_file_path).isFile == true))
             {
                add_file_edit_box.contents = add_file_dialog.filePath;
 
@@ -9782,7 +9808,7 @@ FileListing listing { path };
                 
                 batchfilemaxitems++;
             }
-               
+            }
          return true;
       }
    };
@@ -9805,7 +9831,9 @@ FileListing listing { path };
 
 
          add_folder_dialog.type=selectDir;
-         add_folder_dialog.Modal();
+         
+         if (add_folder_dialog.Modal() == ok)
+         {
          strcpy(add_folder_path, add_folder_dialog.filePath);
          add_folder_edit_box.contents = add_folder_dialog.filePath;
 
@@ -9813,12 +9841,11 @@ FileListing listing { path };
          
          sprintf(tempbuffer, "%i", batchfilemaxitems);
          msgbox(tempbuffer, tempbuffer);
-
-
+         }
          return true;
       }
    };
-   Button output_folder_button 
+   Button output_folder_radio 
    {
       this, text = "Output Folder:", size = { 119, 15 }, position = { 464, 376 }, isRadio = true;
 
@@ -9826,10 +9853,12 @@ FileListing listing { path };
       {
 
          output_folder_dialog.type=selectDir;
-         output_folder_dialog.Modal();
+         
+         if (output_folder_dialog.Modal() == ok)
+         {
          strcpy(output_folder_path, output_folder_dialog.filePath);
          output_folder_edit_box.contents = output_folder_dialog.filePath;
-         
+         }
 
          return true;
       }
@@ -9872,7 +9901,7 @@ FileListing listing { path };
    EditBox new_files_suffix_edit_box { this, text = "new_files_suffix_edit_box", size = { 94, 19 }, position = { 616, 400 } };
    Label new_files_extra_extension_label { this, text = "New Files Extra Extension:", position = { 720, 400 } };
    Label new_files_suffix_label { this, text = "New Files Suffix:", position = { 504, 400 } };
-   Button same_folder_as_files { this, text = "Same Folder As Files:", size = { 167, 15 }, position = { 288, 376 }, isRadio = true };
+   Button same_folder_as_files_radio { this, text = "Same Folder As Files:", size = { 167, 15 }, position = { 288, 376 }, isRadio = true };
    EditBox parameter_1_edit_box
    {
       this, text = "parameter_1_edit_box", size = { 350, 19 }, position = { 288, 448 }, maxNumLines = 1;
@@ -9921,6 +9950,10 @@ FileListing listing { path };
    bool OnCreate(void)
    {
    int i;
+
+   same_folder_as_files_radio.checked=true;
+   output_folder_radio.checked=false;
+
 
    new_files_extra_extension_edit_box.contents = ".naji";
 
@@ -9997,12 +10030,6 @@ FileListing listing { path };
    {
       this, text = "help_edit_box", font = { "Courier New", 8 }, size = { 702, 198 }, position = { 288, 472 }, hasHorzScroll = true, true, true, true, true, readOnly = true, true, noCaret = true
    };
-
-
-
-
-
-
    Button process_button
    {
       this, text = "Process", size = { 80, 25 }, position = { 648, 672 };
@@ -10024,10 +10051,7 @@ FileListing listing { path };
    return true;
    }
 
-   
-   
-   
-
+     
    strcpy(newfileprefix, new_files_prefix_edit_box.contents);
    strcpy(newfilesuffix, new_files_suffix_edit_box.contents);
    strcpy(newfileextrax, new_files_extra_extension_edit_box.contents);
@@ -10038,6 +10062,8 @@ FileListing listing { path };
    {
    
 
+   if (same_folder_as_files_radio.checked == true)
+   {
 
    strcpy(tempbuffer, row.string);
    
@@ -10051,7 +10077,40 @@ FileListing listing { path };
    strcpy(temp_filename_no_extension, tempbuffer);
    StripExtension(temp_filename_no_extension);
   
-   GetExtension(temp_extension, temp_filename);
+   GetExtension(temp_filename, temp_extension);
+   }
+
+   else if (output_folder_radio.checked == true)
+   {
+   
+      if (!strcmp(output_folder_edit_box.contents, ""))
+      {
+      msgbox("najitool GUI batch mode error:", "Please select an \"Output Folder\" or select \"Same Folder As Files\".");
+      return true;
+      }
+   
+   
+   strcpy(temp_path, output_folder_edit_box.contents);
+   
+   strcpy(tempbuffer, row.string);
+   GetLastDirectory(tempbuffer, temp_filename);
+ 
+   strcpy(tempbuffer, temp_filename);
+
+   strcpy(temp_filename_no_extension, tempbuffer);
+   StripExtension(temp_filename_no_extension);
+  
+   GetExtension(temp_filename, temp_extension);
+   }
+
+
+
+
+
+
+
+
+
 
    if (!strcmp(newfileprefix, "") &&
        !strcmp(newfilesuffix, "") &&
@@ -10071,7 +10130,7 @@ FileListing listing { path };
        strcmp(newfileextrax, ""))
    {
    strcat(processing_output_file_path, temp_path);
-   strcat(processing_output_file_path, dirsep);
+   strcat(processing_output_file_path, DIR_SEPS);
    strcat(processing_output_file_path, newfileprefix);
    strcat(processing_output_file_path, temp_filename_no_extension);
    strcat(processing_output_file_path, newfilesuffix);
@@ -10086,7 +10145,7 @@ FileListing listing { path };
        strcmp(newfileextrax, ""))
    {
    strcat(processing_output_file_path, temp_path);
-   strcat(processing_output_file_path, dirsep);
+   strcat(processing_output_file_path, DIR_SEPS);
    strcat(processing_output_file_path, temp_filename_no_extension);
    strcat(processing_output_file_path, newfilesuffix);
    strcat(processing_output_file_path, ".");
@@ -10101,7 +10160,7 @@ FileListing listing { path };
        strcmp(newfileextrax, ""))
    {
    strcat(processing_output_file_path, temp_path);
-   strcat(processing_output_file_path, dirsep);
+   strcat(processing_output_file_path, DIR_SEPS);
    strcat(processing_output_file_path, newfileprefix);
    strcat(processing_output_file_path, temp_filename_no_extension);
    strcat(processing_output_file_path, ".");
@@ -10116,7 +10175,7 @@ FileListing listing { path };
        strcmp(newfileextrax, ""))
    {
    strcat(processing_output_file_path, temp_path);
-   strcat(processing_output_file_path, dirsep);
+   strcat(processing_output_file_path, DIR_SEPS);
    strcat(processing_output_file_path, temp_filename_no_extension);
    strcat(processing_output_file_path, ".");
    strcat(processing_output_file_path, temp_extension);
@@ -10132,7 +10191,7 @@ FileListing listing { path };
        !strcmp(newfileextrax, ""))
    {
    strcat(processing_output_file_path, temp_path);
-   strcat(processing_output_file_path, dirsep);
+   strcat(processing_output_file_path, DIR_SEPS);
    strcat(processing_output_file_path, newfileprefix);
    strcat(processing_output_file_path, temp_filename_no_extension);
    strcat(processing_output_file_path, newfilesuffix);
@@ -10147,7 +10206,7 @@ FileListing listing { path };
          !strcmp(newfileextrax, ""))
    {
    strcat(processing_output_file_path, temp_path);
-   strcat(processing_output_file_path, dirsep);
+   strcat(processing_output_file_path, DIR_SEPS);
    strcat(processing_output_file_path, temp_filename_no_extension);
    strcat(processing_output_file_path, newfilesuffix);
    strcat(processing_output_file_path, ".");
@@ -10160,7 +10219,7 @@ FileListing listing { path };
        !strcmp(newfileextrax, ""))
    {
    strcat(processing_output_file_path, temp_path);
-   strcat(processing_output_file_path, dirsep);
+   strcat(processing_output_file_path, DIR_SEPS);
    strcat(processing_output_file_path, newfileprefix);
    strcat(processing_output_file_path, temp_filename_no_extension);
    strcat(processing_output_file_path, ".");
@@ -11477,7 +11536,7 @@ patch_save_as_dialog.text = "Farkli Kaydet...";
         add_file_button.text="Dosya Ekle:";
         add_folder_button.text="Klasor Ekle:";
         
-        output_folder_button.text="Yazilan Klasor:";
+        output_folder_radio.text="Yazilan Klasor:";
         
          help_edit_box.contents =
         "Lutfen bir kategori secin sonra bir komut secin ve gereken bilgileri\n"
@@ -11543,7 +11602,7 @@ patch_save_as_dialog.text = "Save As...";
 
         add_file_button.text="Add File:";
         add_folder_button.text="Add Folder:";
-        output_folder_button.text="Output Folder:";
+        output_folder_radio.text="Output Folder:";
 
 
         help_edit_box.contents =
@@ -14305,7 +14364,9 @@ class HexEditor : Window
       
         
          patch_load_file_dialog.type=open;
-         patch_load_file_dialog.Modal();
+         
+         if (patch_load_file_dialog.Modal() == ok)
+         {
          strcpy(patch_load_file_path, patch_load_file_dialog.filePath);
          patch_load_file_edit_box.contents = patch_load_file_dialog.filePath;
          patch_load_file = FileOpenBuffered(patch_load_file_path, read); 
@@ -14332,7 +14393,7 @@ class HexEditor : Window
 
 
          patch_load_file.Close();
-
+         }
          return true;
       }
    };
