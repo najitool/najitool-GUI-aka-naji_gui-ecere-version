@@ -87,18 +87,35 @@ void najitool_gui_credits()
 }
 
 
-
-void addfilestolistbox(char * path, ListBox listbox)
+void naji_getfilename(char *destination, char *source)
 {
-FileListing listing { path };
+int len;
+char *p;
 
-   while (listing.Find())
-   {
-      if (listing.stats.attribs.isDirectory)
-      addfilestolistbox(listing.path, listbox);
-   
-      else
-      listbox.AddString(listing.path);
-   }
+  p = NULL;
+
+  len = strlen(source);
+ 
+  if (len <= 1)
+  return;
+  
+  p = strrchr(source, '\\');
+  
+  if (p == NULL)
+  p = strrchr(source, '/');
+  
+  if (p != NULL)
+  {
+  
+  p++;
+
+  len = strlen(p);
+
+  memcpy(destination, p, len);
+
+  msgbox(destination, destination);
+  
+  
+  }
 
 }

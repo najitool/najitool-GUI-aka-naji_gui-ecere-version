@@ -76,8 +76,6 @@ FileDialog patch_save_as_dialog { filters = file_filters, sizeFilters = sizeof(f
 
 
 
-
-
 FileDialog add_file_dialog { filters = file_filters, sizeFilters = sizeof(file_filters); text = "Select File to Add..." }; 
 FileDialog add_folder_dialog { text = "Select Folder/Directory to Add..."}; 
 FileDialog output_folder_dialog { text = "Select Output Folder/Directory..." }; 
@@ -2101,7 +2099,6 @@ int i;
 
 
 
-
                            
 
 
@@ -2116,6 +2113,13 @@ int i;
 
 
    };
+
+
+
+
+
+
+
 
    void bigascii_naji_(int a)
 {
@@ -9649,17 +9653,63 @@ class tab_batch : Tab
    char add_file_path[MAX_LOCATION];
    char add_folder_path[MAX_LOCATION];
    char output_folder_path[MAX_LOCATION];
-   char processing_output_file_path[MAX_LOCATION];
-   char batchfilelist[MAX_LOCATION][1000];
+   char processing_output_file_path[4096];
    char naji_buffer[4096];
    char parameter_1_string[4096];
    char parameter_2_string[4096];
    char najitool_command[4096];
    char najitool_category[4096];
-   unsigned long batchfilenumber;
+   int batchfilenumber;
+   int batchfilemaxitems;
+   char tempbuffer[MAX_LOCATION];
+   char temp_path[MAX_LOCATION];
+   char temp_filename[MAX_LOCATION];
+   char temp_filename_no_extension[MAX_LOCATION];
+   char temp_extension[MAX_LOCATION];
+   char newfileprefix[4096];
+   char newfilesuffix[4096];
+   char newfileextrax[4096];
+   
+
+
+   int temp_len;
+   char dirsep[2];
+   
+   dirsep[0] = DIR_SEP;
+   dirsep[1] = '\0';
+
+   temp_len = 0;
    najitool_languages lang;
    batchfilenumber=0;
+   batchfilemaxitems=0;
 
+
+
+   DataRow row;   
+   
+
+           
+
+   void addfilestolistbox(char * path, ListBox listbox)
+{
+FileListing listing { path };
+
+   while (listing.Find())
+   {
+      if (listing.stats.attribs.isDirectory)
+      addfilestolistbox(listing.path, listbox);
+   
+      else
+      {
+      listbox.AddString(listing.path);
+   
+      batchfilemaxitems++;
+      }
+   }
+
+}
+
+   EditBox new_files_extra_extension_edit_box { this, text = "new_files_extra_extension_edit_box", size = { 94, 19 }, position = { 896, 400 } };
    Label help_label { this, text = "Help/Output:", size = { 89, 16 }, position = { 288, 680 } };
    Label najitool_homepage_label
    {
@@ -9716,20 +9766,29 @@ class tab_batch : Tab
 
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
-         
-         add_file_dialog.Modal();
-         strcpy(add_file_path, add_file_dialog.filePath);
-         add_file_edit_box.contents = add_file_dialog.filePath;
-         
-         najbatch_list_box.AddString(add_file_path);
-         
-              
+            add_file_dialog.Modal();
+            strcpy(add_file_path, add_file_dialog.filePath);
+
+            if (FileExists(add_file_path).isDirectory == false)
+            {
+               add_file_edit_box.contents = add_file_dialog.filePath;
+
+               sprintf(tempbuffer, "%i", batchfilemaxitems);
+               msgbox(tempbuffer, tempbuffer);
+
+                
+
+                najbatch_list_box.AddString(add_file_edit_box.contents);
+                
+                batchfilemaxitems++;
+            }
+               
          return true;
       }
    };
    ListBox najbatch_list_box
    {
-      this, text = "najbatch_list_box", size = { 702, 314 }, position = { 288, 8 }, dontHideScroll = true, hasHorzScroll = true, hasVertScroll = true;
+      this, text = "najbatch_list_box", size = { 702, 314 }, position = { 288, 8 }, dontHideScroll = true, hasHorzScroll = true, hasVertScroll = true, resizable = true, firstField.width = MAX_LOCATION + MAX_LOCATION / 2;
 
       bool NotifySelect(ListBox listBox, DataRow row, Modifiers mods)
       {
@@ -9752,6 +9811,9 @@ class tab_batch : Tab
 
          addfilestolistbox(add_folder_path, najbatch_list_box);
          
+         sprintf(tempbuffer, "%i", batchfilemaxitems);
+         msgbox(tempbuffer, tempbuffer);
+
 
          return true;
       }
@@ -9805,10 +9867,11 @@ class tab_batch : Tab
          return true;
       }
    };
-   EditBox new_files_prefix_edit_box { this, text = "new_files_prefix_edit_box", size = { 238, 19 }, position = { 400, 400 } };
-   Label new_files_prefix_label { this, text = "New Files Prefix:", position = { 288, 402 } };
-   EditBox new_files_suffix_edit_box { this, text = "new_files_suffix_edit_box", size = { 238, 19 }, position = { 752, 400 } };
-   Label new_files_suffix_label { this, text = "New Files Suffix:", position = { 640, 402 } };
+   EditBox new_files_prefix_edit_box { this, text = "new_files_prefix_edit_box", size = { 94, 19 }, position = { 400, 400 } };
+   Label new_files_prefix_label { this, text = "New Files Prefix:", position = { 288, 400 } };
+   EditBox new_files_suffix_edit_box { this, text = "new_files_suffix_edit_box", size = { 94, 19 }, position = { 616, 400 } };
+   Label new_files_extra_extension_label { this, text = "New Files Extra Extension:", position = { 720, 400 } };
+   Label new_files_suffix_label { this, text = "New Files Suffix:", position = { 504, 400 } };
    Button same_folder_as_files { this, text = "Same Folder As Files:", size = { 167, 15 }, position = { 288, 376 }, isRadio = true };
    EditBox parameter_1_edit_box
    {
@@ -9836,7 +9899,7 @@ class tab_batch : Tab
    };
    Label parameter_2_label
    {
-      this, text = "Parameter 2:", position = { 640, 432 };
+      this, text = "Parameter 2:", position = { 640, 424 };
 
       bool NotifyActivate(Window window, bool active, Window previous)
       {
@@ -9858,8 +9921,11 @@ class tab_batch : Tab
    bool OnCreate(void)
    {
    int i;
-  
-    if (!strcmp(najitool_language, ""))
+
+   new_files_extra_extension_edit_box.contents = ".naji";
+
+
+   if (!strcmp(najitool_language, ""))
    strcpy(najitool_language, "English");    
 
    
@@ -9931,6 +9997,12 @@ class tab_batch : Tab
    {
       this, text = "help_edit_box", font = { "Courier New", 8 }, size = { 702, 198 }, position = { 288, 472 }, hasHorzScroll = true, true, true, true, true, readOnly = true, true, noCaret = true
    };
+
+
+
+
+
+
    Button process_button
    {
       this, text = "Process", size = { 80, 25 }, position = { 648, 672 };
@@ -9952,6 +10024,170 @@ class tab_batch : Tab
    return true;
    }
 
+   
+   
+   
+
+   strcpy(newfileprefix, new_files_prefix_edit_box.contents);
+   strcpy(newfilesuffix, new_files_suffix_edit_box.contents);
+   strcpy(newfileextrax, new_files_extra_extension_edit_box.contents);
+
+
+   
+   for (row = najbatch_list_box.firstRow; row; row = row.next)
+   {
+   
+
+
+   strcpy(tempbuffer, row.string);
+   
+   StripLastDirectory(tempbuffer, temp_path);
+
+   strcpy(tempbuffer, row.string);
+   GetLastDirectory(tempbuffer, temp_filename);
+ 
+   strcpy(tempbuffer, temp_filename);
+
+   strcpy(temp_filename_no_extension, tempbuffer);
+   StripExtension(temp_filename_no_extension);
+  
+   GetExtension(temp_extension, temp_filename);
+
+   if (!strcmp(newfileprefix, "") &&
+       !strcmp(newfilesuffix, "") &&
+       !strcmp(newfileextrax, ""))
+   {
+   msgbox("najitool GUI batch mode error:",
+   "Error, new files must contain either a prefix, suffix, or extra extension.");
+   return true;
+   }
+
+
+   memset(processing_output_file_path, '\0', 4096);
+
+
+   if (strcmp(newfileprefix, "") &&
+       strcmp(newfilesuffix, "") &&
+       strcmp(newfileextrax, ""))
+   {
+   strcat(processing_output_file_path, temp_path);
+   strcat(processing_output_file_path, dirsep);
+   strcat(processing_output_file_path, newfileprefix);
+   strcat(processing_output_file_path, temp_filename_no_extension);
+   strcat(processing_output_file_path, newfilesuffix);
+   strcat(processing_output_file_path, ".");
+   strcat(processing_output_file_path, temp_extension);
+   strcat(processing_output_file_path, newfileextrax);
+   }
+
+
+   if (!strcmp(newfileprefix, "") &&
+       strcmp(newfilesuffix, "") &&
+       strcmp(newfileextrax, ""))
+   {
+   strcat(processing_output_file_path, temp_path);
+   strcat(processing_output_file_path, dirsep);
+   strcat(processing_output_file_path, temp_filename_no_extension);
+   strcat(processing_output_file_path, newfilesuffix);
+   strcat(processing_output_file_path, ".");
+   strcat(processing_output_file_path, temp_extension);
+   strcat(processing_output_file_path, newfileextrax);
+   }
+
+
+
+   if (strcmp(newfileprefix, "") &&
+       !strcmp(newfilesuffix, "") &&
+       strcmp(newfileextrax, ""))
+   {
+   strcat(processing_output_file_path, temp_path);
+   strcat(processing_output_file_path, dirsep);
+   strcat(processing_output_file_path, newfileprefix);
+   strcat(processing_output_file_path, temp_filename_no_extension);
+   strcat(processing_output_file_path, ".");
+   strcat(processing_output_file_path, temp_extension);
+   strcat(processing_output_file_path, newfileextrax);
+   }
+
+
+
+   if (!strcmp(newfileprefix, "") &&
+       !strcmp(newfilesuffix, "") &&
+       strcmp(newfileextrax, ""))
+   {
+   strcat(processing_output_file_path, temp_path);
+   strcat(processing_output_file_path, dirsep);
+   strcat(processing_output_file_path, temp_filename_no_extension);
+   strcat(processing_output_file_path, ".");
+   strcat(processing_output_file_path, temp_extension);
+   strcat(processing_output_file_path, newfileextrax);
+   }
+
+
+   
+   
+
+   if (strcmp(newfileprefix, "") &&
+       strcmp(newfilesuffix, "") &&
+       !strcmp(newfileextrax, ""))
+   {
+   strcat(processing_output_file_path, temp_path);
+   strcat(processing_output_file_path, dirsep);
+   strcat(processing_output_file_path, newfileprefix);
+   strcat(processing_output_file_path, temp_filename_no_extension);
+   strcat(processing_output_file_path, newfilesuffix);
+   strcat(processing_output_file_path, ".");
+   strcat(processing_output_file_path, temp_extension);
+   }
+
+
+
+     if (!strcmp(newfileprefix, "") &&
+         strcmp(newfilesuffix, "") &&
+         !strcmp(newfileextrax, ""))
+   {
+   strcat(processing_output_file_path, temp_path);
+   strcat(processing_output_file_path, dirsep);
+   strcat(processing_output_file_path, temp_filename_no_extension);
+   strcat(processing_output_file_path, newfilesuffix);
+   strcat(processing_output_file_path, ".");
+   strcat(processing_output_file_path, temp_extension);
+   }
+
+
+   if (strcmp(newfileprefix, "") &&
+       !strcmp(newfilesuffix, "") &&
+       !strcmp(newfileextrax, ""))
+   {
+   strcat(processing_output_file_path, temp_path);
+   strcat(processing_output_file_path, dirsep);
+   strcat(processing_output_file_path, newfileprefix);
+   strcat(processing_output_file_path, temp_filename_no_extension);
+   strcat(processing_output_file_path, ".");
+   strcat(processing_output_file_path, temp_extension);
+   }
+
+
+
+
+
+
+   
+   msgbox(processing_output_file_path, processing_output_file_path);
+
+   //help_edit_box.AddS(processing_output_file_path);
+
+
+   /*
+   if (! strcmp(najitool_command, "copyfile") )
+   copyfile(najbatch_list_box.GetData(batchfilenumber), processing_output_file_path);
+   */
+
+   }
+
+
+
+   /*
    if (! strcmp(najitool_command, "8bit256") )
    _8bit256(processing_output_file_path, atoi(parameter_1_string));
  
@@ -10705,7 +10941,7 @@ class tab_batch : Tab
    if (! strcmp(najitool_command, "zerokill") )
    zerokill(processing_output_file_path);
 
-
+*/
 
 
 
@@ -14103,7 +14339,8 @@ class HexEditor : Window
 
    bool OnCreate(void)
    {
-      
+
+   
       
       if (!strcmp(najitool_language, "English"))
       {
