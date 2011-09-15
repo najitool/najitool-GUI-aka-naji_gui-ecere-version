@@ -87,35 +87,14 @@ void najitool_gui_credits()
 }
 
 
-void naji_getfilename(char *destination, char *source)
+void msgbox(char *the_text, char *the_contents)
 {
-int len;
-char *p;
-
-  p = NULL;
-
-  len = strlen(source);
- 
-  if (len <= 1)
-  return;
-  
-  p = strrchr(source, '\\');
-  
-  if (p == NULL)
-  p = strrchr(source, '/');
-  
-  if (p != NULL)
-  {
-  
-  p++;
-
-  len = strlen(p);
-
-  memcpy(destination, p, len);
-
-  msgbox(destination, destination);
-  
-  
-  }
-
+MessageBox { text = the_text, contents = the_contents }.Modal();
 }
+
+
+DialogResult msgboxyesno(char *the_text, char *the_contents)
+{
+return MessageBox { type = yesNo, text = the_text, contents = the_contents}.Modal();
+}
+

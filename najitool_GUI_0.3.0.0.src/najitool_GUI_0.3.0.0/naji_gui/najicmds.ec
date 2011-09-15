@@ -5,7 +5,7 @@ import static "ecere"
 #else
 import "ecere"
 #endif
-
+import "najicomm"
 
 FILE *naji_input;
 FILE *naji_input2;
@@ -7876,98 +7876,6 @@ long filecount=0;
 
 
 
-unsigned char allbmp16_header_array[118] =
-{
-0x42,0x4D,0xF6,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x76,0x00,0x00,0x00,0x28,
-0x00,0x00,0x00,0x10,0x00,0x00,0x00,0x10,0x00,0x00,0x00,0x01,0x00,0x04,0x00,
-0x00,0x00,0x00,0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-0x80,0x00,0x00,0x80,0x00,0x00,0x00,0x80,0x80,0x00,0x80,0x00,0x00,0x00,0x80,
-0x00,0x80,0x00,0x80,0x80,0x00,0x00,0x80,0x80,0x80,0x00,0xC0,0xC0,0xC0,0x00,
-0x00,0x00,0xFF,0x00,0x00,0xFF,0x00,0x00,0x00,0xFF,0xFF,0x00,0xFF,0x00,0x00,
-0x00,0xFF,0x00,0xFF,0x00,0xFF,0xFF,0x00,0x00,0xFF,0xFF,0xFF,0x00};
-
-
-#define allbmp16_write_header()\
-for (i=0; i<118; i++)\
-fputc(allbmp16_header_array[i], naji_output);\
-
-
-
-
-void allbmp16(char *output_folder)
-{
-int i;
-int ii;
-unsigned char *buffer;
-
-int x=0;
-FILE *naji_output_a;
-char filename[100];
-char allbmp16_err_buf[4096];
-
-int size = 128;
-
-    buffer = (unsigned char *) malloc( (size) * ( sizeof(unsigned char) ) );
-
-    if (buffer == NULL)
-    {
-    sprintf(allbmp16_err_buf, "Error, could not allocate %i bytes of memory.", size);
-    msgbox("najitool GUI allbmp16 error", allbmp16_err_buf);
-    exit(9);
-    }
-
-    for (i=0; i<=size; i++)
-    buffer[i] = (unsigned char) 0;
-
-    while (*buffer <= 0)
-    {
-
-        for (i=0; i<=255; i++)
-        {
-        buffer[size] = (unsigned char) i;
-
-        sprintf(filename, "%s/%i.bmp", output_folder, x);
-        naji_output_a = fopen(filename, "wb");
-        if (naji_output_a == NULL)
-        {
-        sprintf(allbmp16_err_buf, "Error opening file %s : ", filename, strerror(errno));
-        msgbox("najitool GUI allbmp16 error", allbmp16_err_buf);
-        exit(1);
-        }
-
-
-        for (ii=0; ii<118; ii++)
-        fputc(allbmp16_header_array[ii], naji_output_a);
-
-
-        for (ii=1; ii<=size; ii++)
-        fputc(buffer[ii], naji_output_a);
-
-        fclose(naji_output_a);
-//        printf("Written file: %s\n", filename);
-        x++;
-        }
-
-        if (buffer[size] >= 255)
-        {
-        buffer[size] = (unsigned char) 0;
-        buffer[size-1]++;
-        }
-
-                for (i = (size-1); i >= 0; i--)
-                {
-                        if (buffer[i] >= 255)
-                        {
-                        buffer[i] = (unsigned char) 0;
-                        buffer[i-1]++;
-                        }
-                }
-
-        } /* end of while loop */
-
-return;
-}
 
 
 
@@ -8041,92 +7949,575 @@ return result;
 }
 
 
-   void allfiles(int size, char *outputdir)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void allfiles_genfile(char *filename, short file_contents[], unsigned long long filesize, char *outputdir)
 {
-int i;
-int ii;
-unsigned char *buffer;
-
-int x=0;
-FILE *naji_output_a;
-char filename[1000];
-char error[1000];
+	unsigned long long i;
+	char buffer[4096];
 
 
-    buffer = (unsigned char *) malloc( (size) * ( sizeof(unsigned char) ) );
+	/* NOTE: This will make the filenames start with a dot,
+        	 because on Windows/DOS systems you can't use
+	         CON, NUL, AUX, PRN, as filenames */
 
-    if (buffer == NULL)
-    {
-    
-    if (!strcmp(najitool_language, "English"))
-    {
-    sprintf(error, "Error, could not allocate %i bytes of memory.", size);
-    MessageBox { text = "najitool GUI allfiles error:", contents = error }.Modal();
-    }
-    
-    else if (!strcmp(najitool_language, "Turkish"))
-    {
-    sprintf(error, "Hata, %i bayt hafiza ayrilamadi.", size);
-    MessageBox { text = "najitool GUI allfiles hata:", contents = error }.Modal();
-    }
-    
-    
-    exit(9);
-    }
+	sprintf(buffer, "%s%s.%s", outputdir, DIR_SEPS, filename);
 
-    for (i=0; i<=size; i++)
-    buffer[i] = (unsigned char) 0;
 
-    while (*buffer <= 0)
-    {
+	najout(buffer);
+	
+	for (i=0; i<filesize; i++)
+	fputc(file_contents[i], naji_output);
 
-        for (i=0; i<=255; i++)
-        {
-        buffer[size] = (unsigned char) i;
+	najoutclose();
 
-        sprintf(filename, "%s/%i", outputdir, x);
-        naji_output_a = fopen(filename, "wb");
-        if (naji_output_a == NULL)
-        {
-        
-        if (!strcmp(najitool_language, "English"))
-        {
-        sprintf(error, "Error opening file %s : %s", filename, strerror(errno));
-        MessageBox { text = "najitool GUI allfiles error:", contents = error }.Modal();
-        }
-        
-        else if (!strcmp(najitool_language, "Turkish"))
-        {
-        sprintf(error, "Dosya acilirken hata %s : %s", filename, strerror(errno));
-        MessageBox { text = "najitool GUI allfiles hata:", contents = error }.Modal();
-        }
-        
-        exit(1);
-        }
+	//printf("Made file :%s:\n", buffer);
 
-        for (ii=1; ii<=size; ii++)
-        fputc(buffer[ii], naji_output_a);
+}
 
-        fclose(naji_output_a);
-        x++;
-        }
 
-        if (buffer[size] >= 255)
-        {
-        buffer[size] = (unsigned char) 0;
-        buffer[size-1]++;
-        }
 
-                for (i = (size-1); i >= 0; i--)
-                {
-                        if (buffer[i] >= 255)
-                        {
-                        buffer[i] = (unsigned char) 0;
-                        buffer[i-1]++;
-                        }
-                }
 
-        } /* end of while loop */
 
-return;
+char afgfn_buffer[MAX_LOCATION];
+
+unsigned long long afgfn_i    = 0;
+unsigned long long afgfn_c    = 0;
+unsigned long long afgfn_size = 1;
+
+void allfiles_genfilename(short a, short b, short filecontents[], unsigned long long filesize, char *outputdir)
+{
+
+
+	afgfn_c=0;
+
+	allfiles_genfile(afgfn_buffer, filecontents, filesize, outputdir);
+
+	afgfn_buffer[0]++;
+
+	/* skips characters   \ / : * ? " < > |   which cannot be used in DOS/Windows filenames */
+	/* also skips lowercase letters, since Windows filenames are case insensitive */
+
+	if (afgfn_buffer[0] == '\"')
+	afgfn_buffer[0]++;
+ 
+	else if (afgfn_buffer[0] == '*')
+	afgfn_buffer[0]++;
+
+	else if (afgfn_buffer[0] == '.')
+	afgfn_buffer[0]+=2;
+
+	else if (afgfn_buffer[0] == ':')
+	afgfn_buffer[0]++;
+
+	else if (afgfn_buffer[0] == '<')
+	afgfn_buffer[0]++;
+
+	else if (afgfn_buffer[0] == '>')
+	afgfn_buffer[0]+=2;
+
+	else if (afgfn_buffer[0] == '\\')
+	afgfn_buffer[0]++;
+   
+	else if (islower(afgfn_buffer[0]))
+	afgfn_buffer[0]='{';
+
+	else if (afgfn_buffer[0] == '|')
+	afgfn_buffer[0]++;
+
+	for (afgfn_i=0; afgfn_i<afgfn_size; afgfn_i++)
+	{
+
+			if (afgfn_buffer[afgfn_i] > b)
+			{
+			afgfn_buffer[afgfn_i] = a;
+			afgfn_c++;
+
+				if (afgfn_i <afgfn_size-1)
+				{
+				afgfn_buffer[afgfn_i+1]++;
+
+				/* skips characters   \ / : * ? " < > |   which cannot be used in DOS/Windows filenames */
+				/* also skips lowercase letters, since Windows filenames are case insensitive */
+
+				if (afgfn_buffer[afgfn_i+1] == '\"')
+				afgfn_buffer[afgfn_i+1]++;
+
+				else if (afgfn_buffer[afgfn_i+1] == '*')
+				afgfn_buffer[afgfn_i+1]++;
+				
+				else if (afgfn_buffer[afgfn_i+1] == '.')
+				afgfn_buffer[afgfn_i+1]+=2;
+
+				else if (afgfn_buffer[afgfn_i+1] == ':')
+				afgfn_buffer[afgfn_i+1]++;
+				
+				else if (afgfn_buffer[afgfn_i+1] == '<')
+				afgfn_buffer[afgfn_i+1]++;
+
+				else if (afgfn_buffer[afgfn_i+1] == '>')
+				afgfn_buffer[afgfn_i+1]+=2;
+
+				else if (afgfn_buffer[afgfn_i+1] == '\\')
+				afgfn_buffer[afgfn_i+1]++;
+
+				else if (islower(afgfn_buffer[afgfn_i+1]))
+				afgfn_buffer[afgfn_i+1]='{';
+
+				else if (afgfn_buffer[afgfn_i+1] == '|')
+				afgfn_buffer[afgfn_i+1]++;
+				}
+
+			}
+
+	}
+
+
+	if (afgfn_c == afgfn_size)
+	{
+	for (afgfn_i=0; afgfn_i<afgfn_size+1; afgfn_i++)
+	afgfn_buffer[afgfn_i] = '!';
+
+	afgfn_buffer[afgfn_i] = '\0';
+	afgfn_size++;
+	}
+
+
+}
+
+
+
+
+void allfiles_main(short a, short b, short *buffer, unsigned long long size, char *outputdir)
+{
+	unsigned long long i;
+	unsigned long long c;
+	unsigned long long possible_combinations;
+   char msgbox_buffer[4096+4096];
+
+
+
+	for (afgfn_i=0; afgfn_i<afgfn_size; afgfn_i++)
+	afgfn_buffer[afgfn_i] = '!';
+
+	afgfn_buffer[afgfn_i] = '\0';
+
+
+
+	possible_combinations = pow(abs(a - b)+1, size);
+
+	sprintf(msgbox_buffer,
+"\n\nThis will make %llu files (if you see a zero it cannot be displayed on the\n"
+"'unsigned long long' type on this system) i.e. it will make 256^%llu files.\n"
+"all the files will use up (256^%llu)*%llu bytes.\n\n"
+"Are you sure you want to continue? If you do wish to continue\n"
+"please make sure you use this function on an empty Output Folder\n"
+"so you can delete the folder when you no longer need the files.\n\n"
+, possible_combinations, size, size, size);
+
+	if (msgboxyesno("najitool GUI allfiles confirmation", msgbox_buffer) == no)
+	return;
+
+	for (i=0; i<size; i++)
+	buffer[i] = a;
+
+	buffer[i] = '\0';
+
+	while (1)
+	{
+
+		c=0;
+
+		allfiles_genfilename('!', '~', buffer, size, outputdir);
+
+		buffer[0]++;
+
+
+		for (i=0; i<size; i++)
+		{
+			if (buffer[i] > b)
+			{
+			buffer[i] = a;
+			c++;
+
+				if (i <size-1)
+				buffer[i+1]++;
+			}
+
+		}
+
+		if (c == size)
+		break;
+	}
+
+}
+
+
+
+
+/* WARNING: be very careful with this */
+/* function, it makes a lot of files  */
+
+/* you give it the size in bytes of every  */
+/* possible byte combination that you want */
+
+
+void allfiles(unsigned long long size, char *outputdir)
+{
+
+	short *buffer;
+	
+	buffer = malloc(size * sizeof(short) );
+
+	if (buffer == NULL)
+	{
+   MessageBox { text = "najitool GUI allfiles error:", contents = "Error allocating memory in function allfiles()"}.Modal();
+   exit(9);
+	}
+
+	allfiles_main(0, 255, buffer, size, outputdir);
+
+	free(buffer);
+
+	buffer = NULL; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+unsigned char allbmp16_header_array[118] =
+{
+0x42,0x4D,0xF6,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x76,0x00,0x00,0x00,0x28,
+0x00,0x00,0x00,0x10,0x00,0x00,0x00,0x10,0x00,0x00,0x00,0x01,0x00,0x04,0x00,
+0x00,0x00,0x00,0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+0x80,0x00,0x00,0x80,0x00,0x00,0x00,0x80,0x80,0x00,0x80,0x00,0x00,0x00,0x80,
+0x00,0x80,0x00,0x80,0x80,0x00,0x00,0x80,0x80,0x80,0x00,0xC0,0xC0,0xC0,0x00,
+0x00,0x00,0xFF,0x00,0x00,0xFF,0x00,0x00,0x00,0xFF,0xFF,0x00,0xFF,0x00,0x00,
+0x00,0xFF,0x00,0xFF,0x00,0xFF,0xFF,0x00,0x00,0xFF,0xFF,0xFF,0x00
+};
+
+
+char allbmp16gfn_buffer[MAX_LOCATION];
+
+unsigned long long allbmp16gfn_i    = 0;
+unsigned long long allbmp16gfn_c    = 0;
+unsigned long long allbmp16gfn_size = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+void allbmp16_genfile(char *filename, short file_contents[], unsigned long long filesize, char *outputdir)
+{
+	unsigned long long i;
+	char buffer[4096];
+
+
+
+	/* NOTE: This will make the filenames start with a dot,
+        	 because on Windows/DOS systems you can't use
+	         CON, NUL, AUX, PRN, as filenames */
+
+	sprintf(buffer, "%s%s.%s.bmp", outputdir, DIR_SEPS, filename);
+
+
+	najout(buffer);
+
+
+	for (i=0; i<118; i++)
+	fputc(allbmp16_header_array[i], naji_output);
+
+	for (i=0; i<filesize; i++)
+	fputc(file_contents[i], naji_output);
+
+	najoutclose();
+
+	//printf("Made file :%s:\n", buffer);
+
+}
+
+
+
+
+void allbmp16_genfilename(short a, short b, short filecontents[], unsigned long long filesize, char *outputdir)
+{
+
+
+	allbmp16gfn_c=0;
+
+	allbmp16_genfile(allbmp16gfn_buffer, filecontents, filesize, outputdir);
+
+	allbmp16gfn_buffer[0]++;
+
+	/* skips characters   \ / : * ? " < > |   which cannot be used in DOS/Windows filenames */
+	/* also skips lowercase letters, since Windows filenames are case insensitive */
+
+	if (allbmp16gfn_buffer[0] == '\"')
+	allbmp16gfn_buffer[0]++;
+ 
+	else if (allbmp16gfn_buffer[0] == '*')
+	allbmp16gfn_buffer[0]++;
+
+	else if (allbmp16gfn_buffer[0] == '.')
+	allbmp16gfn_buffer[0]+=2;
+
+	else if (allbmp16gfn_buffer[0] == ':')
+	allbmp16gfn_buffer[0]++;
+
+	else if (allbmp16gfn_buffer[0] == '<')
+	allbmp16gfn_buffer[0]++;
+
+	else if (allbmp16gfn_buffer[0] == '>')
+	allbmp16gfn_buffer[0]+=2;
+
+	else if (allbmp16gfn_buffer[0] == '\\')
+	allbmp16gfn_buffer[0]++;
+   
+	else if (islower(allbmp16gfn_buffer[0]))
+	allbmp16gfn_buffer[0]='{';
+
+	else if (allbmp16gfn_buffer[0] == '|')
+	allbmp16gfn_buffer[0]++;
+
+	for (allbmp16gfn_i=0; allbmp16gfn_i<allbmp16gfn_size; allbmp16gfn_i++)
+	{
+
+			if (allbmp16gfn_buffer[allbmp16gfn_i] > b)
+			{
+			allbmp16gfn_buffer[allbmp16gfn_i] = a;
+			allbmp16gfn_c++;
+
+				if (allbmp16gfn_i <allbmp16gfn_size-1)
+				{
+				allbmp16gfn_buffer[allbmp16gfn_i+1]++;
+
+				/* skips characters   \ / : * ? " < > |   which cannot be used in DOS/Windows filenames */
+				/* also skips lowercase letters, since Windows filenames are case insensitive */
+
+				if (allbmp16gfn_buffer[allbmp16gfn_i+1] == '\"')
+				allbmp16gfn_buffer[allbmp16gfn_i+1]++;
+
+				else if (allbmp16gfn_buffer[allbmp16gfn_i+1] == '*')
+				allbmp16gfn_buffer[allbmp16gfn_i+1]++;
+				
+				else if (allbmp16gfn_buffer[allbmp16gfn_i+1] == '.')
+				allbmp16gfn_buffer[allbmp16gfn_i+1]+=2;
+
+				else if (allbmp16gfn_buffer[allbmp16gfn_i+1] == ':')
+				allbmp16gfn_buffer[allbmp16gfn_i+1]++;
+				
+				else if (allbmp16gfn_buffer[allbmp16gfn_i+1] == '<')
+				allbmp16gfn_buffer[allbmp16gfn_i+1]++;
+
+				else if (allbmp16gfn_buffer[allbmp16gfn_i+1] == '>')
+				allbmp16gfn_buffer[allbmp16gfn_i+1]+=2;
+
+				else if (allbmp16gfn_buffer[allbmp16gfn_i+1] == '\\')
+				allbmp16gfn_buffer[allbmp16gfn_i+1]++;
+
+				else if (islower(allbmp16gfn_buffer[allbmp16gfn_i+1]))
+				allbmp16gfn_buffer[allbmp16gfn_i+1]='{';
+
+				else if (allbmp16gfn_buffer[allbmp16gfn_i+1] == '|')
+				allbmp16gfn_buffer[allbmp16gfn_i+1]++;
+				}
+
+			}
+
+	}
+
+
+	if (allbmp16gfn_c == allbmp16gfn_size)
+	{
+	for (allbmp16gfn_i=0; allbmp16gfn_i<allbmp16gfn_size+1; allbmp16gfn_i++)
+	allbmp16gfn_buffer[allbmp16gfn_i] = '!';
+
+	allbmp16gfn_buffer[allbmp16gfn_i] = '\0';
+	allbmp16gfn_size++;
+	}
+
+
+}
+
+
+
+
+void allbmp16_main(short a, short b, short *buffer, unsigned long long size, char *outputdir)
+{
+	char *msgbox_buffer = 
+	"\n"
+	"This will make the following number of .BMP files:\n"
+   "\n"
+	"17976931348623159077293051907890247336179769789423065727343008115773267580550096\n"
+	"31327084773224075360211201138798713933576587897688144166224928474306394741243777\n"
+	"67893424865485276302219601246094119453082952085005768838150682342462881473913110\n"
+	"540827237163350510684586298239947245938479716304835356329624224137216\n"
+	"\n"
+	"Each .BMP file will have a 118 byte header and a 128 bytes of\n"
+	"16 width, 16 height, and 16 color pixel contents.\n"
+	"\n"
+	"Each .BMP file will be 246 bytes in size.\n"
+	"\n"
+	"The total amount of bytes used for all .BMP files will be:\n"
+	"\n"
+	"44223251117612971330140907693410008447002233681980741689263799964802238248153236\n"
+	"93064628542131225386119554801444836276598406228312834648913324046793731063459693\n"
+	"09017825169093779703460219065391533854584062129114191341850678562458688425826251\n"
+	"93043500342184225628408229367027022500866010210989497657087559137755136 bytes.\n"
+	"\n"
+	"Are you sure you want to continue?\n"
+   ;
+
+
+	unsigned long long i;
+	unsigned long long c;
+/*	unsigned long long possible_combinations; */
+
+
+	for (allbmp16gfn_i=0; allbmp16gfn_i<allbmp16gfn_size; allbmp16gfn_i++)
+	allbmp16gfn_buffer[allbmp16gfn_i] = '!';
+
+	allbmp16gfn_buffer[allbmp16gfn_i] = '\0';
+
+
+/*
+	possible_combinations = pow(abs(a - b)+1, size);
+
+	printf (
+		"\nThis will make %llu .BMP files are you sure you want to continue?\n"
+		"press y or Y then enter or return to continue or any other key to exit.\n", possible_combinations
+		);
+
+*/
+                                         
+
+
+	if (msgboxyesno("najitool GUI allbmp16", msgbox_buffer) == no)
+	return;
+
+	for (i=0; i<size; i++)
+	buffer[i] = a;
+
+	buffer[i] = '\0';
+
+	while (1)
+	{
+
+		c=0;
+
+		allbmp16_genfilename('!', '~', buffer, size, outputdir);
+
+		buffer[0]++;
+
+
+		for (i=0; i<size; i++)
+		{
+			if (buffer[i] > b)
+			{
+			buffer[i] = a;
+			c++;
+
+				if (i <size-1)
+				buffer[i+1]++;
+			}
+
+		}
+
+		if (c == size)
+		break;
+	}
+
+}
+
+
+
+
+
+
+void allbmp16(char *outputdir)
+{
+char error[4096];
+	short *buffer;
+	
+	buffer = malloc(128 * sizeof(short) );
+
+	if (buffer == NULL)
+	{
+   MessageBox { text = "najitool GUI allfiles error:", contents = "Error allocating memory in function allbmp16()"}.Modal();
+	exit(9);
+	}
+
+	allbmp16_main(0, 255, buffer, 128, outputdir);
+
+	free(buffer);
+
+	buffer = NULL; 
 }
