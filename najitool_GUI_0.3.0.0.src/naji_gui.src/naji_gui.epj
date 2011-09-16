@@ -75,77 +75,92 @@
       "najicalc.ec",
       "najihelp.ec",
       "naji_mp3.c",
-      "najicomm.ec"
+      "najicomm.ec",
+      "najimain.ec",
+      "najbatch.ec"
    ],
    "ResourcesPath" : "",
    "Resources" : [
       {
-         "Folder" : "ecere",
+         "Folder" : "res",
          "Files" : [
             {
                "Folder" : "actions",
                "Files" : [
-                  "../../ecereRes/actions/folderNew.png",
-                  "../../ecereRes/actions/goUp.png"
+                  "folderNew.png",
+                  "goUp.png"
                ]
             },
             {
                "Folder" : "devices",
                "Files" : [
-                  "../../ecereRes/devices/computer.png",
-                  "../../ecereRes/devices/driveHardDisk.png",
-                  "../../ecereRes/devices/driveRemovableMedia.png",
-                  "../../ecereRes/devices/mediaFloppy.png",
-                  "../../ecereRes/devices/mediaOptical.png"
+                  "computer.png",
+                  "driveHardDisk.png",
+                  "driveRemovableMedia.png",
+                  "mediaFloppy.png",
+                  "mediaOptical.png"
                ]
             },
             {
                "Folder" : "elements",
                "Files" : [
-                  "../../ecereRes/elements/areaClose.png",
-                  "../../ecereRes/elements/areaMaximize.png",
-                  "../../ecereRes/elements/areaMinimize.png",
-                  "../../ecereRes/elements/areaRestore.png",
-                  "../../ecereRes/elements/arrowDown.png",
-                  "../../ecereRes/elements/arrowLeft.png",
-                  "../../ecereRes/elements/arrowRight.png",
-                  "../../ecereRes/elements/arrowUp.png",
-                  "../../ecereRes/elements/checkBox.png",
-                  "../../ecereRes/elements/checkBoxChecked.png",
-                  "../../ecereRes/elements/checkBoxDisabled.png",
-                  "../../ecereRes/elements/checkBoxDisabledChecked.png",
-                  "../../ecereRes/elements/optionBoxDisabled.png",
-                  "../../ecereRes/elements/optionBoxDisabledSelected.png",
-                  "../../ecereRes/elements/optionBoxDown.png",
-                  "../../ecereRes/elements/optionBoxSelected.png",
-                  "../../ecereRes/elements/optionBoxSelectedDown.png",
-                  "../../ecereRes/elements/optionBoxSelectedUp.png",
-                  "../../ecereRes/elements/optionBoxUp.png",
-                  "../../ecereRes/elements/orderAscending.png",
-                  "../../ecereRes/elements/orderCategorized.png",
-                  "../../ecereRes/elements/orderDescending.png"
+                  "areaClose.png",
+                  "areaMaximize.png",
+                  "areaMinimize.png",
+                  "areaRestore.png",
+                  "arrowDown.png",
+                  "arrowLeft.png",
+                  "arrowRight.png",
+                  "arrowUp.png",
+                  "checkBox.png",
+                  "checkBoxChecked.png",
+                  "checkBoxDisabled.png",
+                  "checkBoxDisabledChecked.png",
+                  "optionBoxDisabled.png",
+                  "optionBoxDisabledSelected.png",
+                  "optionBoxDown.png",
+                  "optionBoxSelected.png",
+                  "optionBoxSelectedDown.png",
+                  "optionBoxSelectedUp.png",
+                  "optionBoxUp.png",
+                  "orderAscending.png",
+                  "orderCategorized.png",
+                  "orderDescending.png"
+               ]
+            },
+            {
+               "Folder" : "licenses",
+               "Files" : [
+                  "ecere.LICENSE",
+                  "freetype.LICENSE",
+                  "jpeg.LICENSE",
+                  "libungif.LICENSE",
+                  "naji.LICENSE",
+                  "png.LICENSE",
+                  "tango.LICENSE",
+                  "zlib.LICENSE"
                ]
             },
             {
                "Folder" : "mimeTypes",
                "Files" : [
-                  "../../ecereRes/mimeTypes/file.png"
+                  "file.png"
                ]
             },
             {
                "Folder" : "places",
                "Files" : [
-                  "../../ecereRes/places/driveRemote.png",
-                  "../../ecereRes/places/folder.png",
-                  "../../ecereRes/places/folderRemote.png",
-                  "../../ecereRes/places/networkServer.png",
-                  "../../ecereRes/places/networkWorkgroup.png"
+                  "driveRemote.png",
+                  "folder.png",
+                  "folderRemote.png",
+                  "networkServer.png",
+                  "networkWorkgroup.png"
                ]
             },
             {
                "Folder" : "status",
                "Files" : [
-                  "../../ecereRes/status/folderOpen.png"
+                  "folderOpen.png"
                ]
             }
          ]

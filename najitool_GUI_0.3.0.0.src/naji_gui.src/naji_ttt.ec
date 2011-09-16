@@ -3,20 +3,33 @@ import static "ecere"
 #else
 import "ecere"
 #endif
+import "najicomm"
+import "najicmds"
+import "naji_ttt"
+import "najicalc"
+import "najihelp"
+#include "naji_gui.eh"
+
+
+
+#ifdef ECERE_STATIC
+import static "ecere"
+#else
+import "ecere"
+#endif
 
 
 int xx=0;
 int yy=0;
 
-#define TRUE 1
-#define FALSE 0
 
-int player_move = TRUE;
+bool player_move = true;
 
-char ttt_board[9] ={
+char ttt_board[9] = {
 ' ', ' ', ' ',
 ' ', ' ', ' ',
-' ', ' ', ' '}; 
+' ', ' ', ' '
+}; 
 
 char ttt_winner = ' '; 
 
@@ -28,17 +41,22 @@ class ttt : Window
    hasMinimize = true;
    hasClose = true;
    tabCycle = true;
-   clientSize = { 471, 471 };
+   size = { 471, 471 };
 
+   
    bool OnCreate()
    {
-      MessageBox{text = "najitool GUI Tic-Tac-Toe", contents = "The aim of the game is to try to get 3 of your pieces\n"
+      
+      
+       msgbox("najitool GUI Tic-Tac-Toe", "The aim of the game is to try to get 3 of your pieces\n"
        "in a row, be it horizontally, vertically or diagonally.\n"
        "Your pieces are represented by X and the computer's O.\n\n"
-       "najitool cmd version by SAMUEL CHANG         (badp1ayer@hotmail.com)\n"
-       "najitool GUI version by NECDET COKYAZICI   (cokyazici@yahoo.co.uk)\n"
-       }.Modal();
-      return true;
+       "najitool cmd version by SAMUEL CHANG     (badp1ayer@hotmail.com)\n"
+       "najitool GUI version by NECDET COKYAZICI (cokyazici@yahoo.co.uk)\n"
+       );
+  
+  
+        return true;
    }
 
    BitmapResource player_x_bitmap { ":player_x.pcx", window = this };
@@ -116,7 +134,7 @@ class ttt : Window
      xx = x;
      yy = y;
 
-      if (player_move == TRUE)
+      if (player_move == true)
       {
 
       if (xx > 0)
@@ -126,7 +144,7 @@ class ttt : Window
       if (ttt_board[0] == ' ')
       {
       ttt_board[0]='X';
-      player_move = FALSE;
+      player_move = false;
       }
       
       if (xx >= 162)
@@ -136,7 +154,7 @@ class ttt : Window
       if (ttt_board[1] == ' ')
       {
       ttt_board[1]='X';
-      player_move = FALSE;
+      player_move = false;
       }
 
 
@@ -147,7 +165,7 @@ class ttt : Window
       if (ttt_board[2] == ' ')
       {
       ttt_board[2]='X';
-      player_move = FALSE;
+      player_move = false;
       }
 
       if (xx > 0)
@@ -157,7 +175,7 @@ class ttt : Window
       if (ttt_board[3] == ' ')
       {
       ttt_board[3]='X';
-      player_move = FALSE;
+      player_move = false;
       }
 
       if (xx >= 162)
@@ -167,7 +185,7 @@ class ttt : Window
       if (ttt_board[4] == ' ')
       {
       ttt_board[4]='X';
-      player_move = FALSE;
+      player_move = false;
       }
 
       if (xx >= 323)
@@ -177,7 +195,7 @@ class ttt : Window
       if (ttt_board[5] == ' ')
       {
       ttt_board[5]='X';
-      player_move = FALSE;
+      player_move = false;
       }
 
       if (xx > 0)
@@ -187,7 +205,7 @@ class ttt : Window
       if (ttt_board[6] == ' ')
       {
       ttt_board[6]='X';
-      player_move = FALSE;
+      player_move = false;
       }
 
 
@@ -198,7 +216,7 @@ class ttt : Window
       if (ttt_board[7] == ' ')
       {
       ttt_board[7]='X';
-      player_move = FALSE;
+      player_move = false;
       }
 
 
@@ -209,13 +227,13 @@ class ttt : Window
       if (ttt_board[8] == ' ')
       {
       ttt_board[8]='X';
-      player_move = FALSE;
+      player_move = false;
       }
       }
 
       if(ttt_gameover() == ' ')
       {
-         if (player_move == FALSE)
+         if (player_move == false)
          ttt_computermove();  
       }
       else
@@ -312,7 +330,7 @@ class ttt : Window
       const int BESTMOVES[] = {4, 0, 2, 6, 8, 1, 3, 5, 7};
       int i;
 
-      player_move = TRUE;
+      player_move = true;
 
         /* Step 1: Check and see if the computer can win */
 
