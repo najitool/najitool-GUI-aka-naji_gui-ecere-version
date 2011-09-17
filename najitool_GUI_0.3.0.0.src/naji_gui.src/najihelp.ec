@@ -1422,7 +1422,7 @@ true, // param 2 box
 "Parameter 1:",
 "Parameter 2:",
 
-"Bir dosya kopyasini yapiyarak butun karakterleri ikilik sayisi artarak diziyor.\n"
+"Bir dosya kopyasini yaparak butun karakterleri ikilik sayisi artarak diziyor.\n"
 "Okunan ve yazilan dosyayi belirt.",
 "Parametre 1:",
 "Parametre 2:"

@@ -434,6 +434,8 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
    
             else if (!strcmp(najitool_language, "Turkish"))
             msgbox("najitool GUI", "Lutfen bir komut secin.");
+         
+         return true;
          }
 
       
@@ -1265,6 +1267,9 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
    } // end of notify clicked
    
    } // end of process button
+   
+   
+   
    DropBox category_drop_box
    {
       this, text = "category_drop_box", size = { 184, 24 }, position = { 8, 232 };
@@ -1278,12 +1283,6 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
     
     
          strcpy(najitool_category, row.string);
-        
-        
-   
-   
-   
- 
         
         
         if (! strcmp(najitool_category, "All") )
@@ -1492,20 +1491,7 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
         return true;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   
 
         if (! strcmp(najitool_category, "Tum") )
         {
@@ -1714,14 +1700,7 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
         }
 
 
-
-
-
-
-
-
-
-
+   
 
 
          }

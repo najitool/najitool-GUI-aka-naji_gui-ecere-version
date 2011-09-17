@@ -134,7 +134,14 @@ FileListing listing { path };
             {
                add_file_edit_box.contents = add_file_dialog.filePath;
 
-               sprintf(tempbuffer, "%i", batchfilemaxitems);
+               if (!strcmp(najitool_language, "English"))
+               sprintf(tempbuffer, "%i files in list.", batchfilemaxitems+1);
+         
+               else if (!strcmp(najitool_language, "Turkish"))
+               sprintf(tempbuffer, "%i dosyalar listede.", batchfilemaxitems+1);
+         
+
+               
                msgbox(tempbuffer, tempbuffer);
 
                 
@@ -174,7 +181,13 @@ FileListing listing { path };
 
          addfilestolistbox(add_folder_path, najbatch_list_box);
          
-         sprintf(tempbuffer, "%i", batchfilemaxitems);
+         
+         if (!strcmp(najitool_language, "English"))
+         sprintf(tempbuffer, "%i files in list.", batchfilemaxitems+1);
+         
+         else if (!strcmp(najitool_language, "Turkish"))
+         sprintf(tempbuffer, "%i dosyalar listede.", batchfilemaxitems+1);
+                  
          msgbox(tempbuffer, tempbuffer);
          }
          return true;
@@ -392,9 +405,24 @@ FileListing listing { path };
    strcpy(newfilesuffix, new_files_suffix_edit_box.contents);
    strcpy(newfileextrax, new_files_extra_extension_edit_box.contents);
 
+   row = najbatch_list_box.firstRow;
 
+   if (row == null)
+   {
    
-   for (row = najbatch_list_box.firstRow; row; row = row.next)
+   if (!strcmp(najitool_language, "English"))
+   MessageBox { text = "najitool GUI", contents = "Please add files and/or folders to process." }.Modal();
+   
+   else if (!strcmp(najitool_language, "Turkish"))
+   MessageBox { text = "najitool GUI", contents = "Lutfen dosyalar veya klasorler secin islem icin." }.Modal();
+   
+   
+   
+   return true;
+   }
+   
+   
+   for (; row; row = row.next)
    {
    
 
@@ -1371,6 +1399,7 @@ FileListing listing { path };
 
    }
 
+   
    }
 
    if (!strcmp(najitool_language, "English"))
@@ -1378,10 +1407,11 @@ FileListing listing { path };
    
    else if (!strcmp(najitool_language, "Turkish"))
    MessageBox { text = "najitool GUI", contents = "Toplu yontem islem tamamlandi." }.Modal();
-
-   return true;
-   }
-      
+   
+   
+      return true;
+      }
+   
    };
    DropBox category_drop_box
    {
