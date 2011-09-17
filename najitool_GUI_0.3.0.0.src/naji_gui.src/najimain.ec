@@ -17,9 +17,10 @@ import "najiform"
 class tab_main : Tab
 {
    text = "Main";
-   background = { r = 110, g = 161, b = 180 };
+//   background = { r = 110, g = 161, b = 180 };
    font = { "Verdana", 8.25f, bold = true };
    size = { 1024, 768 };
+   anchor = { horz = 45, vert = -6 };
 
    char input_file_1_path[MAX_LOCATION];
    char input_file_2_path[MAX_LOCATION];
@@ -34,7 +35,6 @@ class tab_main : Tab
    char najitool_command[4096];
    char najitool_category[4096];
    char temp_edit_delete[4096+4096];
-   
    time_t time_value;
    struct tm *date_time;
    najitool_languages lang;
@@ -94,7 +94,6 @@ sprintf(telltime_buf, "%02i:%02i:%02i", date_time->tm_hour, date_time->tm_min, d
 sprintf(dayofmon_buf, "%i", date_time->tm_mday); sprintf(month_buf, s_ay()); sprintf(year_buf, "%i", ( (1900) + (date_time->tm_year) ) );
 sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, month_buf, year_buf); help_edit_box.contents = naji_buffer;   }
 /* End: Turkish Date/Time Functions */
-
 
    Label help_label { this, text = "Help/Output:", size = { 89, 16 }, position = { 616, 296 } };
    Label najitool_homepage_label
@@ -252,7 +251,7 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
    };
    EditBox input_file_1_edit_box
    {
-      this, text = "input_file_1_edit_box", size = { 294, 19 }, position = { 416, 16 };
+      this, text = "input_file_1_edit_box", size = { 574, 19 }, position = { 416, 16 };
 
       bool NotifyModified(EditBox editBox)
       {
@@ -263,7 +262,7 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
    };
    EditBox input_file_2_edit_box
    {
-      this, text = "input_file_2_edit_box", size = { 294, 19 }, position = { 416, 40 };
+      this, text = "input_file_2_edit_box", size = { 574, 19 }, position = { 416, 40 };
 
       bool NotifyModified(EditBox editBox)
       {
@@ -275,7 +274,7 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
    };
    EditBox input_folder_edit_box 
    {
-      this, text = "input_folder_edit_box", size = { 294, 19 }, position = { 416, 64 };
+      this, text = "input_folder_edit_box", size = { 574, 19 }, position = { 416, 64 };
 
       bool NotifyModified(EditBox editBox)
       {
@@ -287,7 +286,7 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
    };
    EditBox output_file_1_edit_box
    {
-      this, text = "output_file_1_edit_box", size = { 294, 19 }, position = { 416, 88 };
+      this, text = "output_file_1_edit_box", size = { 574, 19 }, position = { 416, 88 };
 
       bool NotifyModified(EditBox editBox)
       {
@@ -300,7 +299,7 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
    };
    EditBox output_file_2_edit_box
    {
-      this, text = "output_file_2_edit_box", size = { 294, 19 }, position = { 416, 112 };
+      this, text = "output_file_2_edit_box", size = { 574, 19 }, position = { 416, 112 };
 
       bool NotifyModified(EditBox editBox)
       {
@@ -312,7 +311,7 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
    };
    EditBox output_folder_edit_box 
    {
-      this, text = "output_folder_edit_box", size = { 294, 19 }, position = { 416, 136 };
+      this, text = "output_folder_edit_box", size = { 574, 19 }, position = { 416, 136 };
 
       bool NotifyModified(EditBox editBox)
       {
@@ -322,7 +321,7 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
    };
    EditBox parameter_1_edit_box
    {
-      this, text = "parameter_1_edit_box", size = { 294, 19 }, position = { 416, 160 };
+      this, text = "parameter_1_edit_box", size = { 574, 19 }, position = { 416, 160 };
 
       bool NotifyModified(EditBox editBox)
       {
@@ -334,7 +333,7 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
    };
    EditBox parameter_2_edit_box
    {
-      this, text = "parameter_2_edit_box", size = { 294, 19 }, position = { 416, 184 };
+      this, text = "parameter_2_edit_box", size = { 574, 19 }, position = { 416, 184 };
 
       bool NotifyModified(EditBox editBox)
       {
@@ -365,19 +364,6 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
       }
    };
 
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
    bool OnCreate(void)
    {
       int i;
@@ -430,23 +416,10 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
 
      return true;
      };
-
-
-
-
-
-
-
-
-
-
-
-
    EditBox help_edit_box 
    {
       this, text = "help_edit_box", font = { "Courier New", 8 }, size = { 702, 326 }, position = { 288, 328 }, hasHorzScroll = true, true, true, true, true, readOnly = true, true, noCaret = true
    };
-   
    Button process_button
    {
       this, text = "Process", size = { 80, 25 }, position = { 648, 672 };
@@ -1292,8 +1265,6 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
    } // end of notify clicked
    
    } // end of process button
-
-
    DropBox category_drop_box
    {
       this, text = "category_drop_box", size = { 184, 24 }, position = { 8, 232 };
@@ -1762,7 +1733,10 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
 
    void OnRedraw(Surface surface)
    {
+   ColorKey keys[2] = { {0x6EA1B4, 0.0f}, { white, 1.0f } };
+   surface.Gradient(keys, sizeof(keys) / sizeof(ColorKey), 1, vertical, 1, 0, 1024-3, 768 - 3);
    surface.Blit(najitool_logo_bitmap.bitmap, 8, 24, 0,0, najitool_logo_bitmap.bitmap.width, najitool_logo_bitmap.bitmap.height);
+   Update(null);
    }
    Label language_label { this, text = "Language:", position = { 8, 168 } };
    FlagCollection flags { this };
@@ -2018,13 +1992,6 @@ int i;
 
 
    };
-
-
-
-
-
-
-
 
    void bigascii_naji_(int a)
 {
@@ -3514,7 +3481,7 @@ najinclose();
 najin2close();
 }
 
-int ::findi_line(const char *line, const char *str)
+   int ::findi_line(const char *line, const char *str)
 {
 char *straux;
 char *lineaux;
@@ -3535,7 +3502,7 @@ find_matches++;
 return 1;
 }
 
-int ::find_line(const char *line, const char *str)
+   int ::find_line(const char *line, const char *str)
 {
 
    if (strstr(line, str) == NULL)
@@ -3544,9 +3511,6 @@ int ::find_line(const char *line, const char *str)
 find_matches++;
 return 1;
 }
-
-
-
 
    void find_basis(char *namein, char *str, bool sensitive, bool show_matches)
 {
@@ -4718,8 +4682,6 @@ help_edit_box.Printf("</najisum>\n");
 help_edit_box.Printf("\n\n\n");
 }
 
-
-
    void najitool_gui_genhelp(char *nameout)
 {
 int i;
@@ -5593,5 +5555,4 @@ l = strlen(str);
        help_edit_box.AddCh(str[l-1]);
 
 }
-
 }

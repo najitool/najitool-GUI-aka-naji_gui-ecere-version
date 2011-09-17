@@ -30,6 +30,13 @@ tabCycle = true;
 
 icon = { ":naji_gui.png" };
 
+
+   void OnRedraw(Surface surface)
+   {
+   ColorKey keys[2] = { {0x6EA1B4, 0.0f}, { white, 1.0f } };
+   surface.Gradient(keys, sizeof(keys) / sizeof(ColorKey), 1, vertical, 1, 0, 1024-3, 33 - 3);
+   }
+
 };
 
 tab_main tabmain { tabControl = tabcontrol_naji_gui };
@@ -88,8 +95,12 @@ class tab_crypt : Tab
 
    void OnRedraw(Surface surface)
    {
+   ColorKey keys[2] = { {0x6EA1B4, 0.0f}, { white, 1.0f } };
+   surface.Gradient(keys, sizeof(keys) / sizeof(ColorKey), 1, vertical, 1, 0, 1024-3, 768 - 3);
    surface.Blit(najitool_logo_bitmap.bitmap, 8, 24, 0,0, najitool_logo_bitmap.bitmap.width, najitool_logo_bitmap.bitmap.height);
+   Update(null);
    }
+
    Button najcrypt_encrypt_button 
    {
       this, text = "Encrypt", position = { 432, 384 };
@@ -569,7 +580,10 @@ class tab_length : Tab
 
    void OnRedraw(Surface surface)
    {
+   ColorKey keys[2] = { {0x6EA1B4, 0.0f}, { white, 1.0f } };
+   surface.Gradient(keys, sizeof(keys) / sizeof(ColorKey), 1, vertical, 1, 0, 1024-3, 768 - 3);
    surface.Blit(najitool_logo_bitmap.bitmap, 8, 24, 0,0, najitool_logo_bitmap.bitmap.width, najitool_logo_bitmap.bitmap.height);
+   Update(null);
    }
    Label length_input_label { this, text = "Input:", position = { 224, 248 } };
    Label length_output_label { this, text = "Output:", position = { 416, 248 } };
@@ -1483,7 +1497,10 @@ class tab_split : Tab
 
    void OnRedraw(Surface surface)
    {
+   ColorKey keys[2] = { {0x6EA1B4, 0.0f}, { white, 1.0f } };
+   surface.Gradient(keys, sizeof(keys) / sizeof(ColorKey), 1, vertical, 1, 0, 1024-3, 768 - 3);
    surface.Blit(najitool_logo_bitmap.bitmap, 8, 24, 0,0, najitool_logo_bitmap.bitmap.width, najitool_logo_bitmap.bitmap.height);
+   Update(null);
    }
    Button splitter_select_a_split_file_button
    {
@@ -2047,6 +2064,21 @@ class tab_database : Tab
    font = { "Verdana", 8.25f, bold = true };
    size = { 1024, 768 };
    position = { 8, 16 };
+
+
+
+      void OnRedraw(Surface surface)
+   {
+   ColorKey keys[2] = { {0x6EA1B4, 0.0f}, { white, 1.0f } };
+   surface.Gradient(keys, sizeof(keys) / sizeof(ColorKey), 1, vertical, 1, 0, 1024-3, 768 - 3);
+   Update(null);
+   }
+
+
+
+
+
+
 
    Button clear_all_entry_items_button 
    {      
@@ -3322,6 +3354,16 @@ class tab_mathgame : Tab
    bool mathgame_started;
    mathgame_started = false;
 
+
+   void OnRedraw(Surface surface)
+   {
+   ColorKey keys[2] = { {0x6EA1B4, 0.0f}, { white, 1.0f } };
+   surface.Gradient(keys, sizeof(keys) / sizeof(ColorKey), 1, vertical, 1, 0, 1024-3, 768 - 3);
+   Update(null);
+   }
+
+
+
    EditBox mathgame_users_answer_edit_box
    {
       this, text = "mathgame_users_answer_edit_box", size = { 214, 19 }, position = { 384, 352 };
@@ -3697,11 +3739,12 @@ class tab_patch : Tab
 
    void OnRedraw(Surface surface)
    {
+   ColorKey keys[2] = { {0x6EA1B4, 0.0f}, { white, 1.0f } };
+   surface.Gradient(keys, sizeof(keys) / sizeof(ColorKey), 1, vertical, 1, 0, 1024-3, 768 - 3);
    surface.Blit(najitool_logo_bitmap.bitmap, 8, 24, 0,0, najitool_logo_bitmap.bitmap.width, najitool_logo_bitmap.bitmap.height);
-   
- //     surface.WriteText(10,10, "hello", 5);  
-   
+   Update(null);
    }
+
    Button patch_save_as_button
    {
       this, text = "Save As:", size = { 104, 21 }, position = { 480, 632 };

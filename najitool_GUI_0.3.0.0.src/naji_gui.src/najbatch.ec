@@ -16,9 +16,9 @@ import "najiform"
 class tab_batch : Tab
 {
    text = "Batch";
-   background = { r = 110, g = 161, b = 180 };
    font = { "Verdana", 8.25f, bold = true };
    size = { 1024, 768 };
+   background = { r = 110, g = 161, b = 180 };
 
    char add_file_path[MAX_LOCATION];
    char add_folder_path[MAX_LOCATION];
@@ -1851,7 +1851,10 @@ FileListing listing { path };
 
    void OnRedraw(Surface surface)
    {
+   ColorKey keys[2] = { {0x6EA1B4, 0.0f}, { white, 1.0f } };
+   surface.Gradient(keys, sizeof(keys) / sizeof(ColorKey), 1, vertical, 1, 0, 1024-3, 768 - 3);
    surface.Blit(najitool_logo_bitmap.bitmap, 8, 24, 0,0, najitool_logo_bitmap.bitmap.width, najitool_logo_bitmap.bitmap.height);
+   Update(null);
    }
    Label language_label { this, text = "Language:", position = { 8, 168 } };
    FlagCollection flags { this };
