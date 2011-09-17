@@ -59,9 +59,9 @@ class ttt : Window
         return true;
    }
 
-   BitmapResource player_x_bitmap { ":player_x.pcx", window = this };
-   BitmapResource player_o_bitmap { ":player_o.pcx", window = this };
-   BitmapResource ttt_board_bitmap { ":ttt_board.pcx", window = this };
+   BitmapResource player_x_bitmap { ":res/player_x.pcx", window = this };
+   BitmapResource player_o_bitmap { ":res/player_o.pcx", window = this };
+   BitmapResource ttt_board_bitmap { ":res/ttt_board.pcx", window = this };
 
    void OnRedraw(Surface surface)
    {

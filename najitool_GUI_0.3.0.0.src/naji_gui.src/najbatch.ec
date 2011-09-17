@@ -1877,7 +1877,7 @@ FileListing listing { path };
          return true;
       }
    };
-   BitmapResource najitool_logo_bitmap { ":najitool.pcx", window = this };
+   BitmapResource najitool_logo_bitmap { ":res/najitool.pcx", window = this };
 
    void OnRedraw(Surface surface)
    {

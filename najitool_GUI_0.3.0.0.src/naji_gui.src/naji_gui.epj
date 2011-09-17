@@ -40,7 +40,7 @@
             ],
             "ObjectsDirectory" : "",
             "Libraries" : [
-               "ecereVanilla",
+               "ecereStatic",
                "winmm",
                "kernel32",
                "user32",
@@ -53,7 +53,26 @@
                "z",
                "naji_gui-icon.o"
             ]
-         }
+         },
+         "Platforms" : [
+            {
+               "Name" : "win32",
+               "Options" : {
+                  "Libraries" : [
+                     "ecereStatic",
+                     "dxguid",
+                     "ddraw",
+                     "dinput",
+                     "opengl32",
+                     "ws2_32",
+                     "winspool",
+                     "ungif",
+                     "jpeg",
+                     "freetype"
+                  ]
+               }
+            }
+         ]
       }
    ],
    "Files" : [
@@ -85,50 +104,6 @@
          "Folder" : "res",
          "Files" : [
             {
-               "Folder" : "actions",
-               "Files" : [
-                  "folderNew.png",
-                  "goUp.png"
-               ]
-            },
-            {
-               "Folder" : "devices",
-               "Files" : [
-                  "computer.png",
-                  "driveHardDisk.png",
-                  "driveRemovableMedia.png",
-                  "mediaFloppy.png",
-                  "mediaOptical.png"
-               ]
-            },
-            {
-               "Folder" : "elements",
-               "Files" : [
-                  "areaClose.png",
-                  "areaMaximize.png",
-                  "areaMinimize.png",
-                  "areaRestore.png",
-                  "arrowDown.png",
-                  "arrowLeft.png",
-                  "arrowRight.png",
-                  "arrowUp.png",
-                  "checkBox.png",
-                  "checkBoxChecked.png",
-                  "checkBoxDisabled.png",
-                  "checkBoxDisabledChecked.png",
-                  "optionBoxDisabled.png",
-                  "optionBoxDisabledSelected.png",
-                  "optionBoxDown.png",
-                  "optionBoxSelected.png",
-                  "optionBoxSelectedDown.png",
-                  "optionBoxSelectedUp.png",
-                  "optionBoxUp.png",
-                  "orderAscending.png",
-                  "orderCategorized.png",
-                  "orderDescending.png"
-               ]
-            },
-            {
                "Folder" : "licenses",
                "Files" : [
                   "ecere.LICENSE",
@@ -141,37 +116,258 @@
                   "zlib.LICENSE"
                ]
             },
+            "english_flag.pcx",
+            "najitool.pcx",
+            "naji_gui.ico",
+            "naji_gui.png",
+            "player_o.pcx",
+            "player_x.pcx",
+            "resources.rc",
+            "ttt_board.pcx",
+            "turkish_flag.pcx"
+         ]
+      },
+      {
+         "Folder" : "ecere",
+         "Files" : [
+            {
+               "Folder" : "actions",
+               "Files" : [
+                  "ecereRes/actions/editFind.png",
+                  "ecereRes/actions/folderNew.png",
+                  "ecereRes/actions/goDown.png",
+                  "ecereRes/actions/goHome.png",
+                  "ecereRes/actions/goNext.png",
+                  "ecereRes/actions/goPrevious.png",
+                  "ecereRes/actions/goUp.png",
+                  "ecereRes/actions/listAdd.png",
+                  "ecereRes/actions/listRemove.png",
+                  "ecereRes/actions/viewRefresh.png",
+                  "ecereRes/actions/windowNew.png"
+               ]
+            },
+            {
+               "Folder" : "aqua",
+               "Files" : [
+                  "ecereRes/aqua/back.png",
+                  "ecereRes/aqua/down.png",
+                  "ecereRes/aqua/downLeft.png",
+                  "ecereRes/aqua/downMiddle.png",
+                  "ecereRes/aqua/downRight.png",
+                  "ecereRes/aqua/sDown.png",
+                  "ecereRes/aqua/sUp.png",
+                  "ecereRes/aqua/up.png",
+                  "ecereRes/aqua/upLeft.png",
+                  "ecereRes/aqua/upMiddle.png",
+                  "ecereRes/aqua/upRight.png"
+               ]
+            },
+            {
+               "Folder" : "constructs",
+               "Files" : [
+                  "ecereRes/constructs/class.png",
+                  "ecereRes/constructs/data.png",
+                  "ecereRes/constructs/dataPrivate.png",
+                  "ecereRes/constructs/dataType.png",
+                  "ecereRes/constructs/enum.png",
+                  "ecereRes/constructs/enumValue.png",
+                  "ecereRes/constructs/event.png",
+                  "ecereRes/constructs/library.png",
+                  "ecereRes/constructs/method.png",
+                  "ecereRes/constructs/methodPrivate.png",
+                  "ecereRes/constructs/namespace.png",
+                  "ecereRes/constructs/property.png",
+                  "ecereRes/constructs/propertyPrivate.png"
+               ]
+            },
+            {
+               "Folder" : "controls",
+               "Files" : [
+                  "ecereRes/controls/button.png",
+                  "ecereRes/controls/calendar.png",
+                  "ecereRes/controls/checkBox.png",
+                  "ecereRes/controls/dataBox.png",
+                  "ecereRes/controls/dropBox.png",
+                  "ecereRes/controls/editBox.png",
+                  "ecereRes/controls/groupBox.png",
+                  "ecereRes/controls/label.png",
+                  "ecereRes/controls/listBox.png",
+                  "ecereRes/controls/menu.png",
+                  "ecereRes/controls/optionBox.png",
+                  "ecereRes/controls/progressBar.png",
+                  "ecereRes/controls/scrollBarHorizontal.png",
+                  "ecereRes/controls/scrollBarVertical.png",
+                  "ecereRes/controls/statusBar.png"
+               ]
+            },
+            {
+               "Folder" : "cursors",
+               "Files" : [
+                  "ecereRes/cursors/arrow.png",
+                  "ecereRes/cursors/cross.png",
+                  "ecereRes/cursors/iBeam.png",
+                  "ecereRes/cursors/move.png",
+                  "ecereRes/cursors/sizeEastWest.png",
+                  "ecereRes/cursors/sizeNortEastSouthWest.png",
+                  "ecereRes/cursors/sizeNorthSouth.png",
+                  "ecereRes/cursors/sizeNortWestSouthEast.png"
+               ]
+            },
+            {
+               "Folder" : "devices",
+               "Files" : [
+                  "ecereRes/devices/computer.png",
+                  "ecereRes/devices/driveHardDisk.png",
+                  "ecereRes/devices/driveRemovableMedia.png",
+                  "ecereRes/devices/mediaFloppy.png",
+                  "ecereRes/devices/mediaOptical.png"
+               ]
+            },
+            {
+               "Folder" : "elements",
+               "Files" : [
+                  "ecereRes/elements/areaClose.png",
+                  "ecereRes/elements/areaMaximize.png",
+                  "ecereRes/elements/areaMinimize.png",
+                  "ecereRes/elements/areaRestore.png",
+                  "ecereRes/elements/arrowDown.png",
+                  "ecereRes/elements/arrowLeft.png",
+                  "ecereRes/elements/arrowRight.png",
+                  "ecereRes/elements/arrowUp.png",
+                  "ecereRes/elements/checkBox.png",
+                  "ecereRes/elements/checkBoxChecked.png",
+                  "ecereRes/elements/checkBoxDisabled.png",
+                  "ecereRes/elements/checkBoxDisabledChecked.png",
+                  "ecereRes/elements/optionBoxDisabled.png",
+                  "ecereRes/elements/optionBoxDisabledSelected.png",
+                  "ecereRes/elements/optionBoxDown.png",
+                  "ecereRes/elements/optionBoxSelectedDown.png",
+                  "ecereRes/elements/optionBoxSelectedUp.png",
+                  "ecereRes/elements/optionBoxUp.png",
+                  "ecereRes/elements/orderAscending.png",
+                  "ecereRes/elements/orderCategorized.png",
+                  "ecereRes/elements/orderDescending.png"
+               ]
+            },
+            {
+               "Folder" : "emblems",
+               "Files" : [
+                  "ecereRes/emblems/unreadable.png"
+               ]
+            },
             {
                "Folder" : "mimeTypes",
                "Files" : [
-                  "file.png"
+                  "ecereRes/mimeTypes/brokenFile.png",
+                  "ecereRes/mimeTypes/file.png",
+                  "ecereRes/mimeTypes/image.png",
+                  "ecereRes/mimeTypes/package.png",
+                  "ecereRes/mimeTypes/packageOpticalDisc.png",
+                  "ecereRes/mimeTypes/packageSoftware.png",
+                  "ecereRes/mimeTypes/text.png",
+                  "ecereRes/mimeTypes/textC++Header.png",
+                  "ecereRes/mimeTypes/textC++Source.png",
+                  "ecereRes/mimeTypes/textCHeader.png",
+                  "ecereRes/mimeTypes/textCSource.png",
+                  "ecereRes/mimeTypes/textEcereHeader.png",
+                  "ecereRes/mimeTypes/textEcereProject.png",
+                  "ecereRes/mimeTypes/textEcereSource.png",
+                  "ecereRes/mimeTypes/textEcereWorkspace.png",
+                  "ecereRes/mimeTypes/textHyperTextMarkup.png"
                ]
             },
             {
                "Folder" : "places",
                "Files" : [
-                  "driveRemote.png",
-                  "folder.png",
-                  "folderRemote.png",
-                  "networkServer.png",
-                  "networkWorkgroup.png"
+                  "ecereRes/places/brokenFolder.png",
+                  "ecereRes/places/driveRemote.png",
+                  "ecereRes/places/folder.png",
+                  "ecereRes/places/folderRemote.png",
+                  "ecereRes/places/networkServer.png",
+                  "ecereRes/places/networkWorkgroup.png"
                ]
             },
             {
                "Folder" : "status",
                "Files" : [
-                  "folderOpen.png"
+                  "ecereRes/status/audioVolumeHigh.png",
+                  "ecereRes/status/folderOpen.png"
+               ]
+            },
+            {
+               "Folder" : "unicode",
+               "Files" : [
+                  "ecereRes/unicode/derivedGeneralCategoryStripped.txt"
+               ]
+            },
+            {
+               "Folder" : "vanilla",
+               "Files" : [
+                  {
+                     "Folder" : "ecere",
+                     "Files" : [
+                        {
+                           "Folder" : "actions",
+                           "Files" : [
+                              "ecereRes/vanilla/ecere/actions/folderNew.png",
+                              "ecereRes/vanilla/ecere/actions/goUp.png"
+                           ]
+                        },
+                        {
+                           "Folder" : "devices",
+                           "Files" : [
+                              "ecereRes/vanilla/ecere/devices/computer.png",
+                              "ecereRes/vanilla/ecere/devices/driveHardDisk.png",
+                              "ecereRes/vanilla/ecere/devices/driveRemovableMedia.png",
+                              "ecereRes/vanilla/ecere/devices/mediaFloppy.png",
+                              "ecereRes/vanilla/ecere/devices/mediaOptical.png"
+                           ]
+                        },
+                        {
+                           "Folder" : "elements",
+                           "Files" : [
+                              "ecereRes/vanilla/ecere/elements/areaClose.png",
+                              "ecereRes/vanilla/ecere/elements/areaMaximize.png",
+                              "ecereRes/vanilla/ecere/elements/areaMinimize.png",
+                              "ecereRes/vanilla/ecere/elements/areaRestore.png",
+                              "ecereRes/vanilla/ecere/elements/arrowDown.png",
+                              "ecereRes/vanilla/ecere/elements/arrowLeft.png",
+                              "ecereRes/vanilla/ecere/elements/arrowRight.png",
+                              "ecereRes/vanilla/ecere/elements/arrowUp.png",
+                              "ecereRes/vanilla/ecere/elements/optionBoxDisabledSelected.png",
+                              "ecereRes/vanilla/ecere/elements/optionBoxDown.png",
+                              "ecereRes/vanilla/ecere/elements/optionBoxSelected.png",
+                              "ecereRes/vanilla/ecere/elements/optionBoxSelectedDown.png",
+                              "ecereRes/vanilla/ecere/elements/optionBoxUp.png"
+                           ]
+                        },
+                        {
+                           "Folder" : "mimeTypes",
+                           "Files" : [
+                              "ecereRes/vanilla/ecere/mimeTypes/file.png"
+                           ]
+                        },
+                        {
+                           "Folder" : "places",
+                           "Files" : [
+                              "ecereRes/vanilla/ecere/places/driveRemote.png",
+                              "ecereRes/vanilla/ecere/places/folder.png",
+                              "ecereRes/vanilla/ecere/places/folderRemote.png",
+                              "ecereRes/vanilla/ecere/places/networkServer.png",
+                              "ecereRes/vanilla/ecere/places/networkWorkgroup.png"
+                           ]
+                        },
+                        {
+                           "Folder" : "status",
+                           "Files" : [
+                              "ecereRes/vanilla/ecere/status/folderOpen.png"
+                           ]
+                        }
+                     ]
+                  }
                ]
             }
          ]
-      },
-      "english_flag.pcx",
-      "najitool.pcx",
-      "player_o.pcx",
-      "player_x.pcx",
-      "ttt_board.pcx",
-      "turkish_flag.pcx",
-      "naji_gui.png",
-      "resources.rc"
+      }
    ]
 }

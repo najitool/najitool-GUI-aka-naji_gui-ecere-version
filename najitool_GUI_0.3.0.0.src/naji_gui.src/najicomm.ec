@@ -41,14 +41,14 @@ class FlagCollection
          
          if (c == EN)
          {
-         sprintf(fn, ":english_flag.pcx", s);
+         sprintf(fn, ":res/english_flag.pcx", s);
          strlwr(fn);
          flags[c] = { fn };
          incref flags[c];
          }
          if (c == TR)
          {
-         sprintf(fn, ":turkish_flag.pcx", s);
+         sprintf(fn, ":res/turkish_flag.pcx", s);
          strlwr(fn);
          flags[c] = { fn };
          incref flags[c];

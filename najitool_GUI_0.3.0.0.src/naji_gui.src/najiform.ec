@@ -28,7 +28,7 @@ font = { "Verdana", 8.25f, bold = true };
 size = { 1024, 768 };
 tabCycle = true;   
 
-icon = { ":naji_gui.png" };
+icon = { "res/:naji_gui.png" };
 
 
    void OnRedraw(Surface surface)
@@ -91,7 +91,7 @@ class tab_crypt : Tab
          return Label::OnLeftButtonDown(x, y, mods);
       }
    };
-   BitmapResource najitool_logo_bitmap { ":najitool.pcx", window = this };
+   BitmapResource najitool_logo_bitmap { ":res/najitool.pcx", window = this };
 
    void OnRedraw(Surface surface)
    {
@@ -576,7 +576,7 @@ class tab_length : Tab
          return Label::OnLeftButtonDown(x, y, mods);
       }
    };
-   BitmapResource najitool_logo_bitmap { ":najitool.pcx", window = this };
+   BitmapResource najitool_logo_bitmap { ":res/najitool.pcx", window = this };
 
    void OnRedraw(Surface surface)
    {
@@ -1493,7 +1493,7 @@ class tab_split : Tab
          return Label::OnLeftButtonDown(x, y, mods);
       }
    };
-   BitmapResource najitool_logo_bitmap { ":najitool.pcx", window = this };
+   BitmapResource najitool_logo_bitmap { ":res/najitool.pcx", window = this };
 
    void OnRedraw(Surface surface)
    {
@@ -3735,7 +3735,7 @@ class tab_patch : Tab
          return Label::OnLeftButtonDown(x, y, mods);
       }
    };
-   BitmapResource najitool_logo_bitmap { ":najitool.pcx", window = this };
+   BitmapResource najitool_logo_bitmap { ":res/najitool.pcx", window = this };
 
    void OnRedraw(Surface surface)
    {

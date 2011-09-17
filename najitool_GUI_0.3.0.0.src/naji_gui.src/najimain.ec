@@ -1708,7 +1708,7 @@ sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, mo
          return true;
       }
    };
-   BitmapResource najitool_logo_bitmap { ":najitool.pcx", window = this };
+   BitmapResource najitool_logo_bitmap { ":res/najitool.pcx", window = this };
 
    void OnRedraw(Surface surface)
    {
