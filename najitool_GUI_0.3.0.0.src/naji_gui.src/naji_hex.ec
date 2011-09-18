@@ -17,7 +17,6 @@ import "naji_db"
 #include "naji_gui.eh"
                          
 
-
 class HexEditorTop : Window
 {
     size = { 1280, 24 };

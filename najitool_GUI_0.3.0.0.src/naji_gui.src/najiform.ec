@@ -49,10 +49,6 @@ tab_database tabdatabase { tabControl = tabcontrol_naji_gui };
 tab_mathgame tabmathgame { tabControl = tabcontrol_naji_gui };
 tab_patch tabpatch { tabControl = tabcontrol_naji_gui };
 
-
-
-
-
 class naji_gui : GuiApplication
 {
     driver = "OpenGL";

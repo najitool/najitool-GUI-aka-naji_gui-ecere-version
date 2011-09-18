@@ -15,8 +15,6 @@ FILE *naji_output2;
 
 FILE *naji_edit;
 
-
-
 void najintext(char *namein)
 {
     char error[4096];
@@ -43,8 +41,6 @@ void najintext(char *namein)
 
     }
 
-
-
    a = fgetc(naji_input);
 	
 	if (a == EOF)
@@ -63,7 +59,6 @@ void najintext(char *namein)
     if (naji_input == NULL)
     {
 
-
         if (!strcmp(najitool_language, "English"))
         {
             sprintf(error, "Error, cannot open input file:\n%s\n%s", namein, strerror(errno));
@@ -80,23 +75,7 @@ void najintext(char *namein)
 
    }
 
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 void najin(char *namein)
 {
@@ -124,8 +103,6 @@ void najin(char *namein)
 
     }
 
-
-
    a = fgetc(naji_input);
 	
 	if (a == EOF)
@@ -144,7 +121,6 @@ void najin(char *namein)
     if (naji_input == NULL)
     {
 
-
         if (!strcmp(najitool_language, "English"))
         {
             sprintf(error, "Error, cannot open input file:\n%s\n%s", namein, strerror(errno));
@@ -161,14 +137,7 @@ void najin(char *namein)
 
    }
 
-
-
-
-
 }
-
-
-
 
 void najin2(char *namein2)
 {
@@ -196,8 +165,6 @@ void najin2(char *namein2)
 
     }
 
-
-
    a = fgetc(naji_input2);
 	
 	if (a == EOF)
@@ -216,7 +183,6 @@ void najin2(char *namein2)
     if (naji_input2 == NULL)
     {
 
-
         if (!strcmp(najitool_language, "English"))
         {
             sprintf(error, "Error, cannot open input file:\n%s\n%s", namein2, strerror(errno));
@@ -233,23 +199,7 @@ void najin2(char *namein2)
 
    }
 
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 void najout(char *nameout)
 {
@@ -428,27 +378,6 @@ long najedsize(void)
 {
     return naji_filesize(naji_edit);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 extern char najitool_language[1000];
 
@@ -1902,9 +1831,6 @@ int isequal(char *str, char *tempbuf, int len, int start_pos)
     return 0;
 }
 
-
-
-
 void _8bit256(char *nameout, unsigned long rep)
 {
     int i;
@@ -2498,11 +2424,6 @@ void fprint_8_bit_bin(FILE *out, char num)
 
 }
 
-
-
-
-
-
 void byte2binstr(char *buffer, char num)
 {
     char a;
@@ -2522,14 +2443,6 @@ void byte2binstr(char *buffer, char num)
     buffer[i] = '\0';
     
 }
-
-
-
-
-
-
-
-
 
 void asctable(char *nameout)
 {
@@ -7262,19 +7175,6 @@ void printftx(char *namein, char *nameout)
     najoutclose();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* bblensorts    */
 /* bblensortl    */
 /* readforsort   */
@@ -7295,8 +7195,6 @@ void printftx(char *namein, char *nameout)
         * NOTE: Can process both UNIX and Windows text files.
 
 */
-
-
 
 void bblensorts(FILE * sourcefile, FILE * destfile,
 struct najiline *plines, struct najiline *plineend)
@@ -7326,10 +7224,7 @@ int sortflag;
 
   } while (sortflag != 0);
 
-
 }
-
-
 
 void bblensortl(FILE * sourcefile, FILE * destfile,
 struct najiline *plines, struct najiline *plineend)
@@ -7340,10 +7235,8 @@ int sortflag;
   do
   {
 
-
     pline = plines;
     sortflag = 0;
-
 
     while (pline < plineend)
     {
@@ -7359,15 +7252,9 @@ int sortflag;
 
     }
 
-
-
   } while (sortflag != 0);
 
-
 }
-
-
-
 
 int readforsort(FILE * sourcefile, FILE * destfile,
 struct najiline **pplines, struct najiline **pplineend, char *lastchar)
@@ -7452,14 +7339,11 @@ long filecharnb = 0;
     pline->pos = filecharnb;
   }
 
-
 *pplineend = pline;
 *pplines = plines;
 
 return lflong;
 }
-
-
 
 void writesorted(FILE *sourcefile, FILE *destfile, struct najiline *plines,
 struct najiline *plineend, int lflong, char lastchar)
@@ -7477,13 +7361,11 @@ char lf = '\n';
 
     fseek(sourcefile, pline->pos, SEEK_SET);
 
-
     for (i=0; i < pline->len; i++)
     {
       fread(&current, 1, 1, sourcefile);
       fwrite(&current, 1, 1, destfile);
     }
-
 
     if ((pline < plineend) || (lastchar == '\n'))
     {
@@ -7493,14 +7375,11 @@ char lf = '\n';
       fwrite(&lf, 1, 1, destfile);
     }
 
-
   }
 
 fclose(sourcefile);
 fclose(destfile);
 }
-
-
 
 void lensort_basis(char whichone, char *namein, char *nameout)
 {
@@ -7525,34 +7404,15 @@ char lastchar;
 free(plines);
 }
 
-
-
 void lensorts(char *namein, char *nameout)
 {
 lensort_basis('s', namein, nameout);
 }
 
-
 void lensortl(char *namein, char *nameout)
 {
 lensort_basis('l', namein, nameout);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 FILE *naji_bmp_out;
 
@@ -8101,7 +7961,6 @@ void charsort(char *namein, char *nameout)
     najinclose();
     najoutclose();
 }
-
 
 void lcvfiles(char *namein, char *output_folder)
 {
@@ -8937,28 +8796,11 @@ void maxxnewl(char *namein, char *nameout, int maxnl)
 
         else fputc(a, naji_output);
 
-
     }
 
     najinclose();
     najoutclose();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* finds the longest line in a text file and returns the result */
 
@@ -8995,12 +8837,10 @@ najinclose();
 return longest;
 }
 
-
 void longline(char *namein)
 {
 printf("\n\nLongest line is: %lu\n\n", longl(namein));
 }
-
 
 /* counts how many lines there are in a text file and returns the result */
 
@@ -9030,12 +8870,10 @@ najinclose();
 return lines;
 }
 
-
 void howline(char *namein)
 {
 printf("\n\nTotal number of lines is: %lu\n\n", howl(namein));
 }
-
 
 char **naji_lines_alloc(unsigned long howmany, unsigned long howlong)
 {
@@ -9055,7 +8893,6 @@ unsigned long i;
 return buffer;
 }
 
-
 void naji_lines_free(char **buffer, unsigned long howmany)
 {
 unsigned long i;
@@ -9067,7 +8904,6 @@ unsigned long i;
 	
 	buffer = NULL;
 }
-
 
 void naji_lines_load(char *namein, char **buffer, unsigned long howmany, unsigned long howlong)
 {
@@ -9127,7 +8963,6 @@ unsigned long c = 0;
 
 }
 
-
 void naji_lines_backwards_print(char **buffer, unsigned long howmany)
 {
 signed long backwards_howmany = 0;
@@ -9149,7 +8984,6 @@ signed long backwards_i = 0;
 
 }
 
-
 void naji_lines_print(char **buffer, unsigned long howmany)
 {
 unsigned long i;
@@ -9158,7 +8992,6 @@ unsigned long i;
 	printf("%s", buffer[i]);
 
 }
-
 
 void lineback(char *namein)
 {
@@ -9181,8 +9014,6 @@ unsigned long howlong;
 	naji_lines_free(buffer, howmany);
 }
 
-
-
 int return_random(int max)
 {
 int random_number;
@@ -9193,7 +9024,6 @@ int limit;
 
 return random_number % max;
 }
-
 
 void shuffle_int_array(int *array, int size)
 {
@@ -9215,7 +9045,6 @@ int c;
 
 }
 
-
 void naji_lines_random_print(char **buffer, int howmany)
 {
 unsigned long i = 0; 
@@ -9235,7 +9064,6 @@ printf("%s", buffer[vektor[i]]);
 free(vektor);
 vektor = NULL;
 }
-
 
 void rndlines(char *namein)
 {
@@ -9257,7 +9085,6 @@ unsigned long howlong;
 
 	naji_lines_free(buffer, howmany);
 }
-
 
 void najifgets(char *buf, int size, FILE *input)
 {
@@ -9299,17 +9126,12 @@ int i=0;
 
 }
 
-
-
-
 int sortcomp(const void *a, const void *b)
 {
 const char **va = (void *) a;
 const char **vb = (void *) b;
 return strcmp(*va, *vb);
 }
-
-
 
 void sort_basis(char *namein)
 {
@@ -9333,7 +9155,6 @@ unsigned long howlong;
 
 	naji_lines_free(buffer, howmany);
 }
-
 
 void sortlast(char *namein)
 {

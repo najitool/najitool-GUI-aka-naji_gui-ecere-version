@@ -16,7 +16,8 @@ class tab_main : Tab
    text = "Main";
    background = { r = 110, g = 161, b = 180 };
    font = { "Verdana", 8.25f, bold = true };
-   size = { 1111, 900};
+   size = { 1111, 900 };
+
    int ey;
    char input_file_1_path[MAX_LOCATION];
    char input_file_2_path[MAX_LOCATION];
@@ -186,8 +187,11 @@ class tab_main : Tab
         sprintf(naji_buffer, "%s %s %s %s %s", telltime_buf, today_buf, dayofmon_buf, month_buf, year_buf);
         help_edit_box.contents = naji_buffer;
     }
-    /* End: Turkish Date/Time Functions */
 
+   Button wav_of_bytes_button { this, text = "WAV Sound of Byte Pattern", font = { "Verdana", 6.85f, bold = true }, size = { 182, 21 }, position = { 8, 400 } };
+   Button bmp_of_bytes_button { this, text = "BMP Image of Byte Pattern", font = { "Verdana", 6.85f, bold = true }, size = { 182, 21 }, position = { 8, 376 } };
+
+    /* End: Turkish Date/Time Functions */
    ProgressBar najitool_main_progress_bar { this, text = "najitool_main_progress_bar", size = { 388, 24 }, position = { 432, 816 } };
    Label help_label { this, text = "Help/Text Output:", size = { 129, 16 }, position = { 200, 344 } };
    Label hex_output_label { this, text = "Hexadecimal Output:", size = { 144, 13 }, position = { 200, 464 } };
@@ -1168,8 +1172,6 @@ class tab_main : Tab
 
             }
 
-
-
            
             if (!strcmp(najitool_language, "English"))
             sprintf(msgbox_buffer, "%s", "Processing complete.");
@@ -1196,10 +1198,6 @@ class tab_main : Tab
             binary_output_edit_box.AddS(msgbox_buffer);
             binary_output_edit_box.AddCh('\n');
             }
-
-
-
-
 
             return true;
         } // end of notify clicked

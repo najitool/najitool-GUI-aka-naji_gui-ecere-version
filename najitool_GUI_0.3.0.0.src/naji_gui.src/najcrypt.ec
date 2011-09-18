@@ -13,7 +13,6 @@ import "najbatch"
 import "najcrypt"
 #include "naji_gui.eh"       
 
-
 class tab_crypt : Tab
 {
     text = "Crypt";
