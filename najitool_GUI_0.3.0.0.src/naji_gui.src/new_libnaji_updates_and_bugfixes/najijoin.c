@@ -1,3 +1,42 @@
+
+void mjoin(char *namein_original_filename, char *nameout_joined_output_file)
+{
+int a;
+unsigned long peice;
+char mjoin_filename_buffer[4096];
+
+peice = 0;
+najout(nameout_joined_output_file);
+
+
+while (1)
+{
+
+
+sprintf(mjoin_filename_buffer, "%s.%lu", namein_original_filename, peice);
+najin(mjoin_filename_buffer);
+
+
+	while (1)
+	{
+	a = fgetc(naji_input);
+
+	if (a == EOF)
+	break;
+
+	fputc(a, naji_output);
+	}
+
+
+najinclose();
+
+peice++;
+}
+
+
+}
+
+
 void bytsplit(char *namein, unsigned long peice_size)
 {
 int a;

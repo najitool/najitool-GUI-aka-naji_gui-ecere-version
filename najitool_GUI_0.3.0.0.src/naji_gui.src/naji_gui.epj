@@ -86,7 +86,13 @@
       "najicomm.ec",
       "najiform.ec",
       "najihelp.ec",
-      "najimain.ec"
+      "najimain.ec",
+      "najcrypt.ec",
+      "naji_len.ec",
+      "najijoin.ec",
+      "naji_db.ec",
+      "naji_hex.ec",
+      "naji_mgm.ec"
    ],
    "ResourcesPath" : "",
    "Resources" : [

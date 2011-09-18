@@ -342,7 +342,7 @@ class licenses_form : Window
 
     LicenseTab freetype_tab
     {
-        text = "Freetype";
+        text = "FreeType";
         sourceFile = ":res/licenses/freetype.LICENSE";
         tabControl = tabControl;
     };
