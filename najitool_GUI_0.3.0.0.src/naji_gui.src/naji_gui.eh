@@ -22,7 +22,7 @@
 #define rndrange(start, end) ( rand() % ( (end) + (start) ) )
 
 #define newint(amount)  ( (int*) ( malloc(amount) ) )
-#define newchar(amount) ( (char*) ( malloc(amount) ) ) 
+#define newchar(amount) ( (char*) ( malloc(amount) ) )
 #define newlong(amount) ( (long*) ( malloc(amount) ) )
 
 #define exitnull(item) \
@@ -31,18 +31,18 @@ if ( ( (item) == NULL ) ) \
 MessageBox { text = "najitool GUI error:", contents = "NULL pointer error."}.Modal(); exit(8);\
 }
 
-struct najiline {
-  int  len;
-  long pos;
+struct najiline
+{
+    int  len;
+    long pos;
 };
 
 void msgbox(char *the_text, char *the_contents);
 
 extern void mp3split (char const * name, char const * output,
-	      unsigned int const start, unsigned int const end);
+                          unsigned int const start, unsigned int const end);
 
 extern char * mp3info (char *name);
-
 
 #define NAJITOOL_MAX_PROGRAMMING 12
 #define NAJITOOL_MAX_COMPRESSION 2
@@ -51,7 +51,7 @@ extern char * mp3info (char *name);
 #define NAJITOOL_MAX_GENERATE 16
 #define NAJITOOL_MAX_CONVERT 10
 #define NAJITOOL_MAX_FILTER 45
-#define NAJITOOL_MAX_FORMAT 29
+#define NAJITOOL_MAX_FORMAT 30
 #define NAJITOOL_MAX_STATUS 21
 #define NAJITOOL_MAX_IMAGES 2
 #define NAJITOOL_MAX_AUDIO 3
@@ -59,8 +59,8 @@ extern char * mp3info (char *name);
 #define NAJITOOL_MAX_EDIT 4
 #define NAJITOOL_MAX_MISC 24
 #define NAJITOOL_MAX_WEB 11
-#define NAJITOOL_MAX_COMMANDS 194
-#define NAJITOOL_MAX_CATEGORIES 16 
+#define NAJITOOL_MAX_COMMANDS 195
+#define NAJITOOL_MAX_CATEGORIES 16
 
 #define naji_max(a,b) ( ( (a) > (b) ) ? (a):(b) )
 #define naji_min(a,b) ( ( (a) < (b) ) ? (a):(b) )
