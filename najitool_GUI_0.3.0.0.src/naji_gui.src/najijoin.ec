@@ -11,7 +11,7 @@ import "najihelp"
 import "najimain"
 import "najbatch"
 import "najcrypt"
-#include "naji_gui.eh" 
+#include "naji_gui.eh"
 
 static String splitter_sizes_string_array[4] =
 {
@@ -20,11 +20,11 @@ static String splitter_sizes_string_array[4] =
     "mb",
     "gb",
 };
- 
- 
- 
- 
- class tab_split : Tab
+
+
+
+
+class tab_split : Tab
 {
     text = "Split";
     background = { r = 110, g = 161, b = 180 };
@@ -561,4 +561,3 @@ static String splitter_sizes_string_array[4] =
 
     }
 }
-                                                                                  

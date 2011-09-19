@@ -11,8 +11,8 @@ import "najihelp"
 import "najimain"
 import "najbatch"
 import "najcrypt"
-#include "naji_gui.eh"       
-                           
+#include "naji_gui.eh"
+
 
 static String length_string_array[8] =
 {

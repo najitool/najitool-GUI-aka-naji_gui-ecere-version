@@ -1,31 +1,31 @@
 
 void weakrypt(const char *password, char *namein, char *nameout)
 {
-int a;
-int pwdlen;
+    int a;
+    int pwdlen;
 
-najin(namein);
-najout(nameout);
+    najin(namein);
+    najout(nameout);
 
-			pwdlen = strlen(password);
+    pwdlen = strlen(password);
 
-			while (1)
-			{
-			a = getc(naji_input);
+    while (1)
+    {
+        a = getc(naji_input);
 
-			if (a == EOF)
-			break;
+        if (a == EOF)
+            break;
 
-			if (*password == '\0')
-			password -= pwdlen;
+        if (*password == '\0')
+            password -= pwdlen;
 
-			a ^= *password;
+        a ^= *password;
 
-			password++;
+        password++;
 
-			fputc(a, naji_output);
-            }
+        fputc(a, naji_output);
+    }
 
-najinclose();
-najoutclose();
+    najinclose();
+    najoutclose();
 }

@@ -757,6 +757,9 @@ class tab_batch : Tab
                 else if (! strcmp(najitool_command, "file2hex") )
                     file2hex(row.string, processing_output_file_path);
 
+                else if (! strcmp(najitool_command, "file2oct") )
+                    file2oct(row.string, processing_output_file_path);
+
                 else if (! strcmp(najitool_command, "filechop") )
                 {
                     notbatch();

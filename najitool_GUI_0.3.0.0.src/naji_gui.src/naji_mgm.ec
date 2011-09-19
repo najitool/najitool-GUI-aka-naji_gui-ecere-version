@@ -18,67 +18,67 @@ import "naji_db"
 
 class tab_mathgame : Tab
 {
-   text = "MathGM";
-   background = { r = 110, g = 161, b = 180 };
-   font = { "Verdana", 8.25f, bold = true };
-   size = { 1280, 1024 };
-   anchor = { horz = 37, vert = 182 };
+    text = "MathGM";
+    background = { r = 110, g = 161, b = 180 };
+    font = { "Verdana", 8.25f, bold = true };
+    size = { 1280, 1024 };
+    anchor = { horz = 37, vert = 182 };
 
-   int mathgame_op;
-   int mathgame_lvalue;
-   int mathgame_rvalue;
-   int answer;
-   int mathgame_points;
-   char mathgame_lvalue_string[4082];
-   char mathgame_rvalue_string[4082];
-   char mathgame_points_string[4082];
-   bool mathgame_started;
-   mathgame_started = false;
+    int mathgame_op;
+    int mathgame_lvalue;
+    int mathgame_rvalue;
+    int answer;
+    int mathgame_points;
+    char mathgame_lvalue_string[4082];
+    char mathgame_rvalue_string[4082];
+    char mathgame_points_string[4082];
+    bool mathgame_started;
+    mathgame_started = false;
 
-   void OnRedraw(Surface surface)
+    void OnRedraw(Surface surface)
     {
         ColorKey keys[2] = { {0x6EA1B4, 0.0f}, { white, 1.0f } };
         surface.Gradient(keys, sizeof(keys) / sizeof(ColorKey), 1, vertical, 1, 0, 1280-3, 1024 - 3);
         Update(null);
     }
 
-   EditBox mathgame_users_answer_edit_box
+    EditBox mathgame_users_answer_edit_box
     {
-      this, text = "mathgame_users_answer_edit_box", size = { 214, 19 }, position = { 432, 336 };
+        this, text = "mathgame_users_answer_edit_box", size = { 214, 19 }, position = { 432, 336 };
 
-      bool NotifyKeyDown(EditBox editBox, Key key, unichar ch)
+        bool NotifyKeyDown(EditBox editBox, Key key, unichar ch)
         {
             if (key == enter || key == keyPadEnter)
                 mathgame_user_answers();
 
             return true;
         }
-   };
-   EditBox mathgame_right_answers_edit_box { this, text = "mathgame_right_answers_edit_box", size = { 286, 739 }, position = { 792, 80 }, hasHorzScroll = true, true, true, readOnly = true, true };
-   Label mathgame_right_answers_label { this, text = "Right Answers:", position = { 800, 40 } };
-   Label mathgame_wrong_answers_label { this, text = "Wrong Answers:", position = { 88, 40 } };
-   Label mathgame_points_label { this, text = "0 Points", font = { "Verdana", 20, bold = true }, position = { 432, 648 } };
-   EditBox mathgame_wrong_answers_edit_box { this, text = "mathgame_wrong_answers_edit_box", size = { 286, 739 }, position = { 16, 80 }, hasHorzScroll = true, true, true, readOnly = true, true };
-   Button mathgame_answer_button
+    };
+    EditBox mathgame_right_answers_edit_box { this, text = "mathgame_right_answers_edit_box", size = { 286, 739 }, position = { 792, 80 }, hasHorzScroll = true, true, true, readOnly = true, true };
+    Label mathgame_right_answers_label { this, text = "Right Answers:", position = { 800, 40 } };
+    Label mathgame_wrong_answers_label { this, text = "Wrong Answers:", position = { 88, 40 } };
+    Label mathgame_points_label { this, text = "0 Points", font = { "Verdana", 20, bold = true }, position = { 432, 648 } };
+    EditBox mathgame_wrong_answers_edit_box { this, text = "mathgame_wrong_answers_edit_box", size = { 286, 739 }, position = { 16, 80 }, hasHorzScroll = true, true, true, readOnly = true, true };
+    Button mathgame_answer_button
     {
-      this, text = "Answer", size = { 215, 25 }, position = { 432, 360 };
+        this, text = "Answer", size = { 215, 25 }, position = { 432, 360 };
 
-      bool NotifyClicked(Button button, int x, int y, Modifiers mods)
+        bool NotifyClicked(Button button, int x, int y, Modifiers mods)
         {
             mathgame_user_answers();
 
             return true;
         }
-   };
-   Label mathgame_whatis_label { this, text = "What is", font = { "Verdana", 13, bold = true }, position = { 504, 224 } };
-   Label mathgame_lvalue_label { this, text = "lvalue", font = { "Verdana", 13, bold = true }, position = { 416, 264 } };
-   Label mathgame_operator_label { this, text = "op", font = { "Verdana", 16, bold = true }, position = { 528, 264 } };
-   Label mathgame_rvalue_label { this, text = "rvalue", font = { "Verdana", 13, bold = true }, position = { 624, 264 } };
-   Label mathgame_get_right_label { this, text = "Get the answers right to score points.", position = { 432, 112 } };
-   Label mathgame_get_wrong_label { this, text = "Get the answers wrong to lose points.", position = { 432, 136 } };
-   Label mathgame_welcome_label { this, text = "Welcome to MathGame", font = { "Verdana", 20, bold = true }, position = { 376, 64 } };
+    };
+    Label mathgame_whatis_label { this, text = "What is", font = { "Verdana", 13, bold = true }, position = { 504, 224 } };
+    Label mathgame_lvalue_label { this, text = "lvalue", font = { "Verdana", 13, bold = true }, position = { 416, 264 } };
+    Label mathgame_operator_label { this, text = "op", font = { "Verdana", 16, bold = true }, position = { 528, 264 } };
+    Label mathgame_rvalue_label { this, text = "rvalue", font = { "Verdana", 13, bold = true }, position = { 624, 264 } };
+    Label mathgame_get_right_label { this, text = "Get the answers right to score points.", position = { 432, 112 } };
+    Label mathgame_get_wrong_label { this, text = "Get the answers wrong to lose points.", position = { 432, 136 } };
+    Label mathgame_welcome_label { this, text = "Welcome to MathGame", font = { "Verdana", 20, bold = true }, position = { 376, 64 } };
 
-   bool OnCreate(void)
+    bool OnCreate(void)
     {
         if (!strcmp(najitool_language, "English"))
         {
@@ -124,7 +124,7 @@ class tab_mathgame : Tab
         return true;
     }
 
-   void mathgame(void)
+    void mathgame(void)
     {
 
         mathgame_op = rndrange(0, 3);
@@ -168,7 +168,7 @@ class tab_mathgame : Tab
 
     }
 
-   void mathgame_user_answers(void)
+    void mathgame_user_answers(void)
     {
 
         answer = atoi(mathgame_users_answer_edit_box.contents);

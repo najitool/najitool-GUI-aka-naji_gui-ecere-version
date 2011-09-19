@@ -1141,4 +1141,4 @@ class tab_database : Tab
             return true;
         }
     };
-}                     
+}

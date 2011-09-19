@@ -2406,13 +2406,54 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
         true,
         true,
 
-        "Makes a file into a stream of hexidecimal values.\n"
+        "Makes a file into a stream of hexadecimal values.\n"
         "Specify input file and output file.",
 
         "Parameter 1:",
         "Parameter 2:",
 
         "Onaltlik degerler, sira sira, bir dosyayi yapar.\n"
+        "Okunan ve yazilan dosyayi belirt.",
+
+        "Parametre 1:",
+        "Parametre 2:"
+
+    },
+
+    {
+        "file2oct",
+
+        false,
+        false,
+
+        true,
+        true,
+
+        true,
+        true,
+
+        false,
+        false,
+
+        true,
+        true,
+
+        true,
+        true,
+
+        true,
+        true,
+
+        true,
+        true,
+
+        "Makes a file into a stream of octal values.\n"
+        "Specify input file and output file.",
+
+        "Parameter 1:",
+        "Parameter 2:",
+
+        "Sekizli degerler, sira sira, bir dosyayi yapar.\n"
         "Okunan ve yazilan dosyayi belirt.",
 
         "Parametre 1:",

@@ -41,39 +41,39 @@ void najintext(char *namein)
 
     }
 
-   a = fgetc(naji_input);
-	
-	if (a == EOF)
+    a = fgetc(naji_input);
+
+    if (a == EOF)
     {
-    sprintf(error, "\n\nError, file is empty:\n%s\n", namein);
-    MessageBox {text = "najitool GUI Error", contents = error}.Modal();
-    exit(1);
+        sprintf(error, "\n\nError, file is empty:\n%s\n", namein);
+        MessageBox {text = "najitool GUI Error", contents = error}.Modal();
+        exit(1);
     }
-	
-   else
-	{
-		najinclose();
-		
-		naji_input = fopen(namein, "rb");
 
-    if (naji_input == NULL)
+    else
     {
+        najinclose();
 
-        if (!strcmp(najitool_language, "English"))
+        naji_input = fopen(namein, "rb");
+
+        if (naji_input == NULL)
         {
-            sprintf(error, "Error, cannot open input file:\n%s\n%s", namein, strerror(errno));
-            MessageBox {text = "najitool GUI Error", contents = error}.Modal();
+
+            if (!strcmp(najitool_language, "English"))
+            {
+                sprintf(error, "Error, cannot open input file:\n%s\n%s", namein, strerror(errno));
+                MessageBox {text = "najitool GUI Error", contents = error}.Modal();
+            }
+
+            else if (!strcmp(najitool_language, "Turkish"))
+            {
+                sprintf(error, "Hata, okunan dosya acilmadi:\n%s\n%s", namein, strerror(errno));
+                MessageBox {text = "najitool GUI Hata", contents = error}.Modal();
+            }
+            exit(1);
         }
 
-        else if (!strcmp(najitool_language, "Turkish"))
-        {
-            sprintf(error, "Hata, okunan dosya acilmadi:\n%s\n%s", namein, strerror(errno));
-            MessageBox {text = "najitool GUI Hata", contents = error}.Modal();
-        }
-	exit(1);
-	}
-
-   }
+    }
 
 }
 
@@ -103,39 +103,39 @@ void najin(char *namein)
 
     }
 
-   a = fgetc(naji_input);
-	
-	if (a == EOF)
+    a = fgetc(naji_input);
+
+    if (a == EOF)
     {
-    sprintf(error, "\n\nError, file is empty:\n%s\n", namein);
-    MessageBox {text = "najitool GUI Error", contents = error}.Modal();
-    exit(1);
+        sprintf(error, "\n\nError, file is empty:\n%s\n", namein);
+        MessageBox {text = "najitool GUI Error", contents = error}.Modal();
+        exit(1);
     }
-	
-   else
-	{
-		najinclose();
-		
-		naji_input = fopen(namein, "rb");
 
-    if (naji_input == NULL)
+    else
     {
+        najinclose();
 
-        if (!strcmp(najitool_language, "English"))
+        naji_input = fopen(namein, "rb");
+
+        if (naji_input == NULL)
         {
-            sprintf(error, "Error, cannot open input file:\n%s\n%s", namein, strerror(errno));
-            MessageBox {text = "najitool GUI Error", contents = error}.Modal();
+
+            if (!strcmp(najitool_language, "English"))
+            {
+                sprintf(error, "Error, cannot open input file:\n%s\n%s", namein, strerror(errno));
+                MessageBox {text = "najitool GUI Error", contents = error}.Modal();
+            }
+
+            else if (!strcmp(najitool_language, "Turkish"))
+            {
+                sprintf(error, "Hata, okunan dosya acilmadi:\n%s\n%s", namein, strerror(errno));
+                MessageBox {text = "najitool GUI Hata", contents = error}.Modal();
+            }
+            exit(1);
         }
 
-        else if (!strcmp(najitool_language, "Turkish"))
-        {
-            sprintf(error, "Hata, okunan dosya acilmadi:\n%s\n%s", namein, strerror(errno));
-            MessageBox {text = "najitool GUI Hata", contents = error}.Modal();
-        }
-	exit(1);
-	}
-
-   }
+    }
 
 }
 
@@ -165,39 +165,39 @@ void najin2(char *namein2)
 
     }
 
-   a = fgetc(naji_input2);
-	
-	if (a == EOF)
+    a = fgetc(naji_input2);
+
+    if (a == EOF)
     {
-    sprintf(error, "\n\nError, file is empty:\n%s\n", namein2);
-    MessageBox {text = "najitool GUI Error", contents = error}.Modal();
-    exit(1);
+        sprintf(error, "\n\nError, file is empty:\n%s\n", namein2);
+        MessageBox {text = "najitool GUI Error", contents = error}.Modal();
+        exit(1);
     }
-	
-   else
-	{
-		najinclose();
-		
-		naji_input2 = fopen(namein2, "rb");
 
-    if (naji_input2 == NULL)
+    else
     {
+        najinclose();
 
-        if (!strcmp(najitool_language, "English"))
+        naji_input2 = fopen(namein2, "rb");
+
+        if (naji_input2 == NULL)
         {
-            sprintf(error, "Error, cannot open input file:\n%s\n%s", namein2, strerror(errno));
-            MessageBox {text = "najitool GUI Error", contents = error}.Modal();
+
+            if (!strcmp(najitool_language, "English"))
+            {
+                sprintf(error, "Error, cannot open input file:\n%s\n%s", namein2, strerror(errno));
+                MessageBox {text = "najitool GUI Error", contents = error}.Modal();
+            }
+
+            else if (!strcmp(najitool_language, "Turkish"))
+            {
+                sprintf(error, "Hata, okunan dosya acilmadi:\n%s\n%s", namein2, strerror(errno));
+                MessageBox {text = "najitool GUI Hata", contents = error}.Modal();
+            }
+            exit(1);
         }
 
-        else if (!strcmp(najitool_language, "Turkish"))
-        {
-            sprintf(error, "Hata, okunan dosya acilmadi:\n%s\n%s", namein2, strerror(errno));
-            MessageBox {text = "najitool GUI Hata", contents = error}.Modal();
-        }
-	exit(1);
-	}
-
-   }
+    }
 
 }
 
@@ -468,6 +468,7 @@ const char * najitool_valid_programming[NAJITOOL_MAX_PROGRAMMING] =
     "file2bin",
     "file2dec",
     "file2hex",
+    "file2oct",
     "hmaker",
     "hmakerf",
     "makarray",
@@ -778,6 +779,7 @@ const char * najitool_valid_commands[NAJITOOL_MAX_COMMANDS] =
     "file2bin",
     "file2dec",
     "file2hex",
+    "file2oct",
     "filechop",
     "filejoin",
     "fillfile",
@@ -2439,9 +2441,9 @@ void byte2binstr(char *buffer, char num)
         num <<= 1;
 
     }
-    
+
     buffer[i] = '\0';
-    
+
 }
 
 void asctable(char *nameout)
@@ -4073,6 +4075,28 @@ void chchar(char *namein, char *nameout, char original, char changed)
 
     najinclose();
     najoutclose();
+}
+
+void file2oct(char *namein, char *nameout)
+{
+    int a;
+
+    najin(namein);
+    najout(nameout);
+
+    while (1)
+    {
+        a = fgetc(naji_input);
+
+        if (a == EOF)
+            break;
+
+        fprintf(naji_output, "%o\n", a);
+    }
+
+    najinclose();
+    najoutclose();
+
 }
 
 void file2dec(char *namein, char *nameout)
@@ -7197,221 +7221,223 @@ void printftx(char *namein, char *nameout)
 */
 
 void bblensorts(FILE * sourcefile, FILE * destfile,
-struct najiline *plines, struct najiline *plineend)
+                struct najiline *plines, struct najiline *plineend)
 {
 
-struct najiline *pline, buffer;
-int sortflag;
+    struct najiline *pline, buffer;
+    int sortflag;
 
-  do
-  {
-
-    pline = plines;
-    sortflag = 0;
-
-    while (pline < plineend)
+    do
     {
-      if ((pline->len) > ((pline + 1)->len))
-      {
-        buffer = *pline;
-        *pline = *(pline + 1);
-        *(pline + 1) = buffer;
-        sortflag = 1;
-      }
 
-      pline++;
+        pline = plines;
+        sortflag = 0;
+
+        while (pline < plineend)
+        {
+            if ((pline->len) > ((pline + 1)->len))
+            {
+                buffer = *pline;
+                *pline = *(pline + 1);
+                *(pline + 1) = buffer;
+                sortflag = 1;
+            }
+
+            pline++;
+        }
+
     }
-
-  } while (sortflag != 0);
+    while (sortflag != 0);
 
 }
 
 void bblensortl(FILE * sourcefile, FILE * destfile,
-struct najiline *plines, struct najiline *plineend)
+                struct najiline *plines, struct najiline *plineend)
 {
-struct najiline *pline, buffer;
-int sortflag;
+    struct najiline *pline, buffer;
+    int sortflag;
 
-  do
-  {
-
-    pline = plines;
-    sortflag = 0;
-
-    while (pline < plineend)
+    do
     {
 
-      if ((pline->len) < ((pline + 1)->len))
-      {
-        buffer = *pline;
-        *pline = *(pline + 1);
-        *(pline + 1) = buffer;
-        sortflag = 1;
-      }
-      pline++;
+        pline = plines;
+        sortflag = 0;
+
+        while (pline < plineend)
+        {
+
+            if ((pline->len) < ((pline + 1)->len))
+            {
+                buffer = *pline;
+                *pline = *(pline + 1);
+                *(pline + 1) = buffer;
+                sortflag = 1;
+            }
+            pline++;
+
+        }
 
     }
-
-  } while (sortflag != 0);
+    while (sortflag != 0);
 
 }
 
 int readforsort(FILE * sourcefile, FILE * destfile,
-struct najiline **pplines, struct najiline **pplineend, char *lastchar)
+                struct najiline **pplines, struct najiline **pplineend, char *lastchar)
 {
-char msgbox_buffer[10000];
-struct najiline line;
-struct najiline *pline = NULL;
-struct najiline *plines = NULL;
-char current;
-char previous = ' ';
-int linecharnb = 0;
-int linenb = 0;
-int lflong = 1;
+    char msgbox_buffer[10000];
+    struct najiline line;
+    struct najiline *pline = NULL;
+    struct najiline *plines = NULL;
+    char current;
+    char previous = ' ';
+    int linecharnb = 0;
+    int linenb = 0;
+    int lflong = 1;
 
-long filecharnb = 0;
+    long filecharnb = 0;
 
-  while ((current = fgetc(sourcefile)) != EOF)
-  {
-
-    linecharnb++;
-    filecharnb++;
-
-    if (current == '\n')
+    while ((current = fgetc(sourcefile)) != EOF)
     {
-      if (previous == '\r')
-      lflong = 2;
 
-      linenb++;
-      linecharnb = 0;
+        linecharnb++;
+        filecharnb++;
+
+        if (current == '\n')
+        {
+            if (previous == '\r')
+                lflong = 2;
+
+            linenb++;
+            linecharnb = 0;
+        }
+
+        previous = current;
     }
 
-    previous = current;
-  }
-
-  if (linecharnb > 0)
-  {
-    *lastchar = '0';
-    linenb++;
-  }
-
-  else *lastchar = '\n';
-
-  if (filecharnb > 0)
-  linenb++;
-
-  plines = malloc(sizeof(line) * linenb);
-
-  if (plines == NULL)
-  {
-
-    sprintf(msgbox_buffer, "Error allocating %d bytes of memory in function readforsort().", sizeof(line) * linenb);
-    msgbox("najitool GUI error", msgbox_buffer);
-	
-
-    return -1;
-  }
-
-  rewind(sourcefile);
-  pline = plines - 1;
-  linecharnb = 0;
-  filecharnb = 0;
-
-  while ((current = fgetc(sourcefile)) != EOF)
-  {
-    linecharnb++;
-
-    if (current == '\n')
+    if (linecharnb > 0)
     {
-      pline++;
-      pline->len = linecharnb - lflong;
-      pline->pos = filecharnb;
-      filecharnb += (long) linecharnb;
-      linecharnb = 0;
+        *lastchar = '0';
+        linenb++;
     }
 
-  }
+    else *lastchar = '\n';
 
-  if (linecharnb > 0)
-  {
-    pline++;
-    pline->len = linecharnb;
-    pline->pos = filecharnb;
-  }
+    if (filecharnb > 0)
+        linenb++;
 
-*pplineend = pline;
-*pplines = plines;
+    plines = malloc(sizeof(line) * linenb);
 
-return lflong;
+    if (plines == NULL)
+    {
+
+        sprintf(msgbox_buffer, "Error allocating %d bytes of memory in function readforsort().", sizeof(line) * linenb);
+        msgbox("najitool GUI error", msgbox_buffer);
+
+
+        return -1;
+    }
+
+    rewind(sourcefile);
+    pline = plines - 1;
+    linecharnb = 0;
+    filecharnb = 0;
+
+    while ((current = fgetc(sourcefile)) != EOF)
+    {
+        linecharnb++;
+
+        if (current == '\n')
+        {
+            pline++;
+            pline->len = linecharnb - lflong;
+            pline->pos = filecharnb;
+            filecharnb += (long) linecharnb;
+            linecharnb = 0;
+        }
+
+    }
+
+    if (linecharnb > 0)
+    {
+        pline++;
+        pline->len = linecharnb;
+        pline->pos = filecharnb;
+    }
+
+    *pplineend = pline;
+    *pplines = plines;
+
+    return lflong;
 }
 
 void writesorted(FILE *sourcefile, FILE *destfile, struct najiline *plines,
-struct najiline *plineend, int lflong, char lastchar)
+                 struct najiline *plineend, int lflong, char lastchar)
 {
-struct najiline *pline;
-char current;
-int i;
-char cr = '\r';
-char lf = '\n';
+    struct najiline *pline;
+    char current;
+    int i;
+    char cr = '\r';
+    char lf = '\n';
 
-  pline = plines;
+    pline = plines;
 
-  for (pline = plines; pline <= plineend; pline++)
-  {
-
-    fseek(sourcefile, pline->pos, SEEK_SET);
-
-    for (i=0; i < pline->len; i++)
+    for (pline = plines; pline <= plineend; pline++)
     {
-      fread(&current, 1, 1, sourcefile);
-      fwrite(&current, 1, 1, destfile);
+
+        fseek(sourcefile, pline->pos, SEEK_SET);
+
+        for (i=0; i < pline->len; i++)
+        {
+            fread(&current, 1, 1, sourcefile);
+            fwrite(&current, 1, 1, destfile);
+        }
+
+        if ((pline < plineend) || (lastchar == '\n'))
+        {
+            if (lflong == 2)
+                fwrite(&cr, 1, 1, destfile);
+
+            fwrite(&lf, 1, 1, destfile);
+        }
+
     }
 
-    if ((pline < plineend) || (lastchar == '\n'))
-    {
-      if (lflong == 2)
-      fwrite(&cr, 1, 1, destfile);
-
-      fwrite(&lf, 1, 1, destfile);
-    }
-
-  }
-
-fclose(sourcefile);
-fclose(destfile);
+    fclose(sourcefile);
+    fclose(destfile);
 }
 
 void lensort_basis(char whichone, char *namein, char *nameout)
 {
-struct najiline *plines, *plineend;
-int lflong;
-char lastchar;
+    struct najiline *plines, *plineend;
+    int lflong;
+    char lastchar;
 
-  najin(namein);
-  najout(nameout);
+    najin(namein);
+    najout(nameout);
 
-  lflong =
-  readforsort(naji_input, naji_output, &plines, &plineend, &lastchar);
+    lflong =
+        readforsort(naji_input, naji_output, &plines, &plineend, &lastchar);
 
-  if (whichone == 's')
-  bblensorts(naji_input, naji_output, plines, plineend);
+    if (whichone == 's')
+        bblensorts(naji_input, naji_output, plines, plineend);
 
-  else
-  bblensortl(naji_input, naji_output, plines, plineend);
+    else
+        bblensortl(naji_input, naji_output, plines, plineend);
 
-  writesorted(naji_input, naji_output, plines, plineend, lflong, lastchar);
+    writesorted(naji_input, naji_output, plines, plineend, lflong, lastchar);
 
-free(plines);
+    free(plines);
 }
 
 void lensorts(char *namein, char *nameout)
 {
-lensort_basis('s', namein, nameout);
+    lensort_basis('s', namein, nameout);
 }
 
 void lensortl(char *namein, char *nameout)
 {
-lensort_basis('l', namein, nameout);
+    lensort_basis('l', namein, nameout);
 }
 
 FILE *naji_bmp_out;
@@ -8806,375 +8832,397 @@ void maxxnewl(char *namein, char *nameout, int maxnl)
 
 unsigned long longl(char *namein)
 {
-int a;
+    int a;
 
-unsigned long length = 0;
-unsigned long longest = 0;
+    unsigned long length = 0;
+    unsigned long longest = 0;
 
-najin(namein);
+    najin(namein);
 
-	while (1)
-	{
-	
-		a = getc(naji_input);
+    while (1)
+    {
 
-		if (a == EOF)
-		break;
+        a = getc(naji_input);
 
-		if (a == '\n')
-		{
-			if (length > longest)
-			longest = length;
-		
-		length=0;
-		}
-		else length++;
+        if (a == EOF)
+            break;
 
-	}
+        if (a == '\n')
+        {
+            if (length > longest)
+                longest = length;
 
-najinclose();
+            length=0;
+        }
+        else length++;
 
-return longest;
+    }
+
+    najinclose();
+
+    return longest;
 }
 
 void longline(char *namein)
 {
-printf("\n\nLongest line is: %lu\n\n", longl(namein));
+    printf("\n\nLongest line is: %lu\n\n", longl(namein));
 }
 
 /* counts how many lines there are in a text file and returns the result */
 
 unsigned long howl(char *namein)
 {
-int a;
+    int a;
 
-unsigned long lines = 0;
+    unsigned long lines = 0;
 
-najin(namein);
+    najin(namein);
 
-	while (1)
-	{
-	
-		a = getc(naji_input);
+    while (1)
+    {
 
-		if (a == EOF)
-		break;
+        a = getc(naji_input);
 
-		if (a == '\n')
-		lines++;
+        if (a == EOF)
+            break;
 
-	}
+        if (a == '\n')
+            lines++;
 
-najinclose();
+    }
 
-return lines;
+    najinclose();
+
+    return lines;
 }
 
 void howline(char *namein)
 {
-printf("\n\nTotal number of lines is: %lu\n\n", howl(namein));
+    printf("\n\nTotal number of lines is: %lu\n\n", howl(namein));
 }
 
 char **naji_lines_alloc(unsigned long howmany, unsigned long howlong)
 {
-char **buffer = NULL;
-unsigned long i;
+    char **buffer = NULL;
+    unsigned long i;
 
-	buffer = (char **) malloc(howmany * sizeof(char *));
+    buffer = (char **) malloc(howmany * sizeof(char *));
 
-	exitnull(buffer);
+    exitnull(buffer);
 
-	for (i=0; i<howmany; i++)
-	{
-	buffer[i] = (char *) malloc(howlong * sizeof(char) + 3);
-	exitnull(buffer[i]);
-	}
+    for (i=0; i<howmany; i++)
+    {
+        buffer[i] = (char *) malloc(howlong * sizeof(char) + 3);
+        exitnull(buffer[i]);
+    }
 
-return buffer;
+    return buffer;
 }
 
 void naji_lines_free(char **buffer, unsigned long howmany)
 {
-unsigned long i;
+    unsigned long i;
 
-	for (i=0; i<howmany; i++)
-	free(buffer[i]);
+    for (i=0; i<howmany; i++)
+        free(buffer[i]);
 
-	free(buffer);
-	
-	buffer = NULL;
+    free(buffer);
+
+    buffer = NULL;
 }
 
 void naji_lines_load(char *namein, char **buffer, unsigned long howmany, unsigned long howlong)
 {
-int a;
-unsigned long i = 0;
-unsigned long c = 0;
+    int a;
+    unsigned long i = 0;
+    unsigned long c = 0;
 
-	najintext(namein);
+    najintext(namein);
 
-	while (1)
-	{
-		a = fgetc(naji_input);
-	
-		if (a == EOF)
-		{
-		buffer[i][c] = '\0';
-		break;
-		}
+    while (1)
+    {
+        a = fgetc(naji_input);
 
-		else if (a == '\n')
-		{
-		buffer[i][c] = '\n';
-		c++;
-		
-		buffer[i][c] = '\0';
-		c++;
-		
-		i++;
-	    
-		c = 0;
-		
-		if (i >= howmany)
-		break;
-		}
-	
-		else if (a == '\r')
-		;
+        if (a == EOF)
+        {
+            buffer[i][c] = '\0';
+            break;
+        }
 
-		else
-		{
-		buffer[i][c] = a;
-		c++;
-		
-		if (c == howlong)
-		{
-		buffer[i][c] = '\0';
-		break;
-		}
-		
-		
-		}
-	
-	}
-	
+        else if (a == '\n')
+        {
+            buffer[i][c] = '\n';
+            c++;
 
-	najinclose();
+            buffer[i][c] = '\0';
+            c++;
+
+            i++;
+
+            c = 0;
+
+            if (i >= howmany)
+                break;
+        }
+
+        else if (a == '\r')
+            ;
+
+        else
+        {
+            buffer[i][c] = a;
+            c++;
+
+            if (c == howlong)
+            {
+                buffer[i][c] = '\0';
+                break;
+            }
+
+
+        }
+
+    }
+
+
+    najinclose();
 
 }
 
 void naji_lines_backwards_print(char **buffer, unsigned long howmany)
 {
-signed long backwards_howmany = 0;
-signed long backwards_i = 0;
+    signed long backwards_howmany = 0;
+    signed long backwards_i = 0;
 
-	backwards_howmany = (signed long) howmany;
+    backwards_howmany = (signed long) howmany;
 
-	backwards_howmany--;
+    backwards_howmany--;
 
-	if (strlen(buffer[backwards_howmany]) > 0)
-	if (strchr(buffer[backwards_howmany], '\n') == NULL)
-	{
-	printf("%s\n", buffer[backwards_howmany]);
-	backwards_howmany--;
-	}
-  
-	for (backwards_i = backwards_howmany; backwards_i >= 0; backwards_i--)
-	printf("%s", buffer[backwards_i]);
+    if (strlen(buffer[backwards_howmany]) > 0)
+        if (strchr(buffer[backwards_howmany], '\n') == NULL)
+        {
+            printf("%s\n", buffer[backwards_howmany]);
+            backwards_howmany--;
+        }
+
+    for (backwards_i = backwards_howmany; backwards_i >= 0; backwards_i--)
+        printf("%s", buffer[backwards_i]);
 
 }
 
 void naji_lines_print(char **buffer, unsigned long howmany)
 {
-unsigned long i;
+    unsigned long i;
 
-	for (i=0; i<howmany; i++)
-	printf("%s", buffer[i]);
+    for (i=0; i<howmany; i++)
+        printf("%s", buffer[i]);
 
 }
 
 void lineback(char *namein)
 {
-char **buffer = NULL;
-unsigned long howmany;
-unsigned long howlong;
+    char **buffer = NULL;
+    unsigned long howmany;
+    unsigned long howlong;
 
-	howmany = howl(namein);
-	howlong = longl(namein);
-	
-	howlong += 3;
-	howmany ++;
-	
-	buffer = naji_lines_alloc(howmany, howlong);
+    howmany = howl(namein);
+    howlong = longl(namein);
 
-	naji_lines_load(namein, buffer, howmany, howlong);
+    howlong += 3;
+    howmany ++;
 
-	naji_lines_backwards_print(buffer, howmany);
+    buffer = naji_lines_alloc(howmany, howlong);
 
-	naji_lines_free(buffer, howmany);
+    naji_lines_load(namein, buffer, howmany, howlong);
+
+    naji_lines_backwards_print(buffer, howmany);
+
+    naji_lines_free(buffer, howmany);
 }
 
 int return_random(int max)
 {
-int random_number;
-int limit;
+    int random_number;
+    int limit;
 
-	limit = RAND_MAX - RAND_MAX % max;
-	do random_number = rand(); while (random_number >= limit);
+    limit = RAND_MAX - RAND_MAX % max;
+    do random_number = rand();
+    while (random_number >= limit);
 
-return random_number % max;
+    return random_number % max;
 }
 
 void shuffle_int_array(int *array, int size)
 {
-int a;
-int b;
-int c;
+    int a;
+    int b;
+    int c;
 
-  size--;
-  
-  srand(time(NULL));
-  
-  for (a=size; a>0; a--)
-  {
-    b = return_random(a + 1);
-    c = array[b];
-    array[b] = array[a];
-    array[a] = c;
-  }
+    size--;
+
+    srand(time(NULL));
+
+    for (a=size; a>0; a--)
+    {
+        b = return_random(a + 1);
+        c = array[b];
+        array[b] = array[a];
+        array[a] = c;
+    }
 
 }
 
 void naji_lines_random_print(char **buffer, int howmany)
 {
-unsigned long i = 0; 
-int *vektor = NULL;
+    unsigned long i = 0;
+    int *vektor = NULL;
 
-vektor = (int *) malloc(howmany * sizeof (int));
-exitnull(vektor)
+    vektor = (int *) malloc(howmany * sizeof (int));
+    exitnull(vektor)
 
-for (i=0; i<howmany; i++)
-vektor[i] = i;
+    for (i=0; i<howmany; i++)
+        vektor[i] = i;
 
-shuffle_int_array(vektor, howmany);
+    shuffle_int_array(vektor, howmany);
 
-for (i=0; i<howmany; i++)
-printf("%s", buffer[vektor[i]]);
+    for (i=0; i<howmany; i++)
+        printf("%s", buffer[vektor[i]]);
 
-free(vektor);
-vektor = NULL;
+    free(vektor);
+    vektor = NULL;
 }
 
 void rndlines(char *namein)
 {
-char **buffer = NULL;
-unsigned long howmany;
-unsigned long howlong;
+    char **buffer = NULL;
+    unsigned long howmany;
+    unsigned long howlong;
 
-	howmany = howl(namein);
-	howlong = longl(namein);
-	
-	howlong += 3;
-	howmany ++;
-	
-	buffer = naji_lines_alloc(howmany, howlong);
+    howmany = howl(namein);
+    howlong = longl(namein);
 
-	naji_lines_load(namein, buffer, howmany, howlong);
+    howlong += 3;
+    howmany ++;
 
-	naji_lines_random_print(buffer, howmany);
+    buffer = naji_lines_alloc(howmany, howlong);
 
-	naji_lines_free(buffer, howmany);
+    naji_lines_load(namein, buffer, howmany, howlong);
+
+    naji_lines_random_print(buffer, howmany);
+
+    naji_lines_free(buffer, howmany);
 }
 
 void najifgets(char *buf, int size, FILE *input)
 {
-int a;
-int i=0;
+    int a;
+    int i=0;
 
-    while(1)
+    while (1)
     {
-    
+
         a = fgetc(naji_input);
 
         if (a == EOF)
-		{
-		buf[i] = '\0';
-		return;
-		}
-		
-		if (i == size)
         {
-		buf[i+1] = '\0';
-		return;
-		}
+            buf[i] = '\0';
+            return;
+        }
+
+        if (i == size)
+        {
+            buf[i+1] = '\0';
+            return;
+        }
 
         if (a == '\n')
         {
-		buf[i]   = '\n';
-		buf[i+1] = '\0';
-        return;
+            buf[i]   = '\n';
+            buf[i+1] = '\0';
+            return;
         }
         else
-		{
-        buf[i] = a;
-		buf[i+1] = '\0';
+        {
+            buf[i] = a;
+            buf[i+1] = '\0';
         }
-		
-		i++;
-    
+
+        i++;
+
     }
 
 }
 
 int sortcomp(const void *a, const void *b)
 {
-const char **va = (void *) a;
-const char **vb = (void *) b;
-return strcmp(*va, *vb);
+    const char **va = (void *) a;
+    const char **vb = (void *) b;
+    return strcmp(*va, *vb);
 }
 
 void sort_basis(char *namein)
 {
-char **buffer = NULL;
-unsigned long howmany;
-unsigned long howlong;
+    char **buffer = NULL;
+    unsigned long howmany;
+    unsigned long howlong;
 
-	howmany = howl(namein);
-	howlong = longl(namein);
-	
-	howlong += 3;
-	howmany ++;
-	
-	buffer = naji_lines_alloc(howmany, howlong);
+    howmany = howl(namein);
+    howlong = longl(namein);
 
-	naji_lines_load(namein, buffer, howmany, howlong);
+    howlong += 3;
+    howmany ++;
 
-	qsort( (void*) buffer, howmany, sizeof(buffer[0]), sortcomp);
+    buffer = naji_lines_alloc(howmany, howlong);
 
-	naji_lines_print(buffer, howmany);
+    naji_lines_load(namein, buffer, howmany, howlong);
 
-	naji_lines_free(buffer, howmany);
+    qsort( (void*) buffer, howmany, sizeof(buffer[0]), sortcomp);
+
+    naji_lines_print(buffer, howmany);
+
+    naji_lines_free(buffer, howmany);
 }
 
 void sortlast(char *namein)
 {
-char **buffer = NULL;
-unsigned long howmany;
-unsigned long howlong;
+    char **buffer = NULL;
+    unsigned long howmany;
+    unsigned long howlong;
 
-	howmany = howl(namein);
-	howlong = longl(namein);
-	
-	howlong += 3;
-	howmany ++;
-	
-	buffer = naji_lines_alloc(howmany, howlong);
+    howmany = howl(namein);
+    howlong = longl(namein);
 
-	naji_lines_load(namein, buffer, howmany, howlong);
+    howlong += 3;
+    howmany ++;
 
-	qsort( (void*) buffer, howmany, sizeof(buffer[0]), sortcomp);
+    buffer = naji_lines_alloc(howmany, howlong);
 
-	naji_lines_backwards_print(buffer, howmany);
+    naji_lines_load(namein, buffer, howmany, howlong);
 
-	naji_lines_free(buffer, howmany);
+    qsort( (void*) buffer, howmany, sizeof(buffer[0]), sortcomp);
+
+    naji_lines_backwards_print(buffer, howmany);
+
+    naji_lines_free(buffer, howmany);
+}
+
+void file2bmp(char *namein, char *nameout)
+{
+    int a;
+
+    najin(namein);
+    bmpout(nameout);
+
+    while (1)
+    {
+        a = fgetc(naji_input);
+
+        if (a == EOF)
+            break;
+
+        fputc(a, naji_bmp_out);
+    }
+
+    najinclose();
+    bmpoutclose();
 }

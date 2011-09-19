@@ -15,7 +15,7 @@ import "naji_len"
 import "najijoin"
 import "naji_db"
 #include "naji_gui.eh"
-                         
+
 
 class HexEditorTop : Window
 {
