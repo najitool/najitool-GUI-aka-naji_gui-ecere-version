@@ -144,7 +144,8 @@
       "najijoin.ec",
       "naji_db.ec",
       "naji_hex.ec",
-      "naji_mgm.ec"
+      "naji_mgm.ec",
+      "najascii.ec"
    ],
    "ResourcesPath" : "",
    "Resources" : [

@@ -28,15 +28,16 @@ inline void byte2hex(register unsigned char a)
 
 class FlagCollection
 {
-    Array<BitmapResource> flags { };
-public property Window window { set { for (b : flags)
-{
-    b.window = value;
-} }
-                              };
+    Array <BitmapResource> flags { };
+
+   public property Window window { set { for (b : flags)
+   b.window = value;
+   }
+
+};
 
 FlagCollection()
-    {
+{
         najitool_languages c;
 
         flags.size = najitool_languages::TR+1;
@@ -76,16 +77,18 @@ enum najitool_languages
 
     char * OnGetString(char * tempString, void * fieldData, bool * needClass)
     {
-
         return languages_string_array[this];
     }
 
     void OnDisplay(Surface surface, int x, int y, int width, FlagCollection flagCollection, Alignment alignment, DataDisplayFlags flags)
     {
         Bitmap icon = (flagCollection) ? flagCollection.flags[this].bitmap : null;
+       
         int w = 8 + (icon ? icon.width : 20);
+       
         if (icon)
             surface.Blit(icon, x,y+2,0,0, icon.width, icon.height);
+
         class::OnDisplay(surface, x + w, y, width - w, null, alignment, flags);
     }
 };

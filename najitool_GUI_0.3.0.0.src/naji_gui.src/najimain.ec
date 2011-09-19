@@ -9,6 +9,7 @@ import "naji_ttt"
 import "najicalc"
 import "najihelp"
 import "najiform"
+import "najascii"
 #include "naji_gui.eh"
 
 class bump : Window
@@ -1864,886 +1865,442 @@ class tab_main : Tab
         }
     };
 
-    void bigascii_naji_(int a)
+
+void nascii(char *character[], int how_many_lines, int line)
+{
+int i;
+    
+    for (i=0; i<how_many_lines; i++)
+    if (line == i)
+    help_edit_box.AddS(character[line]);
+}
+
+void naji_ascii(char *string, int i, int a)
+{
+
+    if (string[i] == ' ')
+
+	nascii(naji_, 6, a);
+       
+    
+    else if (string[i] == 'a')
+    
+        nascii(naji_a, 6, a);
+        
+    
+    else if (string[i] == 'b')
+    
+        nascii(naji_b, 6, a);
+        
+    
+    else if (string[i] == 'c')
+    
+        nascii(naji_c, 6, a);
+        
+    
+    else if (string[i] == 'd')
+    
+        nascii(naji_d, 6, a);
+        
+    
+    else if (string[i] == 'e')
+    
+        nascii(naji_e, 6, a);
+        
+    
+    else if (string[i] == 'f')
+    
+        nascii(naji_f, 6, a);
+        
+    
+    else if (string[i] == 'g')
+    
+        nascii(naji_g, 6, a);
+        
+    
+    else if (string[i] == 'h')
+    
+        nascii(naji_h, 6, a);
+        
+    
+    else if (string[i] == 'i')
+    
+        nascii(naji_i, 6, a);
+        
+    
+    else if (string[i] == 'j')
+    
+        nascii(naji_j, 6, a);
+        
+    
+    else if (string[i] == 'k')
+    
+        nascii(naji_k, 6, a);
+        
+    
+    else if (string[i] == 'l')
+    
+        nascii(naji_l, 6, a);
+        
+    
+    else if (string[i] == 'm')
+    
+        nascii(naji_m, 6, a);
+        
+    
+    else if (string[i] == 'n')
+    
+        nascii(naji_n, 6, a);
+        
+    
+    else if (string[i] == 'o')
+    
+        nascii(naji_o, 6, a);
+        
+    
+    else if (string[i] == 'p')
+    
+        nascii(naji_p, 6, a);
+        
+    
+    else if (string[i] == 'q')
+    
+        nascii(naji_q, 6, a);
+        
+    
+    else if (string[i] == 'r')
+    
+        nascii(naji_r, 6, a);
+        
+    
+    else if (string[i] == 's')
+    
+        nascii(naji_s, 6, a);
+        
+    
+    else if (string[i] == 't')
+    
+        nascii(naji_t, 6, a);
+        
+    
+    else if (string[i] == 'u')
+    
+        nascii(naji_u, 6, a);
+        
+    
+    else if (string[i] == 'v')
+    
+        nascii(naji_v, 6, a);
+        
+    
+    else if (string[i] == 'w')
+    
+        nascii(naji_w, 6, a);
+        
+    
+    else if (string[i] == 'x')
+    
+        nascii(naji_x, 6, a);
+        
+    
+    else if (string[i] == 'y')
+    
+        nascii(naji_y, 6, a);
+        
+    
+    else if (string[i] == 'z')
+    
+        nascii(naji_z, 6, a);
+        
+    
+
+    else if (string[i] == 'A')
+    
+        nascii(naji_a, 6, a);
+        
+    
+    else if (string[i] == 'B')
+    
+        nascii(naji_b, 6, a);
+        
+    
+    else if (string[i] == 'C')
+    
+        nascii(naji_c, 6, a);
+        
+    
+    else if (string[i] == 'D')
+    
+        nascii(naji_d, 6, a);
+        
+    
+    else if (string[i] == 'E')
+    
+        nascii(naji_e, 6, a);
+        
+    
+    else if (string[i] == 'F')
+    
+        nascii(naji_f, 6, a);
+        
+    
+    else if (string[i] == 'G')
+    
+        nascii(naji_g, 6, a);
+        
+    
+    else if (string[i] == 'H')
+    
+        nascii(naji_h, 6, a);
+        
+    
+    else if (string[i] == 'I')
+    
+        nascii(naji_i, 6, a);
+        
+    
+    else if (string[i] == 'J')
+    
+        nascii(naji_j, 6, a);
+        
+    
+    else if (string[i] == 'K')
+    
+        nascii(naji_k, 6, a);
+        
+    
+    else if (string[i] == 'L')
+    
+        nascii(naji_l, 6, a);
+        
+    
+    else if (string[i] == 'M')
+    
+        nascii(naji_m, 6, a);
+        
+    
+    else if (string[i] == 'N')
+    
+        nascii(naji_n, 6, a);
+        
+    
+    else if (string[i] == 'O')
+    
+        nascii(naji_o, 6, a);
+        
+    
+    else if (string[i] == 'P')
+    
+        nascii(naji_p, 6, a);
+        
+    
+    else if (string[i] == 'Q')
+    
+        nascii(naji_q, 6, a);
+        
+    
+    else if (string[i] == 'R')
+    
+        nascii(naji_r, 6, a);
+        
+    
+    else if (string[i] == 'S')
+    
+        nascii(naji_s, 6, a);
+        
+    
+    else if (string[i] == 'T')
+    
+        nascii(naji_t, 6, a);
+        
+    
+    else if (string[i] == 'U')
+    
+        nascii(naji_u, 6, a);
+        
+    
+    else if (string[i] == 'V')
+    
+        nascii(naji_v, 6, a);
+        
+    
+    else if (string[i] == 'W')
+    
+        nascii(naji_w, 6, a);
+        
+    
+    else if (string[i] == 'X')
+    
+        nascii(naji_x, 6, a);
+        
+    
+    else if (string[i] == 'Y')
+    
+        nascii(naji_y, 6, a);
+        
+    
+    else if (string[i] == 'Z')
+    
+        nascii(naji_z, 6, a);
+        
+    
+
+    else if (string[i] == '1')
+    
+        nascii(naji_1, 6, a);
+        
+    
+    else if (string[i] == '2')
+    
+        nascii(naji_2, 6, a);
+        
+    
+    else if (string[i] == '3')
+    
+        nascii(naji_3, 6, a);
+        
+    
+    else if (string[i] == '4')
+    
+        nascii(naji_4, 6, a);
+        
+    
+    else if (string[i] == '5')
+    
+        nascii(naji_5, 6, a);
+        
+    
+    else if (string[i] == '6')
+    
+        nascii(naji_6, 6, a);
+        
+    
+    else if (string[i] == '7')
+    
+        nascii(naji_7, 6, a);
+        
+    
+    else if (string[i] == '8')
+    
+        nascii(naji_8, 6, a);
+        
+    
+    else if (string[i] == '9')
+    
+        nascii(naji_9, 6, a);
+        
+    
+    else if (string[i] == '0')
+    
+        nascii(naji_0, 6, a);
+        
+    
+
+    else if (string[i] == ',')
+    
+        nascii(naji_ascii_coma, 6, a);
+        
+    
+    else if (string[i] == '`')
+    
+        nascii(naji_ascii_aposopen, 6, a);
+        
+    
+    else if (string[i] == '\'')
+    
+        nascii(naji_ascii_aposclose, 6, a);
+        
+    
+    else if (string[i] == '.')
+    
+        nascii(naji_ascii_period, 6, a);
+        
+    
+    else if (string[i] == ':')
+    
+        nascii(naji_ascii_colon, 6, a);
+        
+    
+    else if (string[i] == ';')
+    
+        nascii(naji_ascii_semicolon, 6, a);
+        
+    
+    else if (string[i] == '<')
+    
+        nascii(naji_ascii_lessthan, 6, a);
+        
+    
+    else if (string[i] == '>')
+    
+        nascii(naji_ascii_morethan, 6, a);
+        
+    
+    else if (string[i] == '(')
+    
+        nascii(naji_ascii_paranopen, 6, a);
+        
+    
+    else if (string[i] == ')')
+    
+        nascii(naji_ascii_paranclose, 6, a);
+        
+    
+    else if (string[i] == '_')
+    
+        nascii(naji_ascii_underscore, 6, a);
+        
+    
+    else if (string[i] == '!')
+    
+        nascii(naji_ascii_exclaimark, 6, a);
+        
+    
+    else if (string[i] == '|')
+    
+        nascii(naji_ascii_pipe, 6, a);
+        
+    
+    else if (string[i] == '#')
+    
+        nascii(naji_ascii_numsign, 6, a);
+        
+    
+    else if (string[i] == '/')
+    
+        nascii(naji_ascii_fslash, 6, a);
+        
+    
+    else if (string[i] == '\\')
+    
+        nascii(naji_ascii_bslash, 6, a);
+        
+    
+
+}
+
+
+void bigascii(char *string)
+{
+    int a=0;
+    int i=0;
+    int l=0;
+
+    help_edit_box.Clear();
+
+    l = strlen(string);
+
+    for (a=0; a<6; a++)
     {
-        if (a == 0) help_edit_box.Printf("           ");
-        if (a == 1) help_edit_box.Printf("           ");
-        if (a == 2) help_edit_box.Printf("           ");
-        if (a == 3) help_edit_box.Printf("           ");
-        if (a == 4) help_edit_box.Printf("           ");
-        if (a == 5) help_edit_box.Printf("           ");
+        for (i=0; i<l; i++)
+            naji_ascii(string, i, a);
+
+        help_edit_box.AddCh('\n');
     }
 
-    void bigascii_naji_a(int a)
-    {
-        if (a == 0) help_edit_box.Printf("    ____    ");
-        if (a == 1) help_edit_box.Printf("   / __ \\   ");
-        if (a == 2) help_edit_box.Printf("  | |  | |  ");
-        if (a == 3) help_edit_box.Printf("  | |__| |  ");
-        if (a == 4) help_edit_box.Printf("  |  __  |  ");
-        if (a == 5) help_edit_box.Printf("  |_|  |_|  ");
-    }
+}
 
-    void bigascii_naji_b(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   _____   ");
-        if (a == 1) help_edit_box.Printf("  |  _  |  ");
-        if (a == 2) help_edit_box.Printf("  | |_| /  ");
-        if (a == 3) help_edit_box.Printf("  |  _  \\  ");
-        if (a == 4) help_edit_box.Printf("  | |_| |  ");
-        if (a == 5) help_edit_box.Printf("  |_____|  ");
-    }
-
-    void bigascii_naji_c(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   _____   ");
-        if (a == 1) help_edit_box.Printf("  |  ___|  ");
-        if (a == 2) help_edit_box.Printf("  | |      ");
-        if (a == 3) help_edit_box.Printf("  | |      ");
-        if (a == 4) help_edit_box.Printf("  | |___   ");
-        if (a == 5) help_edit_box.Printf("  |_____|  ");
-    }
-
-    void bigascii_naji_d(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   ____     ");
-        if (a == 1) help_edit_box.Printf("  |     \\   ");
-        if (a == 2) help_edit_box.Printf("  | |~\\  |  ");
-        if (a == 3) help_edit_box.Printf("  | |  | |  ");
-        if (a == 4) help_edit_box.Printf("  | |_/  |  ");
-        if (a == 5) help_edit_box.Printf("  |_____/   ");
-        return;
-    }
-
-    void bigascii_naji_e(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   _____   ");
-        if (a == 1) help_edit_box.Printf("  |  ___|  ");
-        if (a == 2) help_edit_box.Printf("  | |___   ");
-        if (a == 3) help_edit_box.Printf("  |  ___|  ");
-        if (a == 4) help_edit_box.Printf("  | |___   ");
-        if (a == 5) help_edit_box.Printf("  |_____|  ");
-    }
-
-    void bigascii_naji_f(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   _____   ");
-        if (a == 1) help_edit_box.Printf("  |   __|  ");
-        if (a == 2) help_edit_box.Printf("  |  |__   ");
-        if (a == 3) help_edit_box.Printf("  |   __|  ");
-        if (a == 4) help_edit_box.Printf("  |  |     ");
-        if (a == 5) help_edit_box.Printf("  |__|     ");
-    }
-
-    void bigascii_naji_g(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   ______   ");
-        if (a == 1) help_edit_box.Printf("  /  __  \\  ");
-        if (a == 2) help_edit_box.Printf("  | |  |_|  ");
-        if (a == 3) help_edit_box.Printf("  | |  __   ");
-        if (a == 4) help_edit_box.Printf("  | |__\\ |  ");
-        if (a == 5) help_edit_box.Printf("  |_____/   ");
-    }
-
-    void bigascii_naji_h(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   _    _   ");
-        if (a == 1) help_edit_box.Printf("  | |  | |  ");
-        if (a == 2) help_edit_box.Printf("  | |__| |  ");
-        if (a == 3) help_edit_box.Printf("  |  __  |  ");
-        if (a == 4) help_edit_box.Printf("  | |  | |  ");
-        if (a == 5) help_edit_box.Printf("  |_|  |_|  ");
-    }
-
-    void bigascii_naji_i(int a)
-    {
-        if (a == 0) help_edit_box.Printf("     __     ");
-        if (a == 1) help_edit_box.Printf("    |  |    ");
-        if (a == 2) help_edit_box.Printf("    |  |    ");
-        if (a == 3) help_edit_box.Printf("    |  |    ");
-        if (a == 4) help_edit_box.Printf("    |  |    ");
-        if (a == 5) help_edit_box.Printf("    |__|    ");
-    }
-
-    void bigascii_naji_j(int a)
-    {
-        if (a == 0) help_edit_box.Printf("       __   ");
-        if (a == 1) help_edit_box.Printf("      |  |  ");
-        if (a == 2) help_edit_box.Printf("      |  |  ");
-        if (a == 3) help_edit_box.Printf("  ___ |  |  ");
-        if (a == 4) help_edit_box.Printf("  | |_|  |  ");
-        if (a == 5) help_edit_box.Printf("  \\______|  ");
-    }
-
-    void bigascii_naji_k(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   __  ___  ");
-        if (a == 1) help_edit_box.Printf("  |  |/  /  ");
-        if (a == 2) help_edit_box.Printf("  |    _/   ");
-        if (a == 3) help_edit_box.Printf("  |   /__   ");
-        if (a == 4) help_edit_box.Printf("  |   _  \\  ");
-        if (a == 5) help_edit_box.Printf("  |__| \\__\\ ");
-    }
-
-    void bigascii_naji_l(int a)
-    {
-        if (a == 0) help_edit_box.Printf("    __       ");
-        if (a == 1) help_edit_box.Printf("   |  |      ");
-        if (a == 2) help_edit_box.Printf("   |  |      ");
-        if (a == 3) help_edit_box.Printf("   |  |      ");
-        if (a == 4) help_edit_box.Printf("   |  |___   ");
-        if (a == 5) help_edit_box.Printf("   |______|  ");
-    }
-
-    void bigascii_naji_m(int a)
-    {
-        if (a == 0) help_edit_box.Printf("  _      _  ");
-        if (a == 1) help_edit_box.Printf(" | \\    / | ");
-        if (a == 2) help_edit_box.Printf(" |  \\__/  | ");
-        if (a == 3) help_edit_box.Printf(" |        | ");
-        if (a == 4) help_edit_box.Printf(" |  /\\/\\  | ");
-        if (a == 5) help_edit_box.Printf(" |_|    |_| ");
-    }
-
-    void bigascii_naji_n(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   _    _   ");
-        if (a == 1) help_edit_box.Printf("  | \\  | |  ");
-        if (a == 2) help_edit_box.Printf("  |  \\_| |  ");
-        if (a == 3) help_edit_box.Printf("  |      |  ");
-        if (a == 4) help_edit_box.Printf("  | |\\   |  ");
-        if (a == 5) help_edit_box.Printf("  |_| \\__|  ");
-    }
-
-    void bigascii_naji_o(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   ______   ");
-        if (a == 1) help_edit_box.Printf("  |      |  ");
-        if (a == 2) help_edit_box.Printf("  | |~~| |  ");
-        if (a == 3) help_edit_box.Printf("  | |  | |  ");
-        if (a == 4) help_edit_box.Printf("  | |__| |  ");
-        if (a == 5) help_edit_box.Printf("  |______|  ");
-    }
-
-    void bigascii_naji_p(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   ______   ");
-        if (a == 1) help_edit_box.Printf("  |      |  ");
-        if (a == 2) help_edit_box.Printf("  | |~~| |  ");
-        if (a == 3) help_edit_box.Printf("  | ~~~~ |  ");
-        if (a == 4) help_edit_box.Printf("  | |~~~~   ");
-        if (a == 5) help_edit_box.Printf("  |_|       ");
-    }
-
-    void bigascii_naji_q(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   ______   ");
-        if (a == 1) help_edit_box.Printf("  |      |  ");
-        if (a == 2) help_edit_box.Printf("  | |~~| |  ");
-        if (a == 3) help_edit_box.Printf("  | | _| |  ");
-        if (a == 4) help_edit_box.Printf("  | |_\\ \\|  ");
-        if (a == 5) help_edit_box.Printf("  |____\\_\\  ");
-    }
-
-    void bigascii_naji_r(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   ______   ");
-        if (a == 1) help_edit_box.Printf("  |      |  ");
-        if (a == 2) help_edit_box.Printf("  | |~~| |  ");
-        if (a == 3) help_edit_box.Printf("  | ~~~~ |  ");
-        if (a == 4) help_edit_box.Printf("  | |~\\ \\~  ");
-        if (a == 5) help_edit_box.Printf("  |_|  \\_\\  ");
-    }
-
-    void bigascii_naji_s(int a)
-    {
-        if (a == 0) help_edit_box.Printf("    _____   ");
-        if (a == 1) help_edit_box.Printf("   /  __ \\  ");
-        if (a == 2) help_edit_box.Printf("   \\  \\ \\/  ");
-        if (a == 3) help_edit_box.Printf(" /\\ \\  \\    ");
-        if (a == 4) help_edit_box.Printf(" \\ \\_\\  \\   ");
-        if (a == 5) help_edit_box.Printf("  \\_____/   ");
-    }
-
-    void bigascii_naji_t(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   ______   ");
-        if (a == 1) help_edit_box.Printf("  |_    _|  ");
-        if (a == 2) help_edit_box.Printf("    |  |    ");
-        if (a == 3) help_edit_box.Printf("    |  |    ");
-        if (a == 4) help_edit_box.Printf("    |  |    ");
-        if (a == 5) help_edit_box.Printf("    |__|    ");
-    }
-
-    void bigascii_naji_u(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   _    _   ");
-        if (a == 1) help_edit_box.Printf("  | |  | |  ");
-        if (a == 2) help_edit_box.Printf("  | |  | |  ");
-        if (a == 3) help_edit_box.Printf("  | |  | |  ");
-        if (a == 4) help_edit_box.Printf("  | |__| |  ");
-        if (a == 5) help_edit_box.Printf("  |______|  ");
-    }
-
-    void bigascii_naji_v(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   _     _  ");
-        if (a == 1) help_edit_box.Printf("  | |   | | ");
-        if (a == 2) help_edit_box.Printf("  | |   | | ");
-        if (a == 3) help_edit_box.Printf("  \\ \\   / / ");
-        if (a == 4) help_edit_box.Printf("   \\ \\_/ /  ");
-        if (a == 5) help_edit_box.Printf("    \\___/   ");
-    }
-
-    void bigascii_naji_w(int a)
-    {
-        if (a == 0) help_edit_box.Printf("  _      _  ");
-        if (a == 1) help_edit_box.Printf(" | |    | | ");
-        if (a == 2) help_edit_box.Printf(" | |    | | ");
-        if (a == 3) help_edit_box.Printf(" | | /\\ | | ");
-        if (a == 4) help_edit_box.Printf(" | \\/  \\/ | ");
-        if (a == 5) help_edit_box.Printf("  \\__/\\__/  ");
-    }
-
-    void bigascii_naji_x(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   __   __  ");
-        if (a == 1) help_edit_box.Printf("   \\ \\_/ /  ");
-        if (a == 2) help_edit_box.Printf("    \\   /   ");
-        if (a == 3) help_edit_box.Printf("     | |    ");
-        if (a == 4) help_edit_box.Printf("    / _ \\   ");
-        if (a == 5) help_edit_box.Printf("   /_/ \\_\\  ");
-    }
-
-    void bigascii_naji_y(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   __   __  ");
-        if (a == 1) help_edit_box.Printf("   \\ \\_/ /  ");
-        if (a == 2) help_edit_box.Printf("    \\   /   ");
-        if (a == 3) help_edit_box.Printf("     | |    ");
-        if (a == 4) help_edit_box.Printf("     | |    ");
-        if (a == 5) help_edit_box.Printf("     |_|    ");
-    }
-
-    void bigascii_naji_z(int a)
-    {
-        if (a == 0) help_edit_box.Printf("    _____   ");
-        if (a == 1) help_edit_box.Printf("   |___  |  ");
-        if (a == 2) help_edit_box.Printf("      / /   ");
-        if (a == 3) help_edit_box.Printf("     / /    ");
-        if (a == 4) help_edit_box.Printf("    / /__   ");
-        if (a == 5) help_edit_box.Printf("   /_____|  ");
-    }
-
-    void bigascii_naji_1(int a)
-    {
-        if (a == 0) help_edit_box.Printf("    /~~|    ");
-        if (a == 1) help_edit_box.Printf("  /_   |    ");
-        if (a == 2) help_edit_box.Printf("    |  |    ");
-        if (a == 3) help_edit_box.Printf("    |  |    ");
-        if (a == 4) help_edit_box.Printf("   _|  |_   ");
-        if (a == 5) help_edit_box.Printf("  |______|  ");
-    }
-
-    void bigascii_naji_2(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   _____    ");
-        if (a == 1) help_edit_box.Printf("  /     \\   ");
-        if (a == 2) help_edit_box.Printf(" |_/~\\   \\  ");
-        if (a == 3) help_edit_box.Printf("     /  /   ");
-        if (a == 4) help_edit_box.Printf("   /  /___  ");
-        if (a == 5) help_edit_box.Printf("  |_______| ");
-    }
-
-    void bigascii_naji_3(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   ______   ");
-        if (a == 1) help_edit_box.Printf("  |___   \\  ");
-        if (a == 2) help_edit_box.Printf("    __|  /  ");
-        if (a == 3) help_edit_box.Printf("   <__  <   ");
-        if (a == 4) help_edit_box.Printf("   ___|  \\  ");
-        if (a == 5) help_edit_box.Printf("  |______/  ");
-    }
-
-    void bigascii_naji_4(int a)
-    {
-        if (a == 0) help_edit_box.Printf("     /~~|   ");
-        if (a == 1) help_edit_box.Printf("    /   |   ");
-        if (a == 2) help_edit_box.Printf("   / /| |   ");
-        if (a == 3) help_edit_box.Printf("  / /_| |_  ");
-        if (a == 4) help_edit_box.Printf(" /____   _| ");
-        if (a == 5) help_edit_box.Printf("      |_|   ");
-    }
-
-    void bigascii_naji_5(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   ______   ");
-        if (a == 1) help_edit_box.Printf("  |  ____|  ");
-        if (a == 2) help_edit_box.Printf("  | |____   ");
-        if (a == 3) help_edit_box.Printf("  |____  |  ");
-        if (a == 4) help_edit_box.Printf("   ____| |  ");
-        if (a == 5) help_edit_box.Printf("  |______|  ");
-    }
-
-    void bigascii_naji_6(int a)
-    {
-        if (a == 0) help_edit_box.Printf("    _____   ");
-        if (a == 1) help_edit_box.Printf("   / ____|  ");
-        if (a == 2) help_edit_box.Printf("  | |____   ");
-        if (a == 3) help_edit_box.Printf("  |  __  |  ");
-        if (a == 4) help_edit_box.Printf("  | |__| |  ");
-        if (a == 5) help_edit_box.Printf("   \\____/   ");
-    }
-
-    void bigascii_naji_7(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   ______   ");
-        if (a == 1) help_edit_box.Printf("  |___   |  ");
-        if (a == 2) help_edit_box.Printf("     /  /   ");
-        if (a == 3) help_edit_box.Printf("    /  /    ");
-        if (a == 4) help_edit_box.Printf("   /  /     ");
-        if (a == 5) help_edit_box.Printf("  /__/      ");
-    }
-
-    void bigascii_naji_8(int a)
-    {
-        if (a == 0) help_edit_box.Printf("    _____   ");
-        if (a == 1) help_edit_box.Printf("   / ___ \\  ");
-        if (a == 2) help_edit_box.Printf("  | |__| |  ");
-        if (a == 3) help_edit_box.Printf("   > __ <   ");
-        if (a == 4) help_edit_box.Printf("  | |__| |  ");
-        if (a == 5) help_edit_box.Printf("   \\____/   ");
-    }
-
-    void bigascii_naji_9(int a)
-    {
-        if (a == 0) help_edit_box.Printf("    _____   ");
-        if (a == 1) help_edit_box.Printf("   / ___ \\  ");
-        if (a == 2) help_edit_box.Printf("  | |__| |  ");
-        if (a == 3) help_edit_box.Printf("   \\ __  |  ");
-        if (a == 4) help_edit_box.Printf("   ____| |  ");
-        if (a == 5) help_edit_box.Printf("   \\____/   ");
-    }
-
-    void bigascii_naji_0(int a)
-    {
-        if (a == 0) help_edit_box.Printf("    _____   ");
-        if (a == 1) help_edit_box.Printf("   / ___ \\  ");
-        if (a == 2) help_edit_box.Printf("  | |  | |  ");
-        if (a == 3) help_edit_box.Printf("  | |  | |  ");
-        if (a == 4) help_edit_box.Printf("  | |__| |  ");
-        if (a == 5) help_edit_box.Printf("   \\____/   ");
-    }
-
-    void bigascii_naji_ascii_coma(int a)
-    {
-        if (a == 0) help_edit_box.Printf("            ");
-        if (a == 1) help_edit_box.Printf("            ");
-        if (a == 2) help_edit_box.Printf("            ");
-        if (a == 3) help_edit_box.Printf("     ___    ");
-        if (a == 4) help_edit_box.Printf("    |   |   ");
-        if (a == 5) help_edit_box.Printf("   /___/    ");
-    }
-
-    void bigascii_naji_ascii_aposopen(int a)
-    {
-        if (a == 0) help_edit_box.Printf("    ___     ");
-        if (a == 1) help_edit_box.Printf("   |   |    ");
-        if (a == 2) help_edit_box.Printf("    \\___\\   ");
-        if (a == 3) help_edit_box.Printf("            ");
-        if (a == 4) help_edit_box.Printf("            ");
-        if (a == 5) help_edit_box.Printf("            ");
-    }
-
-    void bigascii_naji_ascii_aposclose(int a)
-    {
-        if (a == 0) help_edit_box.Printf("     ___    ");
-        if (a == 1) help_edit_box.Printf("    |   |   ");
-        if (a == 2) help_edit_box.Printf("   /___/    ");
-        if (a == 3) help_edit_box.Printf("            ");
-        if (a == 4) help_edit_box.Printf("            ");
-        if (a == 5) help_edit_box.Printf("            ");
-    }
-
-    void bigascii_naji_ascii_period(int a)
-    {
-        if (a == 0) help_edit_box.Printf("            ");
-        if (a == 1) help_edit_box.Printf("            ");
-        if (a == 2) help_edit_box.Printf("            ");
-        if (a == 3) help_edit_box.Printf("    ____    ");
-        if (a == 4) help_edit_box.Printf("   |    |   ");
-        if (a == 5) help_edit_box.Printf("   |____|   ");
-    }
-
-    void bigascii_naji_ascii_colon(int a)
-    {
-        if (a == 0) help_edit_box.Printf("    ____    ");
-        if (a == 1) help_edit_box.Printf("   |    |   ");
-        if (a == 2) help_edit_box.Printf("   |____|   ");
-        if (a == 3) help_edit_box.Printf("    ____    ");
-        if (a == 4) help_edit_box.Printf("   |    |   ");
-        if (a == 5) help_edit_box.Printf("   |____|   ");
-    }
-
-    void bigascii_naji_ascii_semicolon(int a)
-    {
-        if (a == 0) help_edit_box.Printf("     ___    ");
-        if (a == 1) help_edit_box.Printf("    |   |   ");
-        if (a == 2) help_edit_box.Printf("    |___|   ");
-        if (a == 3) help_edit_box.Printf("     ___    ");
-        if (a == 4) help_edit_box.Printf("    |   |   ");
-        if (a == 5) help_edit_box.Printf("   /___/    ");
-    }
-
-    void bigascii_naji_ascii_lessthan(int a)
-    {
-        if (a == 0) help_edit_box.Printf("     /~/    ");
-        if (a == 1) help_edit_box.Printf("    / /     ");
-        if (a == 2) help_edit_box.Printf("   / /      ");
-        if (a == 3) help_edit_box.Printf("   \\ \\      ");
-        if (a == 4) help_edit_box.Printf("    \\ \\     ");
-        if (a == 5) help_edit_box.Printf("     \\_\\    ");
-    }
-
-    void bigascii_naji_ascii_morethan(int a)
-    {
-        if (a == 0) help_edit_box.Printf("    \\~\\     ");
-        if (a == 1) help_edit_box.Printf("     \\ \\    ");
-        if (a == 2) help_edit_box.Printf("      \\ \\   ");
-        if (a == 3) help_edit_box.Printf("      / /   ");
-        if (a == 4) help_edit_box.Printf("     / /    ");
-        if (a == 5) help_edit_box.Printf("    /_/     ");
-    }
-
-    void bigascii_naji_ascii_paranopen(int a)
-    {
-        if (a == 0) help_edit_box.Printf("     /~/    ");
-        if (a == 1) help_edit_box.Printf("    / /     ");
-        if (a == 2) help_edit_box.Printf("   | |      ");
-        if (a == 3) help_edit_box.Printf("   | |      ");
-        if (a == 4) help_edit_box.Printf("    \\ \\     ");
-        if (a == 5) help_edit_box.Printf("     \\_\\    ");
-    }
-
-    void bigascii_naji_ascii_paranclose(int a)
-    {
-        if (a == 0) help_edit_box.Printf("    \\~\\     ");
-        if (a == 1) help_edit_box.Printf("     \\ \\    ");
-        if (a == 2) help_edit_box.Printf("      | |   ");
-        if (a == 3) help_edit_box.Printf("      | |   ");
-        if (a == 4) help_edit_box.Printf("     / /    ");
-        if (a == 5) help_edit_box.Printf("    /_/     ");
-    }
-
-    void bigascii_naji_ascii_underscore(int a)
-    {
-        if (a == 0) help_edit_box.Printf("            ");
-        if (a == 1) help_edit_box.Printf("            ");
-        if (a == 2) help_edit_box.Printf("            ");
-        if (a == 3) help_edit_box.Printf("            ");
-        if (a == 4) help_edit_box.Printf(" __________ ");
-        if (a == 5) help_edit_box.Printf("|__________|");
-    }
-
-    void bigascii_naji_ascii_exclaimark(int a)
-    {
-        if (a == 0) help_edit_box.Printf("    ___     ");
-        if (a == 1) help_edit_box.Printf("   |   |    ");
-        if (a == 2) help_edit_box.Printf("   |   |    ");
-        if (a == 3) help_edit_box.Printf("   |___|    ");
-        if (a == 4) help_edit_box.Printf("    ___     ");
-        if (a == 5) help_edit_box.Printf("   |___|    ");
-    }
-
-    void bigascii_naji_ascii_pipe(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   |~~~|    ");
-        if (a == 1) help_edit_box.Printf("   |   |    ");
-        if (a == 2) help_edit_box.Printf("   |   |    ");
-        if (a == 3) help_edit_box.Printf("   |   |    ");
-        if (a == 4) help_edit_box.Printf("   |   |    ");
-        if (a == 5) help_edit_box.Printf("   |___|    ");
-    }
-
-    void bigascii_naji_ascii_numsign(int a)
-    {
-        if (a == 0) help_edit_box.Printf("   ##  ##   ");
-        if (a == 1) help_edit_box.Printf(" ########## ");
-        if (a == 2) help_edit_box.Printf("   ##  ##   ");
-        if (a == 3) help_edit_box.Printf("   ##  ##   ");
-        if (a == 4) help_edit_box.Printf(" ########## ");
-        if (a == 5) help_edit_box.Printf("   ##  ##   ");
-    }
-
-    void bigascii_naji_ascii_fslash(int a)
-    {
-        if (a == 0) help_edit_box.Printf("      /~~/  ");
-        if (a == 1) help_edit_box.Printf("     /  /   ");
-        if (a == 2) help_edit_box.Printf("    /  /    ");
-        if (a == 3) help_edit_box.Printf("   /  /     ");
-        if (a == 4) help_edit_box.Printf("  /  /      ");
-        if (a == 5) help_edit_box.Printf(" /__/       ");
-    }
-
-    void bigascii_naji_ascii_bslash(int a)
-    {
-        if (a == 0) help_edit_box.Printf("  \\~~\\      ");
-        if (a == 1) help_edit_box.Printf("   \\  \\     ");
-        if (a == 2) help_edit_box.Printf("    \\  \\    ");
-        if (a == 3) help_edit_box.Printf("     \\  \\   ");
-        if (a == 4) help_edit_box.Printf("      \\  \\  ");
-        if (a == 5) help_edit_box.Printf("       \\__\\ ");
-    }
-
-    void bigascii_naji_ascii(char *string, int i, int a)
-    {
-        /* small and big letter is the same for now */
-        /* i might do different styles in later versions */
-
-        if (string[i] == ' ')
-        {
-            bigascii_naji_(a);
-        }
-        if (string[i] == 'a')
-        {
-            bigascii_naji_a(a);
-        }
-        if (string[i] == 'b')
-        {
-            bigascii_naji_b(a);
-        }
-        if (string[i] == 'c')
-        {
-            bigascii_naji_c(a);
-        }
-        if (string[i] == 'd')
-        {
-            bigascii_naji_d(a);
-        }
-        if (string[i] == 'e')
-        {
-            bigascii_naji_e(a);
-        }
-        if (string[i] == 'f')
-        {
-            bigascii_naji_f(a);
-        }
-        if (string[i] == 'g')
-        {
-            bigascii_naji_g(a);
-        }
-        if (string[i] == 'h')
-        {
-            bigascii_naji_h(a);
-        }
-        if (string[i] == 'i')
-        {
-            bigascii_naji_i(a);
-        }
-        if (string[i] == 'j')
-        {
-            bigascii_naji_j(a);
-        }
-        if (string[i] == 'k')
-        {
-            bigascii_naji_k(a);
-        }
-        if (string[i] == 'l')
-        {
-            bigascii_naji_l(a);
-        }
-        if (string[i] == 'm')
-        {
-            bigascii_naji_m(a);
-        }
-        if (string[i] == 'n')
-        {
-            bigascii_naji_n(a);
-        }
-        if (string[i] == 'o')
-        {
-            bigascii_naji_o(a);
-        }
-        if (string[i] == 'p')
-        {
-            bigascii_naji_p(a);
-        }
-        if (string[i] == 'q')
-        {
-            bigascii_naji_q(a);
-        }
-        if (string[i] == 'r')
-        {
-            bigascii_naji_r(a);
-        }
-        if (string[i] == 's')
-        {
-            bigascii_naji_s(a);
-        }
-        if (string[i] == 't')
-        {
-            bigascii_naji_t(a);
-        }
-        if (string[i] == 'u')
-        {
-            bigascii_naji_u(a);
-        }
-        if (string[i] == 'v')
-        {
-            bigascii_naji_v(a);
-        }
-        if (string[i] == 'w')
-        {
-            bigascii_naji_w(a);
-        }
-        if (string[i] == 'x')
-        {
-            bigascii_naji_x(a);
-        }
-        if (string[i] == 'y')
-        {
-            bigascii_naji_y(a);
-        }
-        if (string[i] == 'z')
-        {
-            bigascii_naji_z(a);
-        }
-
-        if (string[i] == 'A')
-        {
-            bigascii_naji_a(a);
-        }
-        if (string[i] == 'B')
-        {
-            bigascii_naji_b(a);
-        }
-        if (string[i] == 'C')
-        {
-            bigascii_naji_c(a);
-        }
-        if (string[i] == 'D')
-        {
-            bigascii_naji_d(a);
-        }
-        if (string[i] == 'E')
-        {
-            bigascii_naji_e(a);
-        }
-        if (string[i] == 'F')
-        {
-            bigascii_naji_f(a);
-        }
-        if (string[i] == 'G')
-        {
-            bigascii_naji_g(a);
-        }
-        if (string[i] == 'H')
-        {
-            bigascii_naji_h(a);
-        }
-        if (string[i] == 'I')
-        {
-            bigascii_naji_i(a);
-        }
-        if (string[i] == 'J')
-        {
-            bigascii_naji_j(a);
-        }
-        if (string[i] == 'K')
-        {
-            bigascii_naji_k(a);
-        }
-        if (string[i] == 'L')
-        {
-            bigascii_naji_l(a);
-        }
-        if (string[i] == 'M')
-        {
-            bigascii_naji_m(a);
-        }
-        if (string[i] == 'N')
-        {
-            bigascii_naji_n(a);
-        }
-        if (string[i] == 'O')
-        {
-            bigascii_naji_o(a);
-        }
-        if (string[i] == 'P')
-        {
-            bigascii_naji_p(a);
-        }
-        if (string[i] == 'Q')
-        {
-            bigascii_naji_q(a);
-        }
-        if (string[i] == 'R')
-        {
-            bigascii_naji_r(a);
-        }
-        if (string[i] == 'S')
-        {
-            bigascii_naji_s(a);
-        }
-        if (string[i] == 'T')
-        {
-            bigascii_naji_t(a);
-        }
-        if (string[i] == 'U')
-        {
-            bigascii_naji_u(a);
-        }
-        if (string[i] == 'V')
-        {
-            bigascii_naji_v(a);
-        }
-        if (string[i] == 'W')
-        {
-            bigascii_naji_w(a);
-        }
-        if (string[i] == 'X')
-        {
-            bigascii_naji_x(a);
-        }
-        if (string[i] == 'Y')
-        {
-            bigascii_naji_y(a);
-        }
-        if (string[i] == 'Z')
-        {
-            bigascii_naji_z(a);
-        }
-
-        if (string[i] == '1')
-        {
-            bigascii_naji_1(a);
-        }
-        if (string[i] == '2')
-        {
-            bigascii_naji_2(a);
-        }
-        if (string[i] == '3')
-        {
-            bigascii_naji_3(a);
-        }
-        if (string[i] == '4')
-        {
-            bigascii_naji_4(a);
-        }
-        if (string[i] == '5')
-        {
-            bigascii_naji_5(a);
-        }
-        if (string[i] == '6')
-        {
-            bigascii_naji_6(a);
-        }
-        if (string[i] == '7')
-        {
-            bigascii_naji_7(a);
-        }
-        if (string[i] == '8')
-        {
-            bigascii_naji_8(a);
-        }
-        if (string[i] == '9')
-        {
-            bigascii_naji_9(a);
-        }
-        if (string[i] == '0')
-        {
-            bigascii_naji_0(a);
-        }
-
-        if (string[i] == ',')
-        {
-            bigascii_naji_ascii_coma(a);
-        }
-        if (string[i] == '`')
-        {
-            bigascii_naji_ascii_aposopen(a);
-        }
-        if (string[i] == '\'')
-        {
-            bigascii_naji_ascii_aposclose(a);
-        }
-        if (string[i] == '.')
-        {
-            bigascii_naji_ascii_period(a);
-        }
-        if (string[i] == ':')
-        {
-            bigascii_naji_ascii_colon(a);
-        }
-        if (string[i] == ';')
-        {
-            bigascii_naji_ascii_semicolon(a);
-        }
-        if (string[i] == '<')
-        {
-            bigascii_naji_ascii_lessthan(a);
-        }
-        if (string[i] == '>')
-        {
-            bigascii_naji_ascii_morethan(a);
-        }
-        if (string[i] == '(')
-        {
-            bigascii_naji_ascii_paranopen(a);
-        }
-        if (string[i] == ')')
-        {
-            bigascii_naji_ascii_paranclose(a);
-        }
-        if (string[i] == '_')
-        {
-            bigascii_naji_ascii_underscore(a);
-        }
-        if (string[i] == '!')
-        {
-            bigascii_naji_ascii_exclaimark(a);
-        }
-        if (string[i] == '|')
-        {
-            bigascii_naji_ascii_pipe(a);
-        }
-        if (string[i] == '#')
-        {
-            bigascii_naji_ascii_numsign(a);
-        }
-        if (string[i] == '/')
-        {
-            bigascii_naji_ascii_fslash(a);
-        }
-        if (string[i] == '\\')
-        {
-            bigascii_naji_ascii_bslash(a);
-        }
-
-    }
-
-    void bigascii(char *string)
-    {
-        int a=0;
-        int i=0;
-        int l=0;
-
-        help_edit_box.Clear();
-
-        l = strlen(string);
-
-        for (a=0; a<6; a++)
-        {
-            for (i=0; i<l; i++)
-                bigascii_naji_ascii(string, i, a);
-
-            help_edit_box.Printf("\n");
-        }
-
-        return;
-    }
-
-    void cat_head(char *namein, int n_lines)
+  void cat_head(char *namein, int n_lines)
     {
         int a;
         int cnt=0;
