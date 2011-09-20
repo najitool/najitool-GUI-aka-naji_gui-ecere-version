@@ -608,7 +608,10 @@ class tab_main : Tab
                 bigascif(parameter_1_string, output_file_1_path);
 
             else if (!strcmp(najitool_command, "bigascii"))
+            {    
                 bigascii(parameter_1_string);
+                return true;
+            }
 
             else if (!strcmp(najitool_command, "bin2c"))
                 bin2c(input_file_1_path, output_file_1_path, parameter_1_string);
@@ -1221,6 +1224,8 @@ class tab_main : Tab
             remove(".najiout.bin");
             remove(".najiout.bmp");
 
+            if (output_file_1_edit_box.disabled == false)
+            {
             file2hex(output_file_1_path, ".najiout.hex");
             file2dec(output_file_1_path, ".najiout.dec");
             file2oct(output_file_1_path, ".najiout.oct");
@@ -1246,6 +1251,7 @@ class tab_main : Tab
             if (najimainfile != null)
                 binary_output_edit_box.Load(najimainfile);
             delete najimainfile;
+            }
 
             if (!strcmp(najitool_language, "English"))
                 sprintf(msgbox_buffer, "%s", "Processing complete.");
