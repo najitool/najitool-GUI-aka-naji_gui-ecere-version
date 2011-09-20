@@ -1,43 +1,4 @@
 
-void revlines(char *namein, char *nameout)
-{
-    unsigned long int longest_line;
-    char *buffer = NULL;
-
-    longest_line = longl(namein);
-
-    buffer = (char *) malloc(longest_line * sizeof (char) + 2);
-    exitnull(buffer);
-
-    najin(namein);
-    najout(nameout);
-
-    longest_line++;
-
-    while (1)
-    {
-        if (feof(naji_input))
-            break;
-
-
-        najifgets(buffer, longest_line, naji_input);
-
-        sreverse(buffer);
-
-        fprintf(naji_output, "%s", buffer);
-    }
-
-    free(buffer);
-    buffer = NULL;
-
-    najinclose();
-    najoutclose();
-}
-
-
-
-
-
 void sp2ce2sp(char c, char *namein, char *nameout)
 {
     int a;

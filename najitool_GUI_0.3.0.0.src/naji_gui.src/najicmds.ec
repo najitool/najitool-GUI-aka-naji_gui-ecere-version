@@ -602,6 +602,7 @@ const char * najitool_valid_format[NAJITOOL_MAX_FORMAT] =
     "fswpcase",
     "lensortl",
     "lensorts",
+    "lineback",
     "numlines",
     "putlines",
     "rbcafter",
@@ -609,11 +610,14 @@ const char * najitool_valid_format[NAJITOOL_MAX_FORMAT] =
     "repchar",
     "repcharp",
     "revlines",
+    "rndlines",
     "rrrchars",
     "rstrach",
     "rstrbch",
     "rtcafter",
     "rtcbefor",
+    "sort",
+    "sortlast",
     "strachar",
     "strbchar",
     "strbline",
@@ -638,7 +642,9 @@ const char * najitool_valid_status[NAJITOOL_MAX_STATUS] =
     "find",
     "findi",
     "hexicat",
+    "howline",
     "kitten",
+    "longline",
     "najisum",
     "repcat",
     "repcatpp",
@@ -806,6 +812,7 @@ const char * najitool_valid_commands[NAJITOOL_MAX_COMMANDS] =
     "html2txt",
     "htmlfast",
     "htmlhelp",
+    "howline",
     "kitten",
     "lcharvar",
     "lcvfiles",
@@ -815,7 +822,9 @@ const char * najitool_valid_commands[NAJITOOL_MAX_COMMANDS] =
     "lensortl",
     "lensorts",
     "license",
+    "lineback",
     "linesnip",
+    "longline",
     "makarray",
     "mathgame",
     "maxxnewl",
@@ -866,6 +875,7 @@ const char * najitool_valid_commands[NAJITOOL_MAX_COMMANDS] =
     "rndbfile",
     "rndbsout",
     "rndffill",
+    "rndlines",
     "rndtfile",
     "rndtsout",
     "rrrchars",
@@ -890,6 +900,8 @@ const char * najitool_valid_commands[NAJITOOL_MAX_COMMANDS] =
     "skpspace",
     "skpupper",
     "skpxdigt",
+    "sort",
+    "sortlast",
     "strachar",
     "strbchar",
     "strbline",
@@ -947,21 +959,51 @@ int swrdcoun(const char *string)
     return c;
 }
 
+
 void sreverse(char *str)
 {
-    int i;
-    int len=strlen(str);
-    char *strbackup=newchar(len);
+    unsigned long i;
+
+    char *strbackup = NULL;
+    int len;
+    int has_new_line = NAJI_FALSE;
+
+
+    len = strlen(str);
+
+    if (len <= 1)
+        return;
+
+    for (i=0; str[i] != '\0'; i++)
+    {
+        if (str[i] == '\n')
+        {
+            str[i] = '\0';
+            has_new_line = NAJI_TRUE;
+        }
+    }
+
+    strbackup = newchar(len+2);
     exitnull(strbackup);
 
     strcpy(strbackup, str);
 
-    for (i=0; i<len; i++)
-        str[i] = '\0';
+    len = strlen(str);
+
 
     for (i=0; i<len; i++)
         str[len-i-1] = strbackup[i];
 
+    if (has_new_line == NAJI_TRUE)
+    {
+        str[len]   = '\n';
+        str[len+1] = '\0';
+    }
+    else
+        str[len] = '\0';
+
+    free(strbackup);
+    strbackup = NULL;
 }
 
 void sflpcase(char *str)
@@ -5045,27 +5087,6 @@ void freverse(char *namein, char *nameout)
     najoutclose();
 }
 
-/* reverses every line in a file */
-/* note: this has a bug which i should fix later */
-/* the last line doesn't get reversed propally */
-void revlines(char *namein, char *nameout)
-{
-    char buffer[1000];
-
-    najin(namein);
-    najout(nameout);
-
-    while (!feof(naji_input))
-    {
-        fgets(buffer, 990, naji_input);
-        sreverse(buffer);
-        fputs(buffer, naji_output);
-    }
-
-    najinclose();
-    najoutclose();
-}
-
 void n2ch(char ch, char *namein, char *nameout)
 {
     int a;
@@ -7827,7 +7848,7 @@ void maxxnewl(char *namein, char *nameout, int maxnl)
     najoutclose();
 }
 
-/* finds the longest line in a text file and returns the result */
+
 
 unsigned long longl(char *namein)
 {
@@ -7862,12 +7883,9 @@ unsigned long longl(char *namein)
     return longest;
 }
 
-void longline(char *namein)
-{
-    printf("\n\nLongest line is: %lu\n\n", longl(namein));
-}
 
-/* counts how many lines there are in a text file and returns the result */
+
+
 
 unsigned long howl(char *namein)
 {
@@ -7895,10 +7913,6 @@ unsigned long howl(char *namein)
     return lines;
 }
 
-void howline(char *namein)
-{
-    printf("\n\nTotal number of lines is: %lu\n\n", howl(namein));
-}
 
 char **naji_lines_alloc(unsigned long howmany, unsigned long howlong)
 {
@@ -8000,12 +8014,12 @@ void naji_lines_backwards_print(char **buffer, unsigned long howmany)
     if (strlen(buffer[backwards_howmany]) > 0)
         if (strchr(buffer[backwards_howmany], '\n') == NULL)
         {
-            printf("%s\n", buffer[backwards_howmany]);
+            fprintf(naji_output, "%s\n", buffer[backwards_howmany]);
             backwards_howmany--;
         }
 
     for (backwards_i = backwards_howmany; backwards_i >= 0; backwards_i--)
-        printf("%s", buffer[backwards_i]);
+        fprintf(naji_output, "%s", buffer[backwards_i]);
 
 }
 
@@ -8014,11 +8028,11 @@ void naji_lines_print(char **buffer, unsigned long howmany)
     unsigned long i;
 
     for (i=0; i<howmany; i++)
-        printf("%s", buffer[i]);
+        fprintf(naji_output, "%s", buffer[i]);
 
 }
 
-void lineback(char *namein)
+void lineback(char *namein, char *nameout)
 {
     char **buffer = NULL;
     unsigned long howmany;
@@ -8026,6 +8040,8 @@ void lineback(char *namein)
 
     howmany = howl(namein);
     howlong = longl(namein);
+
+    najout(nameout);
 
     howlong += 3;
     howmany ++;
@@ -8037,6 +8053,8 @@ void lineback(char *namein)
     naji_lines_backwards_print(buffer, howmany);
 
     naji_lines_free(buffer, howmany);
+
+    najoutclose();
 }
 
 int return_random(int max)
@@ -8085,13 +8103,13 @@ void naji_lines_random_print(char **buffer, int howmany)
     shuffle_int_array(vektor, howmany);
 
     for (i=0; i<howmany; i++)
-        printf("%s", buffer[vektor[i]]);
+        fprintf(naji_output, "%s", buffer[vektor[i]]);
 
     free(vektor);
     vektor = NULL;
 }
 
-void rndlines(char *namein)
+void rndlines(char *namein, char *nameout)
 {
     char **buffer = NULL;
     unsigned long howmany;
@@ -8099,6 +8117,8 @@ void rndlines(char *namein)
 
     howmany = howl(namein);
     howlong = longl(namein);
+
+    najout(nameout);
 
     howlong += 3;
     howmany ++;
@@ -8110,6 +8130,9 @@ void rndlines(char *namein)
     naji_lines_random_print(buffer, howmany);
 
     naji_lines_free(buffer, howmany);
+
+    najoutclose();
+
 }
 
 void najifgets(char *buf, int size, FILE *input)
@@ -8159,7 +8182,7 @@ int sortcomp(const void *a, const void *b)
     return strcmp(*va, *vb);
 }
 
-void sort_basis(char *namein)
+void sort(char *namein, char *nameout)
 {
     char **buffer = NULL;
     unsigned long howmany;
@@ -8170,6 +8193,8 @@ void sort_basis(char *namein)
 
     howlong += 3;
     howmany ++;
+
+    najout(nameout);
 
     buffer = naji_lines_alloc(howmany, howlong);
 
@@ -8180,9 +8205,11 @@ void sort_basis(char *namein)
     naji_lines_print(buffer, howmany);
 
     naji_lines_free(buffer, howmany);
+
+    najoutclose();
 }
 
-void sortlast(char *namein)
+void sortlast(char *namein, char *nameout)
 {
     char **buffer = NULL;
     unsigned long howmany;
@@ -8194,6 +8221,8 @@ void sortlast(char *namein)
     howlong += 3;
     howmany ++;
 
+    najout(nameout);
+
     buffer = naji_lines_alloc(howmany, howlong);
 
     naji_lines_load(namein, buffer, howmany, howlong);
@@ -8203,6 +8232,8 @@ void sortlast(char *namein)
     naji_lines_backwards_print(buffer, howmany);
 
     naji_lines_free(buffer, howmany);
+
+    najoutclose();
 }
 
 void file2bmp(char *namein, char *nameout)
@@ -8225,3 +8256,39 @@ void file2bmp(char *namein, char *nameout)
     najinclose();
     bmpoutclose();
 }
+
+void revlines(char *namein, char *nameout)
+{
+    unsigned long int longest_line;
+    char *buffer = NULL;
+
+    longest_line = longl(namein);
+
+    buffer = (char *) malloc(longest_line * sizeof (char) + 2);
+    exitnull(buffer);
+
+    najin(namein);
+    najout(nameout);
+
+    longest_line++;
+
+    while (1)
+    {
+        if (feof(naji_input))
+            break;
+
+
+        najifgets(buffer, longest_line, naji_input);
+
+        sreverse(buffer);
+
+        fprintf(naji_output, "%s", buffer);
+    }
+
+    free(buffer);
+    buffer = NULL;
+
+    najinclose();
+    najoutclose();
+}
+

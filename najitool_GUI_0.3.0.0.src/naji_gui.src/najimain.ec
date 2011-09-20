@@ -850,6 +850,12 @@ class tab_main : Tab
             else if (!strcmp(najitool_command, "htmlhelp"))
                 najitool_gui_generate_htmlhelp(output_file_1_path);
 
+            else if (!strcmp(najitool_command, "howline"))
+            {
+                howline(input_file_1_path);
+                return true;
+            }
+
             else if (!strcmp(najitool_command, "kitten"))
                 kitten(input_file_1_path);
 
@@ -879,6 +885,16 @@ class tab_main : Tab
 
             else if (!strcmp(najitool_command, "linesnip"))
                 linesnip(atoi(parameter_1_string), input_file_1_path, output_file_1_path);
+   
+            else if (!strcmp(najitool_command, "lineback"))
+                lineback(input_file_1_path, output_file_1_path);
+
+
+            else if (!strcmp(najitool_command, "longline"))
+            {
+                longline(input_file_1_path);
+                return true;
+            }
 
             else if (!strcmp(najitool_command, "makarray"))
                 makarray(input_file_1_path, output_file_1_path, parameter_1_string);
@@ -1049,6 +1065,11 @@ class tab_main : Tab
 
             }
 
+
+            else if (!strcmp(najitool_command, "rndlines"))
+                rndlines(input_file_1_path, output_file_1_path);
+
+
             else if (!strcmp(najitool_command, "rndtfile"))
                 rndtfile(input_file_1_path, atol(parameter_1_string));
 
@@ -1120,6 +1141,12 @@ class tab_main : Tab
 
             else if (!strcmp(najitool_command, "skpxdigt"))
                 skpxdigt(input_file_1_path, output_file_1_path);
+
+            else if (!strcmp(najitool_command, "sort"))
+                sort(input_file_1_path, output_file_1_path);
+
+            else if (!strcmp(najitool_command, "sortlast"))
+                sortlast(input_file_1_path, output_file_1_path);
 
             else if (!strcmp(najitool_command, "strachar"))
                 strachar(parameter_1_string, input_file_1_path, output_file_1_path);
@@ -5013,4 +5040,17 @@ void bigascii(char *string)
         help_edit_box.AddCh(str[l-1]);
 
     }
+
+
+void howline(char *namein)
+{
+    help_edit_box.Clear();
+    help_edit_box.Printf("Total number of lines is: %lu\n", howl(namein));
+}                                                                     
+          
+void longline(char *namein)
+{   help_edit_box.Clear();
+    help_edit_box.Printf("Longest line is: %lu\n", longl(namein));
+}                                                            
+
 }

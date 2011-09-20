@@ -875,6 +875,9 @@ class tab_batch : Tab
                     notbatch();
                     return true;
                 }
+               
+                else if (! strcmp(najitool_command, "howline") )
+                    howline(row.string);
 
                 else if (! strcmp(najitool_command, "kitten") )
                     kitten(row.string);
@@ -918,6 +921,12 @@ class tab_batch : Tab
                 else if (! strcmp(najitool_command, "linesnip") )
                     linesnip(atoi(parameter_1_string), row.string, processing_output_file_path);
 
+                else if (! strcmp(najitool_command, "lineback") )
+                    lineback(row.string, processing_output_file_path);
+
+                else if (! strcmp(najitool_command, "longline") )
+                    longline(row.string);
+                
                 else if (! strcmp(najitool_command, "makarray") )
                     makarray(row.string, processing_output_file_path, parameter_1_string);
 
@@ -1118,6 +1127,10 @@ class tab_batch : Tab
 
                 }
 
+                else if (! strcmp(najitool_command, "rndlines") )
+                rndlines(row.string, processing_output_file_path);
+
+
                 else if (! strcmp(najitool_command, "rndtfile") )
                     rndtfile(row.string, atol(parameter_1_string));
 
@@ -1195,6 +1208,12 @@ class tab_batch : Tab
 
                 else if (! strcmp(najitool_command, "skpxdigt") )
                     skpxdigt(row.string, processing_output_file_path);
+
+                else if (! strcmp(najitool_command, "sort") )
+                    sort(row.string, processing_output_file_path);
+
+                else if (! strcmp(najitool_command, "sortlast") )
+                    sortlast(row.string, processing_output_file_path);
 
                 else if (! strcmp(najitool_command, "strachar") )
                     strachar(parameter_1_string, row.string, processing_output_file_path);
@@ -4262,5 +4281,18 @@ class tab_batch : Tab
         help_edit_box.AddCh(str[l-1]);
 
     }
+
+void howline(char *namein)
+{
+
+    help_edit_box.Printf("\n%s\nTotal number of lines is: %lu\n", namein, howl(namein));
+}                                                                     
+
+void longline(char *namein)
+{
+    help_edit_box.Printf("\n%s\nLongest line is: %lu\n", namein, longl(namein));
+}                                                            
+      
+
 }
 

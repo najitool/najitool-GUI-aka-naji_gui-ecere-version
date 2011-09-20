@@ -3494,6 +3494,46 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
     },
 
     {
+        "howline",
+        false, // in file 1 but
+        false, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        true, // out file 1 but
+        true, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        true, // param 1 label
+        true, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+        
+        "Counts how many lines there are in a text file\n"
+        "and and displays the number to the screen.\n"
+        "Specify input file.",
+
+        "Parameter 1:",
+        "Parameter 2:",
+
+        "Kac satir bir metin dosyasi sayar ve ekrana sayisini gosterir.\n"
+        "Okunan dosyalari belirt.",
+
+        "Parametre 1:",
+        "Parametre 2:"
+    },
+
+    {
         "kitten",
         false, // in file 1 but
         false, // in file 1 box
@@ -3797,6 +3837,18 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
         "Parametre 2:"
     },
 
+
+
+
+
+
+
+
+
+
+
+
+
     {
         "license",
         true, // in file 1 but
@@ -3832,6 +3884,62 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
         "Parametre 1:",
         "Parametre 2:"
     },
+
+
+
+
+
+
+
+{
+        "lineback",
+
+        false,
+        false,
+
+        true,
+        true,
+
+        true,
+        true,
+
+        false,
+        false,
+
+        true,
+        true,
+
+        true,
+        true,
+
+        true,
+        true,
+
+        true,
+        true,
+
+        "Copies lines in a text file backwards starting from the\n"
+        "last line up to the first line, to a new text file.\n"
+        "Specify input file and output file.",
+
+        "Parameter 1:",
+        "Parameter 2:",
+
+        "Bir metin dosyasini kopyalar satirlarini geriye dogru,\n"
+        "yeni bir metin dosyasina, ilk satirdan son satira kadar.\n"
+        "Okunan ve yazilan dosyayi belirt.",
+
+        "Parametre 1:",
+        "Parametre 2:"
+    },
+
+    
+
+
+
+
+
+
 
     {
         "linesnip",
@@ -3871,6 +3979,48 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
     },
 
     {
+        "longline",
+        false, // in file 1 but
+        false, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        true, // out file 1 but
+        true, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        true, // param 1 label
+        true, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+        
+        "Finds the longest line in a text file\n"
+        "and displays the number to the screen.\n"
+        "Specify input file.",
+
+        "Parameter 1:",
+        "Parameter 2:",
+
+        "Bir metin dosyasi icinde en uzun satir bulur ve\n"
+        "ekrana sayisini gosterir. Okunan dosyalari belirt.",
+
+        "Parametre 1:",
+        "Parametre 2:"
+    },
+    
+
+
+    {
         "makarray",
         false, // in file 1 but
         false, // in file 1 box
@@ -3907,6 +4057,11 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
         "Parametre 2:"
 
     },
+
+
+
+
+
 
     {
         "mathgame",
@@ -5835,6 +5990,57 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
 
     },
 
+
+
+        {
+        "rndlines",
+
+        false,
+        false,
+
+        true,
+        true,
+
+        true,
+        true,
+
+        false,
+        false,
+
+        true,
+        true,
+
+        true,
+        true,
+
+        true,
+        true,
+
+        true,
+        true,
+
+        "Makes a copy of a text file randomizing/shuffling lines.\n"
+        "Specify input file and output file.",
+
+        "Parameter 1:",
+        "Parameter 2:",
+
+        "Rastgele karistirarak satirlari bir metin dosyasinin kopyasini yapar.\n"
+        "Okunan ve yazilan dosyayi belirt.",
+
+        "Parametre 1:",
+        "Parametre 2:"
+    },
+
+
+
+
+
+
+
+
+
+
     {
         "rndtfile",
         true, // in file 1 but
@@ -6772,6 +6978,102 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
         "Parametre 1:",
         "Parametre 2:"
     },
+
+
+
+
+
+
+
+
+
+    {
+        "sort",
+        false, // in file 1 but
+        false, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        false, // out file 1 but
+        false, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        true, // param 1 label
+        true, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+        "Makes a copy of a text file sorting each line in according to ASCII value.\n"
+        "Specify input file and output file.",
+
+        "Parameter 1:",
+        "Parameter 2:",
+
+        "ASCII degerine gore, her satiri siralar bir metin dosyasini kopyalarak.\n"
+        "Okunan dosyayi ve yazilan dosyayi belirt.",
+
+        "Parametre 1:",
+        "Parametre 2:"
+    },
+
+
+
+    {
+        "sortlast",
+        false, // in file 1 but
+        false, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        false, // out file 1 but
+        false, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        true, // param 1 label
+        true, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+        "Makes a copy of a text file sorting each line in according to ASCII value - backwards.\n"
+        "Specify input file and output file.",
+
+        "Parameter 1:",
+        "Parameter 2:",
+
+        "ASCII degerine gore - tersce, her satiri siralar bir metin dosyasini kopyalarak.\n"
+        "Okunan dosyayi ve yazilan dosyayi belirt.",
+
+        "Parametre 1:",
+        "Parametre 2:"
+    },
+
+
+
+
+
+
+
+
+
+
 
     {
         "strachar",
