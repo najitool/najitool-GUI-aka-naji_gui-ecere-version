@@ -1302,6 +1302,9 @@ class tab_batch : Tab
                     return true;
                 }
 
+                else if (! strcmp(najitool_command, "weakrypt") )
+                    weakrypt(parameter_1_string, row.string, processing_output_file_path);
+
                 else if (! strcmp(najitool_command, "wordline") )
                     wordline(row.string, processing_output_file_path);
 

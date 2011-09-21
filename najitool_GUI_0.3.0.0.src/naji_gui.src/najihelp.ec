@@ -518,13 +518,15 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
         true,
 
         "Makes a compilable C programming language source code file\n"
-        "of any file with the contents of the file in an array.",
+        "out of any file with the contents of the file in an array.\n"
+        "Specify input, output file, and array name.",
 
-        "Array Name",
+        "Array Name:",
         "Parameter 2:",
 
         "C programlama dilinde kod yapiyor her hangi bir dosyadan\n"
-        "ve o dosyanin icindekilerinden bir C array yapiyor.",
+        "ve o dosyanin icindekilerinden bir C array yapiyor.\n"
+        "Okunan, yazilan dosyalari, ve Array isim belirt.",
 
         "C Array Isim:",
         "Parametre 2:"
@@ -7906,6 +7908,60 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
         "Parameter 2:"
 
     },
+
+
+
+
+
+{
+        "weakrypt",
+
+        false,
+        false,
+
+        true,
+        true,
+
+        true,
+        true,
+
+        false,
+        false,
+
+        true,
+        true,
+
+        true,
+        true,
+
+        false,
+        false,
+
+        true,
+        true,
+
+        "A weak file encryption function, the same function\n"
+        "does both encryption and decryption with a password.\n"
+        "Specify input, output file, and password.",
+
+        "Password:",
+        "Parameter 2:",
+
+        "Zayif bir dosya sifreleme fonksiyonu, ayni fonksiyon\n"
+        "hem sifreleme hem de cozme yapiyor bir sifre ile.\n"
+        "Yazilan, Okunan dosylari, ve sifreyi belirt.",
+
+        "Sifre:",
+        "Parametre 2:"
+
+    },
+    
+
+
+
+
+
+
 
     {
         "wordline",

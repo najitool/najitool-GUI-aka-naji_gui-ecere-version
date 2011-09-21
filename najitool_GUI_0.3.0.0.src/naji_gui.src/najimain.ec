@@ -1218,6 +1218,9 @@ class tab_main : Tab
                 vowelwrd(parameter_1_string);
             }
 
+            else if (!strcmp(najitool_command, "weakrypt"))
+                weakrypt(parameter_1_string, input_file_1_path, output_file_1_path);
+
             else if (!strcmp(najitool_command, "wordline"))
                 wordline(input_file_1_path, output_file_1_path);
 
