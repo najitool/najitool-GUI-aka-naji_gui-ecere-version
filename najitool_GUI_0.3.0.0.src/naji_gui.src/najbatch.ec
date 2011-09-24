@@ -14,9 +14,9 @@ import "najiform"
 class tab_batch : Tab
 {
     text = "Batch";
+    background = { r = 110, g = 161, b = 180 };
     font = { "Verdana", 8.25f, bold = true };
     size = { 1280, 1024 };
-    background = { r = 110, g = 161, b = 180 };
 
     char add_file_path[MAX_LOCATION];
     char add_folder_path[MAX_LOCATION];
@@ -38,36 +38,45 @@ class tab_batch : Tab
     char newfilesuffix[4096];
     char newfileextrax[4096];
     char temp_edit_delete[MAX_LOCATION+4096];
-    int temp_len;
-    temp_len = 0;
-
     najitool_languages lang;
     batchfilenumber=0;
     batchfilemaxitems=0;
 
     DataRow row;
+    DataRow outdir_row;
+    DataRow outfiles_row;
 
-    void addfilestolistbox(char * path, ListBox listbox)
+    void addfilestolistbox(char * indir, char * outdir, ListBox listbox)
     {
-        FileListing listing { path };
+
+        FileListing listing { indir };
+
+
+        if (strcmp(outdir, ""))
+            outdir_list_box.AddString(outdir);
 
         while (listing.Find())
         {
-            if (listing.stats.attribs.isDirectory)
-                addfilestolistbox(listing.path, listbox);
+            char location[MAX_LOCATION];
+            strcpy(location, outdir);
+            PathCat(location, listing.name);
 
+            if (listing.stats.attribs.isDirectory)
+                addfilestolistbox(listing.path, location, listbox);
             else
             {
                 listbox.AddString(listing.path);
+                outfiles_list_box.AddString(location);
 
                 batchfilemaxitems++;
             }
         }
-
     }
 
-    EditBox new_files_extra_extension_edit_box { this, text = "new_files_extra_extension_edit_box", size = { 94, 19 }, position = { 896, 400 } };
-    Label help_label { this, text = "Help/Output:", size = { 89, 16 }, position = { 288, 680 } };
+    ListBox outdir_list_box { this, text = "outdir_list_box", size = { 20, 8 }, position = { 8, 312 }, visible = false };
+    ListBox outfiles_list_box { this, text = "outfiles_list_box", size = { 20, 8 }, position = { 32, 312 }, visible = false };
+    EditBox new_files_extra_extension_edit_box { this, text = "new_files_extra_extension_edit_box", size = { 160, 19 }, position = { 920, 544 } };
+    Label help_label { this, text = "Help/Output:", size = { 89, 16 }, position = { 200, 808 } };
     Label najitool_homepage_label
     {
         this, text = "http://najitool.sf.net/", foreground = blue, font = { "Verdana", 8.25f, bold = true, underline = true }, position = { 16, 8 }, cursor = ((GuiApplication)__thisModule).GetCursor(hand);
@@ -84,7 +93,7 @@ class tab_batch : Tab
     Label category_label { this, text = "Category:", position = { 8, 216 } };
     Button credits_button
     {
-        this, text = "Credits", size = { 75, 25 }, position = { 832, 672 };
+        this, text = "Credits", size = { 75, 25 }, position = { 912, 808 };
 
         bool NotifyClicked(Button button, int x, int y, Modifiers mods)
         {
@@ -95,7 +104,7 @@ class tab_batch : Tab
     };
     Button license_button
     {
-        this, text = "License", size = { 75, 25 }, position = { 744, 672 };
+        this, text = "License", size = { 75, 25 }, position = { 824, 808 };
 
         bool NotifyClicked(Button button, int x, int y, Modifiers mods)
         {
@@ -107,7 +116,7 @@ class tab_batch : Tab
     };
     Button close_button
     {
-        this, text = "Close", size = { 75, 25 }, position = { 920, 672 };
+        this, text = "Close", size = { 75, 25 }, position = { 1000, 808 };
 
         bool NotifyClicked(Button button, int x, int y, Modifiers mods)
         {
@@ -117,7 +126,7 @@ class tab_batch : Tab
     };
     Button add_file_button
     {
-        this, text = "Add File:", size = { 106, 20 }, position = { 288, 328 };
+        this, text = "Add File:", size = { 106, 20 }, position = { 200, 472 };
 
         bool NotifyClicked(Button button, int x, int y, Modifiers mods)
         {
@@ -131,14 +140,15 @@ class tab_batch : Tab
                     add_file_edit_box.contents = add_file_dialog.filePath;
 
                     if (!strcmp(najitool_language, "English"))
-                        sprintf(tempbuffer, "%i files in list.", batchfilemaxitems+1);
+                        sprintf(tempbuffer, "%i files in list.", batchfilemaxitems);
 
                     else if (!strcmp(najitool_language, "Turkish"))
-                        sprintf(tempbuffer, "%i dosyalar listede.", batchfilemaxitems+1);
+                        sprintf(tempbuffer, "%i dosyalar listede.", batchfilemaxitems);
 
                     msgbox(tempbuffer, tempbuffer);
 
                     najbatch_list_box.AddString(add_file_edit_box.contents);
+                    outfiles_list_box.AddString(add_file_edit_box.contents);
 
                     batchfilemaxitems++;
                 }
@@ -148,7 +158,7 @@ class tab_batch : Tab
     };
     ListBox najbatch_list_box
     {
-        this, text = "najbatch_list_box", size = { 702, 314 }, position = { 288, 8 }, dontHideScroll = true, hasHorzScroll = true, hasVertScroll = true, resizable = true, firstField.width = MAX_LOCATION + MAX_LOCATION / 2;
+        this, text = "najbatch_list_box", size = { 878, 458 }, position = { 200, 8 }, hasHorzScroll = true, dontHideScroll = true, resizable = true, firstField.width = MAX_LOCATION + MAX_LOCATION / 2;;;
 
         bool NotifySelect(ListBox listBox, DataRow row, Modifiers mods)
         {
@@ -158,7 +168,7 @@ class tab_batch : Tab
     };
     Button add_folder_button
     {
-        this, text = "Add Folder:", size = { 106, 20 }, position = { 288, 352 };
+        this, text = "Add Folder:", size = { 106, 20 }, position = { 200, 496 };
 
         bool NotifyClicked(Button button, int x, int y, Modifiers mods)
         {
@@ -170,10 +180,10 @@ class tab_batch : Tab
                 strcpy(add_folder_path, add_folder_dialog.filePath);
                 add_folder_edit_box.contents = add_folder_dialog.filePath;
 
-                addfilestolistbox(add_folder_path, najbatch_list_box);
+                addfilestolistbox(add_folder_path, "", najbatch_list_box);
 
                 if (!strcmp(najitool_language, "English"))
-                    sprintf(tempbuffer, "%i files in list.", batchfilemaxitems+1);
+                    sprintf(tempbuffer, "%i files in list.", batchfilemaxitems);
 
                 else if (!strcmp(najitool_language, "Turkish"))
                     sprintf(tempbuffer, "%i dosyalar listede.", batchfilemaxitems+1);
@@ -185,7 +195,7 @@ class tab_batch : Tab
     };
     Button output_folder_radio
     {
-        this, text = "Output Folder:", size = { 119, 15 }, position = { 464, 376 }, isRadio = true;
+        this, text = "Output Folder:", size = { 119, 15 }, position = { 368, 520 }, isRadio = true;
 
         bool NotifyClicked(Button button, int x, int y, Modifiers mods)
         {
@@ -203,7 +213,7 @@ class tab_batch : Tab
     };
     EditBox add_file_edit_box
     {
-        this, text = "add_file_edit_box", size = { 598, 19 }, position = { 392, 328 }, readOnly = true, maxNumLines = 1;
+        this, text = "add_file_edit_box", size = { 774, 19 }, position = { 304, 472 }, readOnly = true, maxNumLines = 1;
 
         bool NotifyModified(EditBox editBox)
         {
@@ -214,7 +224,7 @@ class tab_batch : Tab
     };
     EditBox add_folder_edit_box
     {
-        this, text = "add_folder_edit_box", size = { 598, 19 }, position = { 392, 352 }, readOnly = true, maxNumLines = 1;
+        this, text = "add_folder_edit_box", size = { 774, 19 }, position = { 304, 496 }, readOnly = true, maxNumLines = 1;
 
         bool NotifyModified(EditBox editBox)
         {
@@ -226,7 +236,7 @@ class tab_batch : Tab
     };
     EditBox output_folder_edit_box
     {
-        this, text = "output_folder_edit_box", size = { 238, 19 }, position = { 592, 376 }, maxNumLines = 1;
+        this, text = "output_folder_edit_box", size = { 430, 19 }, position = { 488, 520 }, maxNumLines = 1;
 
         bool NotifyModified(EditBox editBox)
         {
@@ -234,16 +244,16 @@ class tab_batch : Tab
             return true;
         }
     };
-    Button remake_folder_tree_check_box { this, text = "Remake Folder Tree", background = white, position = { 840, 376 }, isCheckbox = true };
-    EditBox new_files_prefix_edit_box { this, text = "new_files_prefix_edit_box", size = { 94, 19 }, position = { 400, 400 } };
-    Label new_files_prefix_label { this, text = "New Files Prefix:", position = { 288, 400 } };
-    EditBox new_files_suffix_edit_box { this, text = "new_files_suffix_edit_box", size = { 94, 19 }, position = { 616, 400 } };
-    Label new_files_extra_extension_label { this, text = "New Files Extra Extension:", position = { 720, 400 } };
-    Label new_files_suffix_label { this, text = "New Files Suffix:", position = { 504, 400 } };
-    Button same_folder_as_files_radio { this, text = "Same Folder As Files", size = { 167, 15 }, position = { 288, 376 }, isRadio = true };
+    Button remake_folder_tree_check_box { this, text = "Remake Folder Tree", background = white, position = { 920, 520 }, isCheckbox = true };
+    EditBox new_files_prefix_edit_box { this, text = "new_files_prefix_edit_box", size = { 178, 19 }, position = { 312, 544 } };
+    Label new_files_prefix_label { this, text = "New Files Prefix:", position = { 200, 544 } };
+    EditBox new_files_suffix_edit_box { this, text = "new_files_suffix_edit_box", size = { 132, 19 }, position = { 608, 544 } };
+    Label new_files_extra_extension_label { this, text = "New Files Extra Extension:", position = { 744, 544 } };
+    Label new_files_suffix_label { this, text = "New Files Suffix:", position = { 496, 544 } };
+    Button same_folder_as_files_radio { this, text = "Same Folder As Files", size = { 167, 15 }, position = { 200, 520 }, isRadio = true };
     EditBox parameter_1_edit_box
     {
-        this, text = "parameter_1_edit_box", size = { 350, 19 }, position = { 288, 448 }, maxNumLines = 1;
+        this, text = "parameter_1_edit_box", size = { 440, 19 }, position = { 200, 584 }, maxNumLines = 1;
 
         bool NotifyModified(EditBox editBox)
         {
@@ -255,7 +265,7 @@ class tab_batch : Tab
     };
     EditBox parameter_2_edit_box
     {
-        this, text = "parameter_2_edit_box", size = { 350, 19 }, position = { 640, 448 }, maxNumLines = 1;
+        this, text = "parameter_2_edit_box", size = { 440, 19 }, position = { 640, 584 }, maxNumLines = 1;
 
         bool NotifyModified(EditBox editBox)
         {
@@ -267,7 +277,7 @@ class tab_batch : Tab
     };
     Label parameter_2_label
     {
-        this, text = "Parameter 2:", position = { 640, 424 };
+        this, text = "Parameter 2:", position = { 640, 568 };
 
         bool NotifyActivate(Window window, bool active, Window previous)
         {
@@ -277,7 +287,7 @@ class tab_batch : Tab
     };
     Label parameter_1_label
     {
-        this, text = "Parameter 1:", position = { 288, 432 };
+        this, text = "Parameter 1:", position = { 200, 568 };
 
         bool NotifyActivate(Window window, bool active, Window previous)
         {
@@ -339,11 +349,11 @@ class tab_batch : Tab
     }
     EditBox help_edit_box
     {
-        this, text = "help_edit_box", font = { "Courier New", 8 }, size = { 702, 198 }, position = { 288, 472 }, hasHorzScroll = true, true, true, true, true, readOnly = true, true, noCaret = true
+        this, text = "help_edit_box", font = { "Courier New", 8 }, size = { 878, 190 }, position = { 200, 608 }, hasHorzScroll = true, true, true, true, true, readOnly = true, true, noCaret = true
                                          };
     Button process_button
     {
-        this, text = "Process", size = { 80, 25 }, position = { 648, 672 };
+        this, text = "Process", size = { 80, 25 }, position = { 728, 808 };
 
         bool NotifyClicked(Button button, int x, int y, Modifiers mods)
         {
@@ -378,6 +388,13 @@ class tab_batch : Tab
                 return true;
             }
 
+            outfiles_row = outfiles_list_box.firstRow;
+
+            if (outfiles_row == null)
+            {
+                return true;
+            }
+
             for (; row; row = row.next)
             {
 
@@ -408,17 +425,69 @@ class tab_batch : Tab
                         return true;
                     }
 
-                    strcpy(temp_path, output_folder_edit_box.contents);
+                    if (remake_folder_tree_check_box.checked == false)
+                    {
 
-                    strcpy(tempbuffer, row.string);
-                    GetLastDirectory(tempbuffer, temp_filename);
+                        strcpy(temp_path, output_folder_edit_box.contents);
 
-                    strcpy(tempbuffer, temp_filename);
+                        strcpy(tempbuffer, row.string);
+                        GetLastDirectory(tempbuffer, temp_filename);
 
-                    strcpy(temp_filename_no_extension, tempbuffer);
-                    StripExtension(temp_filename_no_extension);
+                        strcpy(tempbuffer, temp_filename);
 
-                    GetExtension(temp_filename, temp_extension);
+                        strcpy(temp_filename_no_extension, tempbuffer);
+                        StripExtension(temp_filename_no_extension);
+
+                        GetExtension(temp_filename, temp_extension);
+                    }
+
+
+                    else
+                    {
+
+                        if (outfiles_row == null)
+                        {
+                            break;
+                        }
+
+                        outdir_row = outdir_list_box.firstRow;
+
+                        if (outdir_row == null)
+                        {
+                            return true;
+                        }
+
+                        for (; outdir_row; outdir_row = outdir_row.next)
+                        {
+                            strcpy(tempbuffer, output_folder_edit_box.contents);
+                            PathCat(tempbuffer, outdir_row.string);
+                            MakeDir(tempbuffer);
+                        }
+
+                        strcpy(tempbuffer, output_folder_edit_box.contents);
+
+                        PathCat(tempbuffer, outfiles_row.string);
+
+                        StripLastDirectory(tempbuffer, temp_path);
+
+                        strcpy(tempbuffer, outfiles_row.string);
+                        GetLastDirectory(tempbuffer, temp_filename);
+
+                        strcpy(tempbuffer, temp_filename);
+
+                        strcpy(temp_filename_no_extension, tempbuffer);
+                        StripExtension(temp_filename_no_extension);
+
+                        GetExtension(temp_filename, temp_extension);
+
+                        outfiles_row = outfiles_row.next;
+
+                    }
+
+
+
+
+
                 }
 
                 if (!strcmp(newfileprefix, "") &&
@@ -523,820 +592,7 @@ class tab_batch : Tab
 
                 //msgbox(processing_output_file_path, processing_output_file_path);
                 //help_edit_box.AddS(processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "8bit256") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "addim") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "allfiles") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "allbmp16") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "arab2eng") )
-                    arab2eng(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "asc2ebc") )
-                    asc2ebc(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "asctable") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "ay") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "ayinkaci") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "bigascif") )
-                {
-                    notbatch();
-                    return true;
-                }
-                else if (! strcmp(najitool_command, "bigascii") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "bin2c") )
-                    bin2c(row.string, processing_output_file_path, parameter_1_string);
-
-                else if (! strcmp(najitool_command, "bin2hexi") )
-                    bin2hexi(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "bin2text") )
-                    bin2text(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "blanka") )
-                    blanka(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "bremline") )
-                    bremline(parameter_1_string, row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "bugun") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "calc") )
-                {
-                    najicalc naji_calc {};
-                    naji_calc.Modal();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "cat_head") )
-                    cat_head(row.string, atoi(parameter_1_string));
-
-                else if (! strcmp(najitool_command, "cat_tail") )
-                    cat_tail(row.string, atoi(parameter_1_string));
-
-                else if (! strcmp(najitool_command, "cat_text") )
-                    cat_text(row.string);
-
-                else if (! strcmp(najitool_command, "catrandl") )
-                    catrandl(row.string);
-
-                else if (! strcmp(najitool_command, "ccompare") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "cfind") )
-                    cfind(row.string, parameter_1_string);
-
-                else if (! strcmp(najitool_command, "cfindi") )
-                    cfindi(row.string, parameter_1_string);
-
-                else if (! strcmp(najitool_command, "charaftr") )
-                    charaftr(row.string, processing_output_file_path, parameter_1_string[0]);
-
-                else if (! strcmp(najitool_command, "charbefr") )
-                    charbefr(row.string, processing_output_file_path, parameter_1_string[0]);
-
-                else if (! strcmp(najitool_command, "charfile") )
-                    charfile(processing_output_file_path, atoi(parameter_2_string), parameter_1_string[0]);
-
-                else if (! strcmp(najitool_command, "charsort") )
-                    charsort(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "charwrap") )
-                    charwrap(atoi(parameter_1_string), row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "chchar") )
-                    chchar(row.string, processing_output_file_path, parameter_1_string[0], parameter_2_string[0]);
-
-                else if (! strcmp(najitool_command, "chchars") )
-                    chchars(row.string, processing_output_file_path, parameter_1_string, parameter_2_string);
-
-                else if (! strcmp(najitool_command, "chstr") )
-                    chstr(row.string, processing_output_file_path, parameter_1_string, parameter_2_string);
-
-                else if (! strcmp(najitool_command, "coffset") )
-                    coffset(row.string, atoi(parameter_1_string), atoi(parameter_2_string));
-
-                else if (! strcmp(najitool_command, "compare") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "copyfile") )
-                    copyfile(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "copyoffs") )
-                    copyoffs(row.string, atoi(parameter_1_string), atoi(parameter_2_string), processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "copyself") )
-                {
-                    notbatch();
-                }
-
-                else if (! strcmp(najitool_command, "cpfroml") )
-                    cpfroml(atol(parameter_1_string), row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "cptiline") )
-                    cptiline(atol(parameter_1_string), row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "credits") )
-                {
-                    najitool_gui_credits();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "database") )
-                {
-                    tabdatabase.SelectTab();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "datetime") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "dayofmon") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "dos2unix") )
-                    dos2unix(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "downlist") )
-                    downlist(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "dumpoffs") )
-                    dumpoffs(row.string, atoi(parameter_1_string), atoi(parameter_2_string));
-
-                else if (! strcmp(najitool_command, "e2ahtml") )
-                    e2ahtml(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "ebc2asc") )
-                    ebc2asc(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "eng2arab") )
-                    eng2arab(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "engnum") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "eremline") )
-                    eremline(parameter_1_string, row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "f2lower") )
-                    f2lower(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "f2upper") )
-                    f2upper(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "filebreed") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "file2bin") )
-                    file2bin(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "file2dec") )
-                    file2dec(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "file2hex") )
-                    file2hex(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "file2oct") )
-                    file2oct(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "filechop") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "filejoin") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "fillfile") )
-                {
-                    sprintf(temp_edit_delete, "Are you sure you want to continue? this will overwrite ALL the characters in the file:\n%s\n\nWith the character %c and the old data WILL NOT be recoverable.\n", row.string, parameter_1_string[0]);
-
-                    if (msgboxyesno("najitool GUI fillfile confirmation", temp_edit_delete) == yes)
-                    {
-                        fillfile(row.string, parameter_1_string[0]);
-                    }
-
-                }
-
-                else if (! strcmp(najitool_command, "find") )
-                    find(row.string, parameter_1_string);
-
-                else if (! strcmp(najitool_command, "findi") )
-                    findi(row.string, parameter_1_string);
-
-                else if (! strcmp(najitool_command, "flipcopy") )
-                    flipcopy(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "freverse") )
-                    freverse(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "fswpcase") )
-                    fswpcase(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "ftothe") )
-                    ftothe(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "genhelp") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "genlic") )
-                    naji_genlic(processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "getlinks") )
-                    getlinks(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "gdivide") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "gigabyte") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "gminus") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "gplus") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "gtimes") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                // help
-
-                else if (! strcmp(najitool_command, "hexicat") )
-                    hexicat(row.string);
-
-                else if (! strcmp(najitool_command, "hilist") )
-                    hilist(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "hmaker") )
-                    hmaker(row.string);
-
-                else if (! strcmp(najitool_command, "hmakerf") )
-                    hmakerf(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "html_db") )
-                {
-                    naji_db_html_selected = true;
-                    tabdatabase.SelectTab();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "html2txt") )
-                    html2txt(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "htmlfast") )
-                    htmlfast(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "htmlhelp") )
-                {
-                    notbatch();
-                    return true;
-                }
-               
-                else if (! strcmp(najitool_command, "howline") )
-                    howline(row.string);
-
-                else if (! strcmp(najitool_command, "kitten") )
-                    kitten(row.string);
-
-                else if (! strcmp(najitool_command, "lcharvar") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "lcvfiles") )
-                    lcvfiles(row.string, output_folder_path);
-
-                else if (! strcmp(najitool_command, "leetfile") )
-                    leetfile(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "leetstr") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "length") )
-                {
-                    tablength.SelectTab();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "lensortl") )
-                    lensortl(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "lensorts") )
-                    lensorts(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "license") )
-                {
-                    najitool_gui_license();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "linesnip") )
-                    linesnip(atoi(parameter_1_string), row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "lineback") )
-                    lineback(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "longline") )
-                    longline(row.string);
-                
-                else if (! strcmp(najitool_command, "makarray") )
-                    makarray(row.string, processing_output_file_path, parameter_1_string);
-
-                else if (! strcmp(najitool_command, "mathgame") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "maxxnewl") )
-                    maxxnewl(row.string, processing_output_file_path, atoi(parameter_1_string));
-
-                else if (! strcmp(najitool_command, "mergline") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "mkpatch") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "month") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "mp3split") )
-                    mp3split(row.string, processing_output_file_path, atoi(parameter_1_string), atoi(parameter_2_string));
-
-                else if (! strcmp(najitool_command, "mp3taged") )
-                {
-
-                    if (!strcmp(najitool_language, "English"))
-                        msgbox("najitool GUI mp3taged information", "Sorry the mp3 tag editor is not implemented in this version because it has bugs which need to be fixed first.");
-                    else if (!strcmp(najitool_language, "Turkish"))
-                        msgbox("najitool GUI mp3taged bilgi", "Maalesef mp3 tag editoru bu verisyon icinde uygulanmadi cunku oncelikle duzeltilmesi gereken hatalar var.");
-
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "mp3tagnf") )
-                {
-                    mp3info_gui(row.string);
-                }
-
-                else if (! strcmp(najitool_command, "n2ch") )
-                    n2ch(parameter_1_string[0], row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "n2str") )
-                    n2str(parameter_1_string, row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "najcrypt") )
-                {
-                    tabcrypt.SelectTab();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "naji_bmp") )
-                    naji_bmp(output_folder_path);
-
-                else if (! strcmp(najitool_command, "najirle") )
-                    najirle(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "najisum") )
-                    najisum(row.string);
-
-                else if (! strcmp(najitool_command, "numlines") )
-                    numlines(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "onlalnum") )
-                    onlalnum(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "onlalpha") )
-                    onlalpha(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "onlcntrl") )
-                    onlcntrl(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "onldigit") )
-                    onldigit(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "onlgraph") )
-                    onlgraph(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "onllower") )
-                    onllower(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "onlprint") )
-                    onlprint(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "onlpunct") )
-                    onlpunct(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "onlspace") )
-                    onlspace(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "onlupper") )
-                    onlupper(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "onlxdigt") )
-                    onlxdigt(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "onlycat") )
-                    onlycat(row.string, parameter_1_string);
-
-                else if (! strcmp(najitool_command, "onlychar") )
-                    onlychar(row.string, processing_output_file_path, parameter_1_string);
-
-                else if (! strcmp(najitool_command, "patch") )
-                {
-                    tabpatch.SelectTab();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "printftx") )
-                    printftx(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "putlines") )
-                    putlines(row.string, processing_output_file_path, parameter_1_string, parameter_2_string);
-
-                else if (! strcmp(najitool_command, "qcrypt") )
-                    qcrypt(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "qpatch") )
-                    qpatch(processing_output_file_path, row.string);
-
-                else if (! strcmp(najitool_command, "randkill") )
-                {
-                    sprintf(temp_edit_delete, "Are you sure you want to unrecoverabley delete the file:\n%s", row.string);
-
-                    if (msgboxyesno("najitool GUI randkill confirmation", temp_edit_delete) == yes)
-                    {
-                        randkill(row.string);
-                    }
-                }
-
-                else if (! strcmp(najitool_command, "rbcafter") )
-                    rbcafter(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "rbcbefor") )
-                    rbcbefor(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "rcharvar") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "rcvfiles") )
-                    rcvfiles(row.string, output_folder_path);
-
-                else if (! strcmp(najitool_command, "remline") )
-                    remline(parameter_1_string, row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "repcat") )
-                    repcat(row.string, atoi(parameter_1_string));
-
-                else if (! strcmp(najitool_command, "repcatpp") )
-                    repcatpp(row.string, atoi(parameter_1_string));
-
-                else if (! strcmp(najitool_command, "repchar") )
-                    repchar(row.string, processing_output_file_path, atoi(parameter_1_string));
-
-                else if (! strcmp(najitool_command, "repcharp") )
-                    repcharp(row.string, processing_output_file_path, atoi(parameter_1_string));
-
-                else if (! strcmp(najitool_command, "revcat") )
-                    revcat(row.string);
-
-                else if (! strcmp(najitool_command, "revlines") )
-                    revlines(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "rmunihtm") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "rndbfile") )
-                    rndbfile(row.string, atol(parameter_1_string));
-
-                else if (! strcmp(najitool_command, "rndbsout") )
-                    rndbsout(atol(parameter_1_string));
-
-                else if (! strcmp(najitool_command, "rndffill") )
-                {
-
-                    sprintf(temp_edit_delete, "Are you sure you want to continue? this will overwrite ALL the characters in the file:\n%s\n\nWith random characters and the old data WILL NOT be recoverable.\n", row.string);
-
-                    if (msgboxyesno("najitool GUI fillfile confirmation", temp_edit_delete) == yes)
-                    {
-                        rndffill(row.string);
-                    }
-
-                }
-
-                else if (! strcmp(najitool_command, "rndlines") )
-                rndlines(row.string, processing_output_file_path);
-
-
-                else if (! strcmp(najitool_command, "rndtfile") )
-                    rndtfile(row.string, atol(parameter_1_string));
-
-                else if (! strcmp(najitool_command, "rndtsout") )
-                    rndtsout(atol(parameter_1_string));
-
-                else if (! strcmp(najitool_command, "rrrchars") )
-                    rrrchars(row.string, processing_output_file_path, atoi(parameter_1_string), atoi(parameter_2_string));
-
-                else if (! strcmp(najitool_command, "rstrach") )
-                    rstrach(atoi(parameter_1_string), row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "rstrbch") )
-                    rstrbch(atoi(parameter_1_string), row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "rtcafter") )
-                    rtcafter(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "rtcbefor") )
-                    rtcbefor(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "saat") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "saatarih") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "showline") )
-                    showline(row.string, atoi(parameter_1_string));
-
-                else if (! strcmp(najitool_command, "skipcat") )
-                    skipcat(row.string, parameter_1_string);
-
-                else if (! strcmp(najitool_command, "skipchar") )
-                    skipchar(row.string, processing_output_file_path, parameter_1_string);
-
-                else if (! strcmp(najitool_command, "skipstr") )
-                    skipstr(row.string, processing_output_file_path, parameter_1_string);
-
-                else if (! strcmp(najitool_command, "skpalnum") )
-                    skpalnum(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "skpalpha") )
-                    skpalpha(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "skpcntrl") )
-                    skpcntrl(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "skpdigit") )
-                    skpdigit(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "skpgraph") )
-                    skpgraph(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "skplower") )
-                    skplower(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "skpprint") )
-                    skpprint(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "skppunct") )
-                    skppunct(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "skpspace") )
-                    skpspace(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "skpupper") )
-                    skpupper(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "skpxdigt") )
-                    skpxdigt(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "sort") )
-                    sort(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "sortlast") )
-                    sortlast(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "strachar") )
-                    strachar(parameter_1_string, row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "strbchar") )
-                    strbchar(parameter_1_string, row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "strbline") )
-                    strbline(row.string, processing_output_file_path, parameter_1_string);
-
-                else if (! strcmp(najitool_command, "streline") )
-                    streline(row.string, processing_output_file_path, parameter_1_string);
-
-                else if (! strcmp(najitool_command, "strfile") )
-                    strfile(processing_output_file_path, atoi(parameter_1_string), parameter_2_string);
-
-                else if (! strcmp(najitool_command, "swapfeb") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "systemdt") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "tabspace") )
-                    tabspace(atoi(parameter_1_string), row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "telltime") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "today") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "tothe") )
-                {
-                    tothe(parameter_1_string);
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "ttt") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "turnum") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "txt2html") )
-                    txt2html(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "unihtml") )
-                    naji_gen_unicode_html_pages(output_folder_path);
-
-                else if (! strcmp(najitool_command, "unajirle") )
-                    unajirle(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "unblanka") )
-                    unblanka(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "unix2dos") )
-                    unix2dos(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "uudecode") )
-                    uudecode(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "uuencode") )
-                    uuencode(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "vowelwrd") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "weakrypt") )
-                    weakrypt(parameter_1_string, row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "wordline") )
-                    wordline(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "wordwrap") )
-                    wordwrap(row.string, processing_output_file_path);
-
-                else if (! strcmp(najitool_command, "wrdcount") )
-                    help_edit_box.Printf("\n%s: %u", temp_filename, wrdcount(row.string));
-
-                else if (! strcmp(najitool_command, "year") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "yil") )
-                {
-                    notbatch();
-                    return true;
-                }
-
-                else if (! strcmp(najitool_command, "zerokill") )
-                {
-
-                    sprintf(temp_edit_delete, "Are you sure you want to unrecoverabley delete the file:\n%s", row.string);
-
-                    if (msgboxyesno("najitool GUI zerokill confirmation", temp_edit_delete) == yes)
-                    {
-                        zerokill(row.string);
-                    }
-
-                }
+                batch_check();
 
             }
 
@@ -1348,7 +604,6 @@ class tab_batch : Tab
 
             return true;
         }
-
     };
     DropBox category_drop_box
     {
@@ -4285,17 +3540,833 @@ class tab_batch : Tab
 
     }
 
-void howline(char *namein)
-{
+    void howline(char *namein)
+    {
 
-    help_edit_box.Printf("\n%s\nTotal number of lines is: %lu\n", namein, howl(namein));
-}                                                                     
+        help_edit_box.Printf("\n%s\nTotal number of lines is: %lu\n", namein, howl(namein));
+    }
 
-void longline(char *namein)
-{
-    help_edit_box.Printf("\n%s\nLongest line is: %lu\n", namein, longl(namein));
-}                                                            
-      
+    void longline(char *namein)
+    {
+        help_edit_box.Printf("\n%s\nLongest line is: %lu\n", namein, longl(namein));
+    }
 
+    bool batch_check(void)
+    {
+        if (! strcmp(najitool_command, "8bit256") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "addim") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "allfiles") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "allbmp16") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "arab2eng") )
+            arab2eng(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "asc2ebc") )
+            asc2ebc(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "asctable") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "ay") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "ayinkaci") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "bigascif") )
+        {
+            notbatch();
+            return true;
+        }
+        else if (! strcmp(najitool_command, "bigascii") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "bin2c") )
+            bin2c(row.string, processing_output_file_path, parameter_1_string);
+
+        else if (! strcmp(najitool_command, "bin2hexi") )
+            bin2hexi(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "bin2text") )
+            bin2text(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "blanka") )
+            blanka(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "bremline") )
+            bremline(parameter_1_string, row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "bugun") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "calc") )
+        {
+            najicalc naji_calc {};
+            naji_calc.Modal();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "cat_head") )
+            cat_head(row.string, atoi(parameter_1_string));
+
+        else if (! strcmp(najitool_command, "cat_tail") )
+            cat_tail(row.string, atoi(parameter_1_string));
+
+        else if (! strcmp(najitool_command, "cat_text") )
+            cat_text(row.string);
+
+        else if (! strcmp(najitool_command, "catrandl") )
+            catrandl(row.string);
+
+        else if (! strcmp(najitool_command, "ccompare") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "cfind") )
+            cfind(row.string, parameter_1_string);
+
+        else if (! strcmp(najitool_command, "cfindi") )
+            cfindi(row.string, parameter_1_string);
+
+        else if (! strcmp(najitool_command, "charaftr") )
+            charaftr(row.string, processing_output_file_path, parameter_1_string[0]);
+
+        else if (! strcmp(najitool_command, "charbefr") )
+            charbefr(row.string, processing_output_file_path, parameter_1_string[0]);
+
+        else if (! strcmp(najitool_command, "charfile") )
+            charfile(processing_output_file_path, atoi(parameter_2_string), parameter_1_string[0]);
+
+        else if (! strcmp(najitool_command, "charsort") )
+            charsort(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "charwrap") )
+            charwrap(atoi(parameter_1_string), row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "chchar") )
+            chchar(row.string, processing_output_file_path, parameter_1_string[0], parameter_2_string[0]);
+
+        else if (! strcmp(najitool_command, "chchars") )
+            chchars(row.string, processing_output_file_path, parameter_1_string, parameter_2_string);
+
+        else if (! strcmp(najitool_command, "chstr") )
+            chstr(row.string, processing_output_file_path, parameter_1_string, parameter_2_string);
+
+        else if (! strcmp(najitool_command, "coffset") )
+            coffset(row.string, atoi(parameter_1_string), atoi(parameter_2_string));
+
+        else if (! strcmp(najitool_command, "compare") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "copyfile") )
+            copyfile(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "copyoffs") )
+            copyoffs(row.string, atoi(parameter_1_string), atoi(parameter_2_string), processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "copyself") )
+        {
+            notbatch();
+        }
+
+        else if (! strcmp(najitool_command, "cpfroml") )
+            cpfroml(atol(parameter_1_string), row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "cptiline") )
+            cptiline(atol(parameter_1_string), row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "credits") )
+        {
+            najitool_gui_credits();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "database") )
+        {
+            tabdatabase.SelectTab();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "datetime") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "dayofmon") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "dos2unix") )
+            dos2unix(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "downlist") )
+            downlist(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "dumpoffs") )
+            dumpoffs(row.string, atoi(parameter_1_string), atoi(parameter_2_string));
+
+        else if (! strcmp(najitool_command, "e2ahtml") )
+            e2ahtml(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "ebc2asc") )
+            ebc2asc(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "eng2arab") )
+            eng2arab(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "engnum") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "eremline") )
+            eremline(parameter_1_string, row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "f2lower") )
+            f2lower(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "f2upper") )
+            f2upper(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "filebreed") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "file2bin") )
+            file2bin(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "file2dec") )
+            file2dec(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "file2hex") )
+            file2hex(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "file2oct") )
+            file2oct(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "filechop") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "filejoin") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "fillfile") )
+        {
+            sprintf(temp_edit_delete, "Are you sure you want to continue? this will overwrite ALL the characters in the file:\n%s\n\nWith the character %c and the old data WILL NOT be recoverable.\n", row.string, parameter_1_string[0]);
+
+            if (msgboxyesno("najitool GUI fillfile confirmation", temp_edit_delete) == yes)
+            {
+                fillfile(row.string, parameter_1_string[0]);
+            }
+
+        }
+
+        else if (! strcmp(najitool_command, "find") )
+            find(row.string, parameter_1_string);
+
+        else if (! strcmp(najitool_command, "findi") )
+            findi(row.string, parameter_1_string);
+
+        else if (! strcmp(najitool_command, "flipcopy") )
+            flipcopy(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "freverse") )
+            freverse(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "fswpcase") )
+            fswpcase(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "ftothe") )
+            ftothe(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "genhelp") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "genlic") )
+            naji_genlic(processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "getlinks") )
+            getlinks(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "gdivide") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "gigabyte") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "gminus") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "gplus") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "gtimes") )
+        {
+            notbatch();
+            return true;
+        }
+
+        // help
+
+        else if (! strcmp(najitool_command, "hexicat") )
+            hexicat(row.string);
+
+        else if (! strcmp(najitool_command, "hilist") )
+            hilist(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "hmaker") )
+            hmaker(row.string);
+
+        else if (! strcmp(najitool_command, "hmakerf") )
+            hmakerf(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "html_db") )
+        {
+            naji_db_html_selected = true;
+            tabdatabase.SelectTab();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "html2txt") )
+            html2txt(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "htmlfast") )
+            htmlfast(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "htmlhelp") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "howline") )
+            howline(row.string);
+
+        else if (! strcmp(najitool_command, "kitten") )
+            kitten(row.string);
+
+        else if (! strcmp(najitool_command, "lcharvar") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "lcvfiles") )
+            lcvfiles(row.string, output_folder_path);
+
+        else if (! strcmp(najitool_command, "leetfile") )
+            leetfile(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "leetstr") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "length") )
+        {
+            tablength.SelectTab();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "lensortl") )
+            lensortl(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "lensorts") )
+            lensorts(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "license") )
+        {
+            najitool_gui_license();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "linesnip") )
+            linesnip(atoi(parameter_1_string), row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "lineback") )
+            lineback(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "longline") )
+            longline(row.string);
+
+        else if (! strcmp(najitool_command, "makarray") )
+            makarray(row.string, processing_output_file_path, parameter_1_string);
+
+        else if (! strcmp(najitool_command, "mathgame") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "maxxnewl") )
+            maxxnewl(row.string, processing_output_file_path, atoi(parameter_1_string));
+
+        else if (! strcmp(najitool_command, "mergline") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "mkpatch") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "month") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "mp3split") )
+            mp3split(row.string, processing_output_file_path, atoi(parameter_1_string), atoi(parameter_2_string));
+
+        else if (! strcmp(najitool_command, "mp3taged") )
+        {
+
+            if (!strcmp(najitool_language, "English"))
+                msgbox("najitool GUI mp3taged information", "Sorry the mp3 tag editor is not implemented in this version because it has bugs which need to be fixed first.");
+            else if (!strcmp(najitool_language, "Turkish"))
+                msgbox("najitool GUI mp3taged bilgi", "Maalesef mp3 tag editoru bu verisyon icinde uygulanmadi cunku oncelikle duzeltilmesi gereken hatalar var.");
+
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "mp3tagnf") )
+        {
+            mp3info_gui(row.string);
+        }
+
+        else if (! strcmp(najitool_command, "n2ch") )
+            n2ch(parameter_1_string[0], row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "n2str") )
+            n2str(parameter_1_string, row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "najcrypt") )
+        {
+            tabcrypt.SelectTab();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "naji_bmp") )
+            naji_bmp(output_folder_path);
+
+        else if (! strcmp(najitool_command, "najirle") )
+            najirle(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "najisum") )
+            najisum(row.string);
+
+        else if (! strcmp(najitool_command, "numlines") )
+            numlines(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "onlalnum") )
+            onlalnum(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "onlalpha") )
+            onlalpha(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "onlcntrl") )
+            onlcntrl(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "onldigit") )
+            onldigit(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "onlgraph") )
+            onlgraph(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "onllower") )
+            onllower(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "onlprint") )
+            onlprint(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "onlpunct") )
+            onlpunct(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "onlspace") )
+            onlspace(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "onlupper") )
+            onlupper(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "onlxdigt") )
+            onlxdigt(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "onlycat") )
+            onlycat(row.string, parameter_1_string);
+
+        else if (! strcmp(najitool_command, "onlychar") )
+            onlychar(row.string, processing_output_file_path, parameter_1_string);
+
+        else if (! strcmp(najitool_command, "patch") )
+        {
+            tabpatch.SelectTab();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "printftx") )
+            printftx(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "putlines") )
+            putlines(row.string, processing_output_file_path, parameter_1_string, parameter_2_string);
+
+        else if (! strcmp(najitool_command, "qcrypt") )
+            qcrypt(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "qpatch") )
+            qpatch(processing_output_file_path, row.string);
+
+        else if (! strcmp(najitool_command, "randkill") )
+        {
+            sprintf(temp_edit_delete, "Are you sure you want to unrecoverabley delete the file:\n%s", row.string);
+
+            if (msgboxyesno("najitool GUI randkill confirmation", temp_edit_delete) == yes)
+            {
+                randkill(row.string);
+            }
+        }
+
+        else if (! strcmp(najitool_command, "rbcafter") )
+            rbcafter(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "rbcbefor") )
+            rbcbefor(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "rcharvar") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "rcvfiles") )
+            rcvfiles(row.string, output_folder_path);
+
+        else if (! strcmp(najitool_command, "remline") )
+            remline(parameter_1_string, row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "repcat") )
+            repcat(row.string, atoi(parameter_1_string));
+
+        else if (! strcmp(najitool_command, "repcatpp") )
+            repcatpp(row.string, atoi(parameter_1_string));
+
+        else if (! strcmp(najitool_command, "repchar") )
+            repchar(row.string, processing_output_file_path, atoi(parameter_1_string));
+
+        else if (! strcmp(najitool_command, "repcharp") )
+            repcharp(row.string, processing_output_file_path, atoi(parameter_1_string));
+
+        else if (! strcmp(najitool_command, "revcat") )
+            revcat(row.string);
+
+        else if (! strcmp(najitool_command, "revlines") )
+            revlines(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "rmunihtm") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "rndbfile") )
+            rndbfile(row.string, atol(parameter_1_string));
+
+        else if (! strcmp(najitool_command, "rndbsout") )
+            rndbsout(atol(parameter_1_string));
+
+        else if (! strcmp(najitool_command, "rndffill") )
+        {
+
+            sprintf(temp_edit_delete, "Are you sure you want to continue? this will overwrite ALL the characters in the file:\n%s\n\nWith random characters and the old data WILL NOT be recoverable.\n", row.string);
+
+            if (msgboxyesno("najitool GUI fillfile confirmation", temp_edit_delete) == yes)
+            {
+                rndffill(row.string);
+            }
+
+        }
+
+        else if (! strcmp(najitool_command, "rndlines") )
+            rndlines(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "rndtfile") )
+            rndtfile(row.string, atol(parameter_1_string));
+
+        else if (! strcmp(najitool_command, "rndtsout") )
+            rndtsout(atol(parameter_1_string));
+
+        else if (! strcmp(najitool_command, "rrrchars") )
+            rrrchars(row.string, processing_output_file_path, atoi(parameter_1_string), atoi(parameter_2_string));
+
+        else if (! strcmp(najitool_command, "rstrach") )
+            rstrach(atoi(parameter_1_string), row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "rstrbch") )
+            rstrbch(atoi(parameter_1_string), row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "rtcafter") )
+            rtcafter(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "rtcbefor") )
+            rtcbefor(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "saat") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "saatarih") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "showline") )
+            showline(row.string, atoi(parameter_1_string));
+
+        else if (! strcmp(najitool_command, "skipcat") )
+            skipcat(row.string, parameter_1_string);
+
+        else if (! strcmp(najitool_command, "skipchar") )
+            skipchar(row.string, processing_output_file_path, parameter_1_string);
+
+        else if (! strcmp(najitool_command, "skipstr") )
+            skipstr(row.string, processing_output_file_path, parameter_1_string);
+
+        else if (! strcmp(najitool_command, "skpalnum") )
+            skpalnum(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "skpalpha") )
+            skpalpha(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "skpcntrl") )
+            skpcntrl(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "skpdigit") )
+            skpdigit(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "skpgraph") )
+            skpgraph(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "skplower") )
+            skplower(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "skpprint") )
+            skpprint(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "skppunct") )
+            skppunct(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "skpspace") )
+            skpspace(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "skpupper") )
+            skpupper(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "skpxdigt") )
+            skpxdigt(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "sort") )
+            sort(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "sortlast") )
+            sortlast(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "strachar") )
+            strachar(parameter_1_string, row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "strbchar") )
+            strbchar(parameter_1_string, row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "strbline") )
+            strbline(row.string, processing_output_file_path, parameter_1_string);
+
+        else if (! strcmp(najitool_command, "streline") )
+            streline(row.string, processing_output_file_path, parameter_1_string);
+
+        else if (! strcmp(najitool_command, "strfile") )
+            strfile(processing_output_file_path, atoi(parameter_1_string), parameter_2_string);
+
+        else if (! strcmp(najitool_command, "swapfeb") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "systemdt") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "tabspace") )
+            tabspace(atoi(parameter_1_string), row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "telltime") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "today") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "tothe") )
+        {
+            tothe(parameter_1_string);
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "ttt") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "turnum") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "txt2html") )
+            txt2html(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "unihtml") )
+            naji_gen_unicode_html_pages(output_folder_path);
+
+        else if (! strcmp(najitool_command, "unajirle") )
+            unajirle(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "unblanka") )
+            unblanka(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "unix2dos") )
+            unix2dos(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "uudecode") )
+            uudecode(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "uuencode") )
+            uuencode(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "vowelwrd") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "weakrypt") )
+            weakrypt(parameter_1_string, row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "wordline") )
+            wordline(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "wordwrap") )
+            wordwrap(row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "wrdcount") )
+            help_edit_box.Printf("\n%s: %u", temp_filename, wrdcount(row.string));
+
+        else if (! strcmp(najitool_command, "year") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "yil") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "zerokill") )
+        {
+
+            sprintf(temp_edit_delete, "Are you sure you want to unrecoverabley delete the file:\n%s", row.string);
+
+            if (msgboxyesno("najitool GUI zerokill confirmation", temp_edit_delete) == yes)
+            {
+                zerokill(row.string);
+            }
+
+        }
+
+        return false;
+    }
 }
 
