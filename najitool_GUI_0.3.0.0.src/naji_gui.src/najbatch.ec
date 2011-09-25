@@ -3553,6 +3553,7 @@ class tab_batch : Tab
 
     bool batch_check(void)
     {
+
         if (! strcmp(najitool_command, "8bit256") )
         {
             notbatch();
@@ -3564,6 +3565,10 @@ class tab_batch : Tab
             notbatch();
             return true;
         }
+
+        else if (! strcmp(najitool_command, "addline") )
+            addline(row.string, processing_output_file_path, parameter_1_string, atoi(parameter_2_string));
+
 
         else if (! strcmp(najitool_command, "allfiles") )
         {
@@ -3908,6 +3913,13 @@ class tab_batch : Tab
         else if (! strcmp(najitool_command, "howline") )
             howline(row.string);
 
+        else if (!strcmp(najitool_command, "istrael"))
+                istrael(parameter_1_string, atoi(parameter_2_string), row.string, processing_output_file_path);
+
+        else if (!strcmp(najitool_command, "istreml"))
+                istreml(parameter_1_string, row.string, processing_output_file_path);
+
+
         else if (! strcmp(najitool_command, "kitten") )
             kitten(row.string);
 
@@ -4138,6 +4150,9 @@ class tab_batch : Tab
         else if (! strcmp(najitool_command, "remline") )
             remline(parameter_1_string, row.string, processing_output_file_path);
 
+        else if (!strcmp(najitool_command, "removel"))
+            removel(row.string, processing_output_file_path, atoi(parameter_1_string));
+
         else if (! strcmp(najitool_command, "repcat") )
             repcat(row.string, atoi(parameter_1_string));
 
@@ -4150,6 +4165,9 @@ class tab_batch : Tab
         else if (! strcmp(najitool_command, "repcharp") )
             repcharp(row.string, processing_output_file_path, atoi(parameter_1_string));
 
+        else if (! strcmp(najitool_command, "replacel") )
+            replacel(row.string, processing_output_file_path, parameter_1_string, atoi(parameter_2_string));
+        
         else if (! strcmp(najitool_command, "revcat") )
             revcat(row.string);
 
@@ -4269,6 +4287,12 @@ class tab_batch : Tab
 
         else if (! strcmp(najitool_command, "sp2ce2sp") )
             sp2ce2sp(parameter_1_string[1], row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "spyramid") )
+        {
+            notbatch();
+            return true;
+        }
 
         else if (! strcmp(najitool_command, "sp2re2sp") )
             sp2re2sp(row.string, processing_output_file_path);

@@ -583,6 +583,9 @@ class tab_main : Tab
             else if (!strcmp(najitool_command, "addim"))
                 addim(atoi(parameter_1_string), output_file_1_path);
 
+            else if (! strcmp(najitool_command, "addline") )
+                addline(input_file_1_path, output_file_1_path, parameter_1_string, atoi(parameter_2_string));
+
             else if (!strcmp(najitool_command, "allfiles"))
                 allfiles(atoi(parameter_1_string), output_folder_path);
 
@@ -856,6 +859,12 @@ class tab_main : Tab
                 return true;
             }
 
+            else if (!strcmp(najitool_command, "istrael"))
+                istrael(parameter_1_string, atoi(parameter_2_string), input_file_1_path, output_file_1_path);
+
+            else if (!strcmp(najitool_command, "istreml"))
+                istreml(parameter_1_string, input_file_1_path, output_file_1_path);
+          
             else if (!strcmp(najitool_command, "kitten"))
                 kitten(input_file_1_path);
 
@@ -1039,6 +1048,9 @@ class tab_main : Tab
 
             else if (!strcmp(najitool_command, "remline"))
                 remline(parameter_1_string, input_file_1_path, output_file_1_path);
+            
+            else if (!strcmp(najitool_command, "removel"))
+                removel(input_file_1_path, output_file_1_path, atoi(parameter_1_string));
 
             else if (!strcmp(najitool_command, "repcat"))
                 repcat(input_file_1_path, atoi(parameter_1_string));
@@ -1051,6 +1063,9 @@ class tab_main : Tab
 
             else if (!strcmp(najitool_command, "repcharp"))
                 repcharp(input_file_1_path, output_file_1_path, atoi(parameter_1_string));
+
+            else if (! strcmp(najitool_command, "replacel") )
+                replacel(input_file_1_path, output_file_1_path, parameter_1_string, atoi(parameter_2_string));
 
             else if (!strcmp(najitool_command, "revcat"))
                 revcat(input_file_1_path);
@@ -1159,11 +1174,17 @@ class tab_main : Tab
             else if (!strcmp(najitool_command, "sortlast"))
                 sortlast(input_file_1_path, output_file_1_path);
 
-            else if (! strcmp(najitool_command, "sp2ce2sp") )
+            else if (!strcmp(najitool_command, "sp2ce2sp"))
                  sp2ce2sp(parameter_1_string[1], input_file_1_path, output_file_1_path);
 
-            else if (! strcmp(najitool_command, "sp2re2sp") )
+            else if (!strcmp(najitool_command, "sp2re2sp"))
                  sp2re2sp(input_file_1_path, output_file_1_path);
+
+            else if (!strcmp(najitool_command, "spyramid"))
+            {
+                 main_spyramid(parameter_1_string);
+                 return true;
+            }
 
             else if (!strcmp(najitool_command, "strachar"))
                 strachar(parameter_1_string, input_file_1_path, output_file_1_path);
@@ -5072,5 +5093,38 @@ void longline(char *namein)
 {   help_edit_box.Clear();
     help_edit_box.Printf("Longest line is: %lu\n", longl(namein));
 }                                                            
+
+
+void main_spyramid(char *str)
+{
+    unsigned long i=0;
+    unsigned long x=0;
+    unsigned long len = 0;
+
+    len = strlen(str);
+
+    for (x=0; x<len; x++)
+    {
+        for (i=0; i<x; i++)
+        {
+            help_edit_box.AddCh(str[i]);
+        }
+
+        help_edit_box.AddCh('\n');
+    }
+
+    for (x=0; x<len; x++)
+    {
+        for (i=0; i<len-x; i++)
+        {
+            help_edit_box.AddCh(str[i]);
+        }
+
+        help_edit_box.AddCh('\n');
+    }
+
+}
+
+
 
 }

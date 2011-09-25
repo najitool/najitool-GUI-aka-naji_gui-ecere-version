@@ -4,10 +4,3 @@ toadd mbsplit
 toadd gbsplit
 toadd mjoin
 
-toadd istrael
-toadd istreml
-
-toadd addline
-toadd removel
-toadd spyramid
-toadd replacel

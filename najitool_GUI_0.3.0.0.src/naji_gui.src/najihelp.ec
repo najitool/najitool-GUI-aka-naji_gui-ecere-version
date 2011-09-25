@@ -123,6 +123,49 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
         "Parametre 2:"
     },
 
+
+
+    {
+        "addline",
+        false, // in file 1 but
+        false, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        false, // out file 1 but
+        false, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        false, // param 1 label
+        false, // param 1 box
+
+        false, // param 2 label
+        false, // param 2 box
+        
+        "Adds new line with the specified text at the specified line position.\n"
+        "Specify input file, output file, text, and line position",
+
+        "Text:",
+        "Line:",
+
+        "Belirtilen satir pozisyonunda belirtilen tekst ile yeni bir satir ekler.\n"
+        "Okunan, yazilan dosyalari, tekst, ve satir pozisyonu belirt.",
+
+        "Tekst:",
+        "Satir:"
+    },
+
+
+
     {
         "allfiles",
 
@@ -3535,6 +3578,89 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
         "Parametre 2:"
     },
 
+
+
+    {
+        "istrael",
+        false, // in file 1 but
+        false, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        false, // out file 1 but
+        false, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        false, // param 1 label
+        false, // param 1 box
+
+        false, // param 2 label
+        false, // param 2 box
+        
+        "Inserts string (text) at every line at the specified column.\n"
+        "Specify input file, output file, text, and position",
+
+        "Text:",
+        "Column:",
+
+        "Belirtilen kolonda belirtilen tekst ekler her satirlarin.\n"
+        "Okunan, yazilan dosyalari, tekst, ve kolon belirt.",
+
+        "Tekst:",
+        "Kolon:"
+    },
+
+
+
+    {
+        "istreml",
+        false, // in file 1 but
+        false, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        false, // out file 1 but
+        false, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        false, // param 1 label
+        false, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+        
+        "Inserts string (text) at every empty line.\n"
+        "Specify input file, output file, and text.",
+
+        "Text:",
+        "Parameter 2:",
+
+        "Her bos satira berilenen tekst ekler.\n"
+        "Okunan, yazilan dosyalari, ve teksti belirt.",
+
+        "Tekst:",
+        "Parametre 2:"
+    },
+
+
     {
         "kitten",
         false, // in file 1 but
@@ -5729,6 +5855,45 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
     },
 
     {
+        "removel",
+        false, // in file 1 but
+        false, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        false, // out file 1 but
+        false, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        false, // param 1 label
+        false, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+        
+        "Removes the specified line and all its line contents.\n"
+        "Specify input file, output file, and line number.",
+
+        "Line:",
+        "Parameter 2:",
+
+        "Belirtilen satir ve tum satir icerigini kaldirir.\n"
+        "Okunan, yazilan dosyalari, ve satir numarasi belirt.",
+
+        "Satir:",
+        "Parametre 2:"
+    },
+
+    {
         "repcat",
         false, // in file 1 but
         false, // in file 1 box
@@ -5885,6 +6050,45 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
         "Baslangic:",
         "Parametre 2:",
 
+    },
+
+    {
+        "replacel",
+        false, // in file 1 but
+        false, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        false, // out file 1 but
+        false, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        false, // param 1 label
+        false, // param 1 box
+
+        false, // param 2 label
+        false, // param 2 box
+        
+        "Replaces specified line contents with the specified text.\n"
+        "Specify input file, output file, text, and line number.",
+
+        "Text:",
+        "Line:",
+
+        "Belirtilen tekst ile belirtilen satir icerigini degistirir.\n"
+        "Okunan, yazilan dosyalari, tekst, ve satir numarasi belirt.",
+
+        "Tekst:",
+        "Satir:"
     },
 
     {
@@ -7274,6 +7478,63 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
         "Parametre 1:",
         "Parametre 2:"
     },
+
+
+
+
+    {
+        "spyramid",
+        false, // in file 1 but
+        false, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        false, // out file 1 but
+        false, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        false, // param 1 label
+        false, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+        
+		"Makes a pyramid out of the specified string (text).\n"
+		"That is to say, give it the text new and it makes\n"
+		"something like:\n"
+		"n\n"
+		"ne\n"
+		"new\n"
+		"ne\n"
+		"n\n"
+		"Specify text.",
+
+        "Text:",
+        "Parameter 2:",
+
+		"Belirtilen tekst den bir piramit yapar.\n"
+		"Yani, ali diye bir tekst ver ve bunun gibi\n"
+		"birsey yapar:\n"
+		"a\n"
+		"al\n"
+		"ali\n"
+		"al\n"
+		"a\n"
+		"Tekt Belirt.",
+
+        "Tekst:",
+        "Parametre 2:"
+    },
+
 
 
     {
