@@ -88,7 +88,7 @@ extern char * mp3info (char *name);
 #define NAJITOOL_MAX_COMPRESSION 2
 #define NAJITOOL_MAX_ENCRYPTION 3
 #define NAJITOOL_MAX_DATE_TIME 13
-#define NAJITOOL_MAX_GENERATE 16
+#define NAJITOOL_MAX_GENERATE 20
 #define NAJITOOL_MAX_CONVERT 12
 #define NAJITOOL_MAX_FILTER 45
 #define NAJITOOL_MAX_FORMAT 33
@@ -99,7 +99,7 @@ extern char * mp3info (char *name);
 #define NAJITOOL_MAX_EDIT 4
 #define NAJITOOL_MAX_MISC 24
 #define NAJITOOL_MAX_WEB 11
-#define NAJITOOL_MAX_COMMANDS 205
+#define NAJITOOL_MAX_COMMANDS 209
 #define NAJITOOL_MAX_CATEGORIES 16
 
 #define naji_max(a,b) ( ( (a) > (b) ) ? (a):(b) )

@@ -889,6 +889,17 @@ class tab_main : Tab
             else if (!strcmp(najitool_command, "lineback"))
                 lineback(input_file_1_path, output_file_1_path);
 
+            else if (! strcmp(najitool_command, "listdigt") )
+                listdigt(atoi(parameter_1_string), output_file_1_path);
+
+            else if (! strcmp(najitool_command, "listlowr") )
+                listlowr(atoi(parameter_1_string), output_file_1_path);
+
+            else if (! strcmp(najitool_command, "listprnt") )
+                listprnt(atoi(parameter_1_string), output_file_1_path);
+
+            else if (! strcmp(najitool_command, "listuppr") )
+                listuppr(atoi(parameter_1_string), output_file_1_path);
 
             else if (!strcmp(najitool_command, "longline"))
             {

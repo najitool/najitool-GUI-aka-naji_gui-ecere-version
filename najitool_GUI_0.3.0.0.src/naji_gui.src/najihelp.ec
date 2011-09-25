@@ -3840,17 +3840,6 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
     },
 
 
-
-
-
-
-
-
-
-
-
-
-
     {
         "license",
         true, // in file 1 but
@@ -3887,13 +3876,7 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
         "Parametre 2:"
     },
 
-
-
-
-
-
-
-{
+   {
         "lineback",
 
         false,
@@ -3935,13 +3918,6 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
         "Parametre 2:"
     },
 
-    
-
-
-
-
-
-
 
     {
         "linesnip",
@@ -3977,6 +3953,159 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
         "cikartiyor her satirin basindan. Okunan ve yazilan dosyalari,\n"
         "ve karakter miktari belirt.",
         "Miktar:",
+        "Parametre 2:"
+    },
+
+    {
+        "listdigt",
+        true, // in file 1 but
+        true, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        false, // out file 1 but
+        false, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        false, // param 1 label
+        false, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+        "Makes a text file with every possible combinations\n"
+        "of characters from 0 to 9 (numbers), one line after another, at\n"
+        "the length you specify. Specify length and output file.",
+        "Length:",
+        "Parameter 2:",
+
+        "Bir metin dosyasi yapar her olasi kombinasyonlari 0 dan 9'a kadar\n"
+        "karakterler ile (numaralar), satir satir, belirttiginiz uzunlukta.\n"
+        "Yazilan dosya ve karakter uzunlugu belirt.",
+        "Uzunluk:",
+        "Parametre 2:"
+    },
+
+    {
+        "listlowr",
+        true, // in file 1 but
+        true, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        false, // out file 1 but
+        false, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        false, // param 1 label
+        false, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+        "Makes a text file with every possible combinations\n"
+        "of characters from a to z (small letters), one line after another, at\n"
+        "the length you specify. Specify length and output file.",
+        "Length:",
+        "Parameter 2:",
+
+        "Bir metin dosyasi yapar her olasi kombinasyonlari a dan z'ye kadar\n"
+        "karakterler ile (kucuk Ingilizce harf), satir satir, belirttiginiz\n"
+        "uzunlukta. Yazilan dosya ve karakter uzunlugu belirt.",
+        "Uzunluk:",
+        "Parametre 2:"
+    },
+
+
+    {
+        "listprnt",
+        true, // in file 1 but
+        true, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        false, // out file 1 but
+        false, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        false, // param 1 label
+        false, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+        "Makes a text file with every possible combinations\n"
+        "of printable characters from ! to ~ (ASCII values 33 to 126), one line\n"
+        "after another, at the length you specify. Specify length and output file.",
+        "Length:",
+        "Parameter 2:",
+
+        "Bir metin dosyasi yapar her olasi kombinasyonlari sundan: ! suna: ~ kadar\n"
+        "basabilen karakterler ile (ASCII degerler 33 den 126 ya kadar), satir satir,\n"
+        "belirttiginiz uzunlukta. Yazilan dosya ve karakter uzunlugu belirt.",
+        "Uzunluk:",
+        "Parametre 2:"
+    },
+
+    {
+        "listuppr",
+        true, // in file 1 but
+        true, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        false, // out file 1 but
+        false, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        false, // param 1 label
+        false, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+        "Makes a text file with every possible combinations\n"
+        "of characters from A to Z (capital letters), one line after another, at\n"
+        "the length you specify. Specify length and output file.",
+        "Length:",
+        "Parameter 2:",
+
+        "Bir metin dosyasi yapar her olasi kombinasyonlari a dan z'ye kadar\n"
+        "karakterler ile (buyuk Ingilizce harf), satir satir, belirttiginiz\n"
+        "uzunlukta. Yazilan dosya ve karakter uzunlugu belirt.",
+        "Uzunluk:",
         "Parametre 2:"
     },
 

@@ -3953,6 +3953,30 @@ class tab_batch : Tab
         else if (! strcmp(najitool_command, "lineback") )
             lineback(row.string, processing_output_file_path);
 
+        else if (! strcmp(najitool_command, "listdigt") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "listlowr") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "listprnt") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "listuppr") )
+        {
+            notbatch();
+            return true;
+        }
+
         else if (! strcmp(najitool_command, "longline") )
             longline(row.string);
 

@@ -521,6 +521,10 @@ const char * najitool_valid_generate[NAJITOOL_MAX_GENERATE] =
     "genlic",
     "htmlhelp",
     "lcvfiles",
+    "listdigt",
+    "listlowr",
+    "listprnt",
+    "listuppr",
     "rcvfiles",
     "rndbfile",
     "rndtfile",
@@ -829,6 +833,10 @@ const char * najitool_valid_commands[NAJITOOL_MAX_COMMANDS] =
     "license",
     "lineback",
     "linesnip",
+    "listdigt",
+    "listlowr",
+    "listprnt",
+    "listuppr",
     "longline",
     "makarray",
     "mathgame",
@@ -8398,4 +8406,99 @@ void sp2re2sp(char *namein, char *nameout)
 
     najinclose();
     najoutclose();
+}
+
+
+void wordlist(short a, short b, unsigned int size, char *nameout)
+{
+    int i;
+    int c;
+    short *buffer;
+    unsigned long long possible_combinations;
+    char msgboxbuffer[4096+4096];
+
+    buffer = malloc(size * sizeof (short) );
+
+
+    if (buffer == NULL)
+    {
+        sprintf(msgboxbuffer, "\nlibnaji: Error allocating memory for function wordlist()\n");
+        msgbox("najitool GUI wordlist", msgboxbuffer);
+        exit(1);
+    }
+
+
+    possible_combinations = pow(abs(a - b)+1, size);
+
+
+    sprintf(msgboxbuffer, "This will make a text file with %llu possible combinations\nof characters from %c to %c one line after another.\nAre you sure you want to continue?", possible_combinations, a, b);
+
+    if (msgboxyesno("najitool GUI wordlist", msgboxbuffer) == no)
+    {
+    return;
+    }
+
+    najout(nameout);
+
+    for (i=0; i<size; i++)
+        buffer[i] = a;
+
+    buffer[i] = '\0';
+
+    while (1)
+    {
+        c=0;
+
+        for (i=0; i<size; i++)
+            fputc(buffer[i], naji_output);
+
+        fputc('\n', naji_output);
+
+        buffer[0]++;
+
+        for (i=0; i<size; i++)
+        {
+
+            if (buffer[i] > b)
+            {
+                buffer[i] = a;
+
+                c++;
+
+
+                if (i <size-1)
+                    buffer[i+1]++;
+            }
+
+        }
+
+        if (c == size)
+            break;
+    }
+
+
+
+    free(buffer);
+    buffer = NULL;
+}
+
+
+void listlowr(unsigned int size, char *nameout)
+{
+    wordlist('a', 'z', size, nameout);
+}
+
+void listuppr(unsigned int size, char *nameout)
+{
+    wordlist('A', 'Z', size, nameout);
+}
+
+void listdigt(unsigned int size, char *nameout)
+{
+    wordlist('0', '9', size, nameout);
+}
+
+void listprnt(unsigned int size, char *nameout)
+{
+    wordlist(33, 126, size, nameout);
 }
