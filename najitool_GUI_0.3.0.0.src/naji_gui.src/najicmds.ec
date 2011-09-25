@@ -538,8 +538,12 @@ const char * najitool_valid_convert[NAJITOOL_MAX_CONVERT] =
     "f2upper",
     "tabspace",
     "unix2dos",
+    "sp2ce2sp",
+    "sp2re2sp",
     "uudecode",
     "uuencode"
+
+
 };
 
 const char * najitool_valid_filter[NAJITOOL_MAX_FILTER] =
@@ -903,6 +907,8 @@ const char * najitool_valid_commands[NAJITOOL_MAX_COMMANDS] =
     "skpxdigt",
     "sort",
     "sortlast",
+    "sp2ce2sp",
+    "sp2re2sp",
     "strachar",
     "strbchar",
     "strbline",
@@ -8322,6 +8328,73 @@ void weakrypt(const char *password, char *namein, char *nameout)
 
         fputc(a, naji_output);
     }
+
+    najinclose();
+    najoutclose();
+}
+
+
+void sp2ce2sp(char c, char *namein, char *nameout)
+{
+    int a;
+
+    najin(namein);
+    najout(nameout);
+
+    while (1)
+    {
+        a = fgetc(naji_input);
+
+        if (a == EOF)
+            break;
+
+        if (a == ' ')
+            fputc(c, naji_output);
+
+        else if (a == '\n')
+            fputc('\n', naji_output);
+
+        else if (a == '\r')
+            fputc('\r', naji_output);
+
+        else
+            fputc(' ', naji_output);
+    }
+
+
+    najinclose();
+    najoutclose();
+}
+
+void sp2re2sp(char *namein, char *nameout)
+{
+    int a;
+
+    najin(namein);
+    najout(nameout);
+
+    rndinit();
+
+    while (1)
+    {
+        a = fgetc(naji_input);
+
+        if (a == EOF)
+            break;
+
+        if (a == ' ')
+            fputc( ( (rand() % 94) + '!'), naji_output);
+
+        else if (a == '\n')
+            fputc('\n', naji_output);
+
+        else if (a == '\r')
+            fputc('\r', naji_output);
+
+        else
+            fputc(' ', naji_output);
+    }
+
 
     najinclose();
     najoutclose();

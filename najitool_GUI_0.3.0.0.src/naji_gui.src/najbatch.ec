@@ -4243,6 +4243,12 @@ class tab_batch : Tab
         else if (! strcmp(najitool_command, "sortlast") )
             sortlast(row.string, processing_output_file_path);
 
+        else if (! strcmp(najitool_command, "sp2ce2sp") )
+            sp2ce2sp(parameter_1_string[1], row.string, processing_output_file_path);
+
+        else if (! strcmp(najitool_command, "sp2re2sp") )
+            sp2re2sp(row.string, processing_output_file_path);
+
         else if (! strcmp(najitool_command, "strachar") )
             strachar(parameter_1_string, row.string, processing_output_file_path);
 

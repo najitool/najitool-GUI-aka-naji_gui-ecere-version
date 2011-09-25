@@ -9,8 +9,6 @@ toadd mbsplit
 toadd gbsplit
 toadd mjoin
 
-toadd sp2ce2sp
-toadd sp2re2sp
 toadd istrael
 toadd istreml
 

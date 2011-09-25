@@ -1148,6 +1148,12 @@ class tab_main : Tab
             else if (!strcmp(najitool_command, "sortlast"))
                 sortlast(input_file_1_path, output_file_1_path);
 
+            else if (! strcmp(najitool_command, "sp2ce2sp") )
+                 sp2ce2sp(parameter_1_string[1], input_file_1_path, output_file_1_path);
+
+            else if (! strcmp(najitool_command, "sp2re2sp") )
+                 sp2re2sp(input_file_1_path, output_file_1_path);
+
             else if (!strcmp(najitool_command, "strachar"))
                 strachar(parameter_1_string, input_file_1_path, output_file_1_path);
 

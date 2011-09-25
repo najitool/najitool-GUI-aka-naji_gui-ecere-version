@@ -7069,12 +7069,82 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
 
 
 
+    {
+        "sp2ce2sp",
+        false, // in file 1 but
+        false, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        false, // out file 1 but
+        false, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        false, // param 1 label
+        false, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+        "Changes spaces to the specified character, changes everything else to\n"
+        "the space character. Specify input file, output file, and character.",
+
+        "Character:",
+        "Parameter 2:",
+
+        "Bosluklari belirtiren karaktere degistirir, baska her karakteri bosluk\n"
+        "karaktere degistirir. Okunan, yazilan dosyalari ve karakteri belirt.",
+
+        "Karakter:",
+        "Parametre 2:"
+    },
 
 
+    {
+        "sp2re2sp",
+        false, // in file 1 but
+        false, // in file 1 box
 
+        true, // in file 2 but
+        true, // in file 2 box
 
+        true, // in folder but
+        true, // in folder box
 
+        false, // out file 1 but
+        false, // out file 1 box
 
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        true, // param 1 label
+        true, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+        "Changes spaces to a random text character, changes everything\n"
+        "else to space character. Specify input file and output file.",
+
+        "Parameter 1:",
+        "Parameter 2:",
+
+        "Bosluklari rasgele metin karaktere degistirir, baska her karakteri bosluk\n"
+        "karaktere degistirir. Okunan dosyayi ve yazilan dosyayi belirt.",
+
+        "Parametre 1:",
+        "Parametre 2:"
+    },
 
 
     {
