@@ -10,6 +10,7 @@ import "najicalc"
 import "najihelp"
 import "najiform"
 import "najascii"
+import "najbatch"
 #include "naji_gui.eh"
 
 class bump : Window
@@ -633,7 +634,10 @@ class tab_main : Tab
 
             else if (!strcmp(najitool_command, "bugun"))
                 bugun();
-
+        
+            else if (! strcmp(najitool_command, "bytsplit") )
+                bytsplit(input_file_1_path, atoi(parameter_1_string));
+        
             else if (!strcmp(najitool_command, "calc"))
             {
                 najicalc naji_calc {};
@@ -800,6 +804,9 @@ class tab_main : Tab
             else if (!strcmp(najitool_command, "ftothe"))
                 ftothe(input_file_1_path, output_file_1_path);
 
+            else if (! strcmp(najitool_command, "gbsplit") )
+                gbsplit(input_file_1_path, atoi(parameter_1_string));
+
             else if (!strcmp(najitool_command, "genhelp"))
                 najitool_gui_genhelp(output_file_1_path);
 
@@ -864,7 +871,10 @@ class tab_main : Tab
 
             else if (!strcmp(najitool_command, "istreml"))
                 istreml(parameter_1_string, input_file_1_path, output_file_1_path);
-          
+
+            else if (! strcmp(najitool_command, "kbsplit") )
+                kbsplit(input_file_1_path, atoi(parameter_1_string));
+  
             else if (!strcmp(najitool_command, "kitten"))
                 kitten(input_file_1_path);
 
@@ -925,9 +935,16 @@ class tab_main : Tab
             else if (!strcmp(najitool_command, "maxxnewl"))
                 maxxnewl(input_file_1_path, output_file_1_path, atoi(parameter_1_string));
 
+            else if (! strcmp(najitool_command, "mbsplit") )
+                mbsplit(input_file_1_path, atoi(parameter_1_string));
+
             else if (!strcmp(najitool_command, "mergline"))
                 mergline(input_file_1_path, input_file_2_path, output_file_1_path, parameter_1_string, parameter_2_string);
 
+            else if (! strcmp(najitool_command, "mjoin") )
+                mjoin(input_file_1_path, output_file_1_path);
+
+            
             else if (!strcmp(najitool_command, "mkpatch"))
                 mkpatch(input_file_1_path, input_file_2_path, output_file_1_path);
 

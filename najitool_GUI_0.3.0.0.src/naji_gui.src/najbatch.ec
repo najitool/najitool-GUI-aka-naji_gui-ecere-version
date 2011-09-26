@@ -9,6 +9,7 @@ import "naji_ttt"
 import "najicalc"
 import "najihelp"
 import "najiform"
+import "najimain"
 #include "naji_gui.eh"
 
 class tab_batch : Tab
@@ -3638,6 +3639,9 @@ class tab_batch : Tab
             return true;
         }
 
+        else if (! strcmp(najitool_command, "bytsplit") )
+            bytsplit(row.string, atoi(parameter_1_string));
+        
         else if (! strcmp(najitool_command, "calc") )
         {
             najicalc naji_calc {};
@@ -3840,6 +3844,9 @@ class tab_batch : Tab
             notbatch();
             return true;
         }
+    
+        else if (! strcmp(najitool_command, "gbsplit") )
+            gbsplit(row.string, atoi(parameter_1_string));
 
         else if (! strcmp(najitool_command, "genlic") )
             naji_genlic(processing_output_file_path);
@@ -3919,6 +3926,8 @@ class tab_batch : Tab
         else if (!strcmp(najitool_command, "istreml"))
                 istreml(parameter_1_string, row.string, processing_output_file_path);
 
+        else if (! strcmp(najitool_command, "kbsplit") )
+            kbsplit(row.string, atoi(parameter_1_string));
 
         else if (! strcmp(najitool_command, "kitten") )
             kitten(row.string);
@@ -4004,7 +4013,16 @@ class tab_batch : Tab
         else if (! strcmp(najitool_command, "maxxnewl") )
             maxxnewl(row.string, processing_output_file_path, atoi(parameter_1_string));
 
+        else if (! strcmp(najitool_command, "mbsplit") )
+            mbsplit(row.string, atoi(parameter_1_string));
+
         else if (! strcmp(najitool_command, "mergline") )
+        {
+            notbatch();
+            return true;
+        }
+
+        else if (! strcmp(najitool_command, "mjoin") )
         {
             notbatch();
             return true;

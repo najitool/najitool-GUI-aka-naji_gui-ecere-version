@@ -110,7 +110,7 @@ class tab_split : Tab
 
             if (!strcmp(splitter_size_measurement, "bytes"))
             {
-                bytsplit(splitter_input_file_edit_box.contents, atoi(splitter_size_edit_box.contents), splitter_output_folder_edit_box.contents);
+                splitter_bytsplit(splitter_input_file_edit_box.contents, atoi(splitter_size_edit_box.contents), splitter_output_folder_edit_box.contents);
 
                 if (!strcmp(najitool_language, "English"))
                     msgbox("najitool GUI File Splitter", "File splitting complete.");
@@ -120,7 +120,7 @@ class tab_split : Tab
 
             else if (!strcmp(splitter_size_measurement, "kb"))
             {
-                kbsplit(splitter_input_file_edit_box.contents, atoi(splitter_size_edit_box.contents), splitter_output_folder_edit_box.contents);
+                splitter_kbsplit(splitter_input_file_edit_box.contents, atoi(splitter_size_edit_box.contents), splitter_output_folder_edit_box.contents);
                 if (!strcmp(najitool_language, "English"))
                     msgbox("najitool GUI File Splitter", "File splitting complete.");
                 else if (!strcmp(najitool_language, "Turkish"))
@@ -129,7 +129,7 @@ class tab_split : Tab
 
             else if (!strcmp(splitter_size_measurement, "mb"))
             {
-                mbsplit(splitter_input_file_edit_box.contents, atoi(splitter_size_edit_box.contents), splitter_output_folder_edit_box.contents);
+                splitter_mbsplit(splitter_input_file_edit_box.contents, atoi(splitter_size_edit_box.contents), splitter_output_folder_edit_box.contents);
                 if (!strcmp(najitool_language, "English"))
                     msgbox("najitool GUI File Splitter", "File splitting complete.");
                 else if (!strcmp(najitool_language, "Turkish"))
@@ -138,7 +138,7 @@ class tab_split : Tab
 
             else if (!strcmp(splitter_size_measurement, "gb"))
             {
-                gbsplit(splitter_input_file_edit_box.contents, atoi(splitter_size_edit_box.contents), splitter_output_folder_edit_box.contents);
+                splitter_gbsplit(splitter_input_file_edit_box.contents, atoi(splitter_size_edit_box.contents), splitter_output_folder_edit_box.contents);
                 if (!strcmp(najitool_language, "English"))
                     msgbox("najitool GUI File Splitter", "File splitting complete.");
                 else if (!strcmp(najitool_language, "Turkish"))
@@ -155,7 +155,7 @@ class tab_split : Tab
         bool NotifyClicked(Button button, int x, int y, Modifiers mods)
         {
             StripExtension(splitter_a_split_file_path);
-            mjoin(splitter_a_split_file_path, splitter_join_output_file_path);
+            splitter_mjoin(splitter_a_split_file_path, splitter_join_output_file_path);
 
             return true;
         }
@@ -294,7 +294,7 @@ class tab_split : Tab
         return true;
     }
 
-    void bytsplit(char *namein, unsigned long peice_size, char *output_folder)
+    void splitter_bytsplit(char *namein, unsigned long peice_size, char *output_folder)
     {
         int a;
 
@@ -344,7 +344,7 @@ class tab_split : Tab
 
     }
 
-    void kbsplit(char *namein, unsigned long peice_size, char *output_folder)
+    void splitter_kbsplit(char *namein, unsigned long peice_size, char *output_folder)
     {
         int a;
         unsigned long i;
@@ -403,7 +403,7 @@ class tab_split : Tab
 
     }
 
-    void mbsplit(char *namein, unsigned long peice_size, char *output_folder)
+    void splitter_mbsplit(char *namein, unsigned long peice_size, char *output_folder)
     {
         int a;
         unsigned long i;
@@ -461,7 +461,7 @@ class tab_split : Tab
 
     }
 
-    void gbsplit(char *namein, unsigned long peice_size, char *output_folder)
+    void splitter_gbsplit(char *namein, unsigned long peice_size, char *output_folder)
     {
         int a;
         unsigned long i;
@@ -519,7 +519,7 @@ class tab_split : Tab
 
     }
 
-    void mjoin(char *namein_original_filename, char *nameout_joined_output_file)
+    void splitter_mjoin(char *namein_original_filename, char *nameout_joined_output_file)
     {
         int a;
 

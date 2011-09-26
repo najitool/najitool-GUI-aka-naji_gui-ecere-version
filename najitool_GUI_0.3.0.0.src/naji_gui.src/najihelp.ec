@@ -792,6 +792,53 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
 
     },
 
+{
+        "bytsplit",
+        false, // in file 1 but
+        false, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        true, // out file 1 but
+        true, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        false, // param 1 label
+        false, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+        
+        "Splits the file you specify into the size of pieces you specify in bytes.\n"
+        "The output file is the original filename with numbered extensions e.g.\n"
+        "example.big.0, example.big.1, example.big.2...\n"
+        "You can use mjoin to join the files.\n"
+        "Specify input file and size of peices.",
+
+
+        "Peice Size:",
+        "Parameter 2:",
+
+        "Bayt olarak belirttiginiz parcalar boyutunda, belirtilen dosyayi boler.\n"
+        "Yazilan dosyalar orijinal dosya isimdir numarali dosya uzantisi ile.\n"
+        "Yani, example.big.0, example.big.1, example.big.2...\n"
+        "Dosyalari birlestirmek icin mjoin kullanabilirsiniz.\n"
+        "Okunan dosyayi ve parcalarin boyutlarini belirt.",
+
+        "Parca Boyut:",
+        "Parametre 2:"
+    },
+
+
     {
 
         "calc",
@@ -2885,6 +2932,51 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
 
     },
 
+{
+        "gbsplit",
+        false, // in file 1 but
+        false, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        true, // out file 1 but
+        true, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        false, // param 1 label
+        false, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+        "Splits the file you specify into the size of pieces you specify in gigabytes.\n"
+        "The output file is the original filename with numbered extensions e.g.\n"
+        "example.big.0, example.big.1, example.big.2...\n"
+        "You can use mjoin to join the files.\n"
+        "Specify input file and size of peices.",
+
+        "Peice Size:",
+        "Parameter 2:",
+
+        "Gigabayt olarak belirttiginiz parcalar boyutunda, belirtilen dosyayi boler.\n"
+        "Yazilan dosyalar orijinal dosya isimdir numarali dosya uzantisi ile.\n"
+        "Yani, example.big.0, example.big.1, example.big.2...\n"
+        "Dosyalari birlestirmek icin mjoin kullanabilirsiniz.\n"
+        "Okunan dosyayi ve parcalarin boyutlarini belirt.",
+
+        "Parca Boyut:",
+        "Parametre 2:"
+    },
+
+
     {
         "genhelp",
 
@@ -3660,7 +3752,51 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
         "Parametre 2:"
     },
 
+{
+        "kbsplit",
+        false, // in file 1 but
+        false, // in file 1 box
 
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        true, // out file 1 but
+        true, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        false, // param 1 label
+        false, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+        
+        "Splits the file you specify into the size of pieces you specify in kilobytes.\n"
+        "The output file is the original filename with numbered extensions e.g.\n"
+        "example.big.0, example.big.1, example.big.2...\n"
+        "You can use mjoin to join the files.\n"
+        "Specify input file and size of peices.",
+        
+        "Peice Size:",
+        "Parameter 2:",
+
+        "Kilobayt olarak belirttiginiz parcalar boyutunda, belirtilen dosyayi boler.\n"
+        "Yazilan dosyalar orijinal dosya isimdir numarali dosya uzantisi ile.\n"
+        "Yani, example.big.0, example.big.1, example.big.2...\n"
+        "Dosyalari birlestirmek icin mjoin kullanabilirsiniz.\n"
+        "Okunan dosyayi ve parcalarin boyutlarini belirt.",
+
+        "Parca Boyut:",
+        "Parametre 2:"
+    },
+    
     {
         "kitten",
         false, // in file 1 but
@@ -4394,6 +4530,52 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
         "Parametre 2:"
     },
 
+{
+        "mbsplit",
+        false, // in file 1 but
+        false, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        true, // out file 1 but
+        true, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        false, // param 1 label
+        false, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+
+		  "Splits the file you specify into the size of pieces you specify in megabytes.\n"
+		  "The output file is the original filename with numbered extensions e.g.\n"
+		  "example.big.0, example.big.1, example.big.2...\n"
+		  "You can use mjoin to join the files.\n"
+        "Specify input file and size of peices.",
+
+        "Peice Size:",
+        "Parameter 2:",
+        
+        "Megabayt olarak belirttiginiz parcalar boyutunda, belirtilen dosyayi boler.\n"
+        "Yazilan dosyalar orijinal dosya isimdir numarali dosya uzantisi ile.\n"
+        "Yani, example.big.0, example.big.1, example.big.2...\n"
+        "Dosyalari birlestirmek icin mjoin kullanabilirsiniz.\n"
+        "Okunan dosyayi ve parcalarin boyutlarini belirt.",
+
+        "Parca Boyut:",
+        "Parametre 2:"
+    },
+
+
     {
         "mergline",
         false, // in file 1 but
@@ -4434,6 +4616,54 @@ najihelp helpitems[NAJITOOL_MAX_COMMANDS] =
         "Bas tekst:",
         "Son tekst:"
     },
+
+{
+        "mjoin",
+        false, // in file 1 but
+        false, // in file 1 box
+
+        true, // in file 2 but
+        true, // in file 2 box
+
+        true, // in folder but
+        true, // in folder box
+
+        false, // out file 1 but
+        false, // out file 1 box
+
+        true, // out file 2 but
+        true, // out file 2 box
+
+        true, // out folder but
+        true, // out folder box
+
+        true, // param 1 label
+        true, // param 1 box
+
+        true, // param 2 label
+        true, // param 2 box
+        
+        "Joins files split with bytsplit, kbsplit, mbsplit, or gbsplit.\n"
+        "specify the input filename without the numbered extensions e.g.\n"
+        "if the files are example.big.0, example.big.1 example.big.2 then\n"
+        "you specify example.big as the original input filename and they\n"
+        "will be joined automatically to the new output filename.\n"
+        "Specify original filename as input file and the joined\n"
+        "file for the output file.",
+        "Parameter 1:",
+        "Parameter 2:",
+
+        "bytsplit, kbsplit, mbsplit, veya gbsplit ile bolunen dosyalari birlestirir.\n"
+        "Dosya adi numarali dosya uzantisi haric okunan dosyayi belirt, yani, eger\n"
+        "dosyalar example.big.0, example.big.1 example.big.2 ise o zaman example.big\n"
+        "belirt orijinal okunan dosya icin ve onlar otomatik olarak birlesir yeni\n"
+        "yazilan dosyaya. Orijinal dosya adi belirt okunan dosya olarak ve birlesmis\n"
+        "dosya adi belirt yazilan dosya olarak.",
+
+        "Parametre 1:",
+        "Parametre 2:"
+    },
+    
 
     {
         "mkpatch",
