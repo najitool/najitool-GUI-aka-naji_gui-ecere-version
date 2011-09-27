@@ -27,46 +27,45 @@ class HexEditorTop : Window
 
 class HexEditor : Window
 {
-    size = { 1280, 1024 };
+   size = { 1024, 795 };
+   isDocument = true;
+   hasVertScroll = true;
+   dontHideScroll = true;
 
-    char patch_load_file_path[MAX_LOCATION];
-    byte a;
-    unsigned long long i;
-    unsigned long long ii;
-    unsigned long long buffer_size;
-    unsigned long long offset;
-    int left_double;
-    int right_double;
-    uint patch_load_file_size;
-    uint x;
-    uint y;
-    uint xx;
-    uint yy;
-    uint xxx;
-    uint yyy;
-    byte * read_buffer;
-    uint scroll_pos;
+   char patch_load_file_path[MAX_LOCATION];
+   byte a;
+   unsigned long long i;
+   unsigned long long ii;
+   unsigned long long buffer_size;
+   unsigned long long offset;
+   int left_double;
+   int right_double;
+   uint patch_load_file_size;
+   uint x;
+   uint y;
+   uint xx;
+   uint yy;
+   uint xxx;
+   uint yyy;
+   uint scroll_pos_start;
+   byte * read_buffer;
+   uint scroll_pos;
+   BufferedFile patch_load_file;
+   File patch_save_as_hex_file;
+   left_double = 0;
+   right_double = 0;
+   i=0;
+   buffer_size=0;
+   x = 340;
+   y = 24;
+   ii=0;
+   a = 0;
+   scroll_pos = 0;
+   offset = 0;
+   scroll_pos_start = 0;
 
-    BufferedFile patch_load_file;
-    File patch_save_as_hex_file;
-
-    left_double = 0;
-    right_double = 0;
-    i=0;
-    buffer_size=0;
-    x = 340;
-    y = 24;
-    ii=0;
-    a = 0;
-    scroll_pos = 0;
-    offset = 0;
-
-    Button scroll_down
+   void scroll_down(void)
     {
-        this, text = "Scroll Down", size = { 104, 21 }, position = { 8, 184 };
-
-        bool NotifyClicked(Button button, int x, int y, Modifiers mods)
-        {
 
             scroll_pos-=1;
 
@@ -75,28 +74,42 @@ class HexEditor : Window
 
             Scroll(0, scroll_pos);
             Update(null);
+    }
 
+   void scroll_up(void)
+    {
+
+            if (scroll_pos > 0)
+                scroll_pos += 1;
+            
+
+            Scroll(0, scroll_pos);
+            Update(null);
+
+    }
+
+   Button scroll_down_button
+    {
+        this, text = "Scroll Down", size = { 104, 21 }, position = { 8, 184 };
+
+        bool NotifyClicked(Button button, int x, int y, Modifiers mods)
+        {
+            scroll_down();
             return true;
         }
     };
-    Button scroll_up
+   Button scroll_up_button
     {
         this, text = "Scroll Up", size = { 104, 21 }, position = { 8, 152 };
 
         bool NotifyClicked(Button button, int x, int y, Modifiers mods)
         {
-
-            if (scroll_pos > 0)
-                scroll_pos+=1;
-
-            Scroll(0, scroll_pos);
-            Update(null);
-
+            scroll_up();
             return true;
         }
     };
 
-    void OnRedraw(Surface surface)
+   void OnRedraw(Surface surface)
     {
 
         i=0;
@@ -108,20 +121,37 @@ class HexEditor : Window
             {
 
                 if (i >= buffer_size)
-                    break;
+                break;
 
-                surface.WriteTextf((x-24), ((y)+(yy)*(12)-24), "%08X ", (offset * 16));
+                //scrollArea.h = ( (buffer_size) + (y) + (yy) * (12) -24 );
 
-                surface.WriteTextf(  ( (x) + (xx) * (24)  + 60 ), ((y)+(yy)*(12)-24), "%02X ", read_buffer[i]);
-                i++;
+                
+                
+                
+                surface.WriteTextf(scroll.x + (x-24), scroll.y + ( (y) + (yy) * (12) -24 ), "%08X ", (offset * 16));
+
+                ;
+
+                surface.WriteTextf(scroll.x + ( (x) + (xx) * (24)  + 60 ), scroll.y + ( (y) + (yy) * (12) -24 ), "%02X ", read_buffer[i]);
+
 
                 if ( ( (read_buffer[i] >= ' ') && (read_buffer[i] <= '~') ) )
-                    surface.WriteTextf( ( ( (x) + (xx) * (12)) + 455), ((y)+(yy)*(12)-24), "%c", read_buffer[i]);
+                {
+                    
 
+                    surface.WriteTextf(scroll.x + ( ( (x) + (xx) * (12)) + 455), scroll.y + ( (y) + (yy) * (12) -24 ), "%c", read_buffer[i]);
+                }
                 else
-                    surface.WriteTextf( ( ( (x) + (xx) * (12)) + 455), ((y)+(yy)*(12)-24), ".");
+                {
+                    
 
-                SetCaret(400+xxx, ((y+yyy)-24), 12);
+                    surface.WriteTextf(scroll.x + ( ( (x) + (xx) * (12)) + 455), scroll.y + ( (y) + (yy) * (12) -24 ), ".");
+                }
+
+
+            SetCaret(400+xxx, ((y+yyy)-24), 12);
+            
+            i++;
             }
 
             if (i >= buffer_size)
@@ -130,11 +160,11 @@ class HexEditor : Window
         }
 
     }
-    Button save_button { this, text = "Save", size = { 106, 21 }, position = { 8, 56 } };
-    Button save_as_button { this, text = "Save As...", size = { 106, 21 }, position = { 8, 88 } };
-    Button save_as_hex_button { this, text = "Save As Hex...", size = { 106, 21 }, position = { 8, 120 } };
-    EditBox patch_load_file_edit_box { this, text = "patch_load_file_edit_box", size = { 104, 19 }, position = { 8, 24 }, readOnly = true, noCaret = true };
-    Button patch_load_file_button
+   Button save_button { this, text = "Save", size = { 106, 21 }, position = { 8, 56 } };
+   Button save_as_button { this, text = "Save As...", size = { 106, 21 }, position = { 8, 88 } };
+   Button save_as_hex_button { this, text = "Save As Hex...", size = { 106, 21 }, position = { 8, 120 } };
+   EditBox patch_load_file_edit_box { this, text = "patch_load_file_edit_box", size = { 104, 19 }, position = { 8, 24 }, readOnly = true, noCaret = true };
+   Button patch_load_file_button
     {
         this, text = "Load File...", font = { "Verdana", 8.25f, bold = true }, clientSize = { 104, 21 }, position = { 8 };
 
@@ -176,12 +206,15 @@ class HexEditor : Window
                 }
 
                 patch_load_file.Close();
+            
+          
+            scrollArea.h += buffer_size;
             }
             return true;
         }
     };
 
-    bool OnCreate(void)
+   bool OnCreate(void)
     {
 
         if (!strcmp(najitool_language, "English"))
@@ -203,7 +236,7 @@ class HexEditor : Window
         return true;
     }
 
-    bool OnKeyHit(Key key, unichar ch)
+   bool OnKeyHit(Key key, unichar ch)
     {
 
         if (key == left)
@@ -238,7 +271,7 @@ class HexEditor : Window
 
         }
 
-        if (key == right)
+        else if (key == right)
         {
             if (xxx < 368)
             {
@@ -267,7 +300,7 @@ class HexEditor : Window
 
         }
 
-        if (yyy >= 12)
+        else if (yyy >= 12)
         {
 
             if (key == up)
@@ -278,7 +311,7 @@ class HexEditor : Window
 
         }
 
-        if (key == down)
+        else if (key == down)
         {
             yyy+=12;
             SetCaret(400+xxx, ((y+yyy)-24), 12);
@@ -287,6 +320,25 @@ class HexEditor : Window
         return false;
     }
 
+   void OnVScroll(ScrollBarAction action, int position, Key key)
+   {
+   
+   
+   if (action == down)
+   scroll_down();
+   
+   else if (action == up)
+   scroll_up();
+ 
+   else if (action == wheelDown)
+   scroll_down();
+   
+   else if (action == wheelUp)
+   scroll_up();
+   
+
+   //position = scroll_pos;
+   }
 }
 
 class tab_patch : Tab
