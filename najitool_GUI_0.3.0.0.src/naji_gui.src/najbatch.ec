@@ -14,40 +14,40 @@ import "najimain"
 
 class tab_batch : Tab
 {
-    text = "Batch";
-    background = { r = 110, g = 161, b = 180 };
-    font = { "Verdana", 8.25f, bold = true };
-    size = { 1280, 1024 };
+   text = "Batch";
+   background = { r = 110, g = 161, b = 180 };
+   font = { "Verdana", 8.25f, bold = true };
+   size = { 1280, 1024 };
 
-    char add_file_path[MAX_LOCATION];
-    char add_folder_path[MAX_LOCATION];
-    char output_folder_path[MAX_LOCATION];
-    char processing_output_file_path[4096];
-    char naji_buffer[4096];
-    char parameter_1_string[4096];
-    char parameter_2_string[4096];
-    char najitool_command[4096];
-    char najitool_category[4096];
-    int batchfilenumber;
-    int batchfilemaxitems;
-    char tempbuffer[MAX_LOCATION];
-    char temp_path[MAX_LOCATION];
-    char temp_filename[MAX_LOCATION];
-    char temp_filename_no_extension[MAX_LOCATION];
-    char temp_extension[MAX_LOCATION];
-    char newfileprefix[4096];
-    char newfilesuffix[4096];
-    char newfileextrax[4096];
-    char temp_edit_delete[MAX_LOCATION+4096];
-    najitool_languages lang;
-    batchfilenumber=0;
-    batchfilemaxitems=0;
+   char add_file_path[MAX_LOCATION];
+   char add_folder_path[MAX_LOCATION];
+   char output_folder_path[MAX_LOCATION];
+   char processing_output_file_path[4096];
+   char naji_buffer[4096];
+   char parameter_1_string[4096];
+   char parameter_2_string[4096];
+   char najitool_command[4096];
+   char najitool_category[4096];
+   int batchfilenumber;
+   int batchfilemaxitems;
+   char tempbuffer[MAX_LOCATION];
+   char temp_path[MAX_LOCATION];
+   char temp_filename[MAX_LOCATION];
+   char temp_filename_no_extension[MAX_LOCATION];
+   char temp_extension[MAX_LOCATION];
+   char newfileprefix[4096];
+   char newfilesuffix[4096];
+   char newfileextrax[4096];
+   char temp_edit_delete[MAX_LOCATION+4096];
+   najitool_languages lang;
+   batchfilenumber=0;
+   batchfilemaxitems=0;
 
-    DataRow row;
-    DataRow outdir_row;
-    DataRow outfiles_row;
+   DataRow row;
+   DataRow outdir_row;
+   DataRow outfiles_row;
 
-    void addfilestolistbox(char * indir, char * outdir, ListBox listbox)
+   void addfilestolistbox(char * indir, char * outdir, ListBox listbox)
     {
 
         FileListing listing { indir };
@@ -74,11 +74,11 @@ class tab_batch : Tab
         }
     }
 
-    ListBox outdir_list_box { this, text = "outdir_list_box", size = { 20, 8 }, position = { 8, 312 }, visible = false };
-    ListBox outfiles_list_box { this, text = "outfiles_list_box", size = { 20, 8 }, position = { 32, 312 }, visible = false };
-    EditBox new_files_extra_extension_edit_box { this, text = "new_files_extra_extension_edit_box", size = { 160, 19 }, position = { 920, 544 } };
-    Label help_label { this, text = "Help/Output:", size = { 89, 16 }, position = { 200, 808 } };
-    Label najitool_homepage_label
+   ListBox outdir_list_box { this, text = "outdir_list_box", size = { 20, 8 }, position = { 8, 312 }, visible = false };
+   ListBox outfiles_list_box { this, text = "outfiles_list_box", size = { 20, 8 }, position = { 32, 312 }, visible = false };
+   EditBox new_files_extra_extension_edit_box { this, text = "new_files_extra_extension_edit_box", size = { 160, 19 }, position = { 920, 544 } };
+   Label help_label { this, text = "Help/Output:", size = { 89, 16 }, position = { 200, 808 } };
+   Label najitool_homepage_label
     {
         this, text = "http://najitool.sf.net/", foreground = blue, font = { "Verdana", 8.25f, bold = true, underline = true }, position = { 16, 8 }, cursor = ((GuiApplication)__thisModule).GetCursor(hand);
 
@@ -90,9 +90,9 @@ class tab_batch : Tab
             return Label::OnLeftButtonDown(x, y, mods);
         }
     };
-    Label command_label { this, text = "Command:", position = { 8, 264 } };
-    Label category_label { this, text = "Category:", position = { 8, 216 } };
-    Button credits_button
+   Label command_label { this, text = "Command:", position = { 8, 264 } };
+   Label category_label { this, text = "Category:", position = { 8, 216 } };
+   Button credits_button
     {
         this, text = "Credits", size = { 75, 25 }, position = { 912, 808 };
 
@@ -103,7 +103,7 @@ class tab_batch : Tab
             return true;
         }
     };
-    Button license_button
+   Button license_button
     {
         this, text = "License", size = { 75, 25 }, position = { 824, 808 };
 
@@ -115,7 +115,7 @@ class tab_batch : Tab
             return true;
         }
     };
-    Button close_button
+   Button close_button
     {
         this, text = "Close", size = { 75, 25 }, position = { 1000, 808 };
 
@@ -125,7 +125,7 @@ class tab_batch : Tab
             return true;
         }
     };
-    Button add_file_button
+   Button add_file_button
     {
         this, text = "Add File:", size = { 106, 20 }, position = { 200, 472 };
 
@@ -157,7 +157,7 @@ class tab_batch : Tab
             return true;
         }
     };
-    ListBox najbatch_list_box
+   ListBox najbatch_list_box
     {
         this, text = "najbatch_list_box", size = { 878, 458 }, position = { 200, 8 }, hasHorzScroll = true, dontHideScroll = true, resizable = true, firstField.width = MAX_LOCATION + MAX_LOCATION / 2;;;
 
@@ -167,7 +167,7 @@ class tab_batch : Tab
             return true;
         }
     };
-    Button add_folder_button
+   Button add_folder_button
     {
         this, text = "Add Folder:", size = { 106, 20 }, position = { 200, 496 };
 
@@ -194,12 +194,16 @@ class tab_batch : Tab
             return true;
         }
     };
-    Button output_folder_radio
+   Button output_folder_radio
     {
         this, text = "Output Folder:", size = { 119, 15 }, position = { 368, 520 }, isRadio = true;
 
         bool NotifyClicked(Button button, int x, int y, Modifiers mods)
         {
+
+            output_folder_edit_box.disabled=false;
+            remake_folder_tree_check_box.disabled=false;
+
 
             output_folder_dialog.type=selectDir;
 
@@ -212,7 +216,7 @@ class tab_batch : Tab
             return true;
         }
     };
-    EditBox add_file_edit_box
+   EditBox add_file_edit_box
     {
         this, text = "add_file_edit_box", size = { 774, 19 }, position = { 304, 472 }, readOnly = true, maxNumLines = 1;
 
@@ -223,7 +227,7 @@ class tab_batch : Tab
             return true;
         }
     };
-    EditBox add_folder_edit_box
+   EditBox add_folder_edit_box
     {
         this, text = "add_folder_edit_box", size = { 774, 19 }, position = { 304, 496 }, readOnly = true, maxNumLines = 1;
 
@@ -235,7 +239,7 @@ class tab_batch : Tab
             return true;
         }
     };
-    EditBox output_folder_edit_box
+   EditBox output_folder_edit_box
     {
         this, text = "output_folder_edit_box", size = { 430, 19 }, position = { 488, 520 }, maxNumLines = 1;
 
@@ -245,14 +249,24 @@ class tab_batch : Tab
             return true;
         }
     };
-    Button remake_folder_tree_check_box { this, text = "Remake Folder Tree", background = white, position = { 920, 520 }, isCheckbox = true };
-    EditBox new_files_prefix_edit_box { this, text = "new_files_prefix_edit_box", size = { 178, 19 }, position = { 312, 544 } };
-    Label new_files_prefix_label { this, text = "New Files Prefix:", position = { 200, 544 } };
-    EditBox new_files_suffix_edit_box { this, text = "new_files_suffix_edit_box", size = { 132, 19 }, position = { 608, 544 } };
-    Label new_files_extra_extension_label { this, text = "New Files Extra Extension:", position = { 744, 544 } };
-    Label new_files_suffix_label { this, text = "New Files Suffix:", position = { 496, 544 } };
-    Button same_folder_as_files_radio { this, text = "Same Folder As Files", size = { 167, 15 }, position = { 200, 520 }, isRadio = true };
-    EditBox parameter_1_edit_box
+   Button remake_folder_tree_check_box { this, text = "Remake Folder Tree", background = white, position = { 920, 520 }, isCheckbox = true };
+   EditBox new_files_prefix_edit_box { this, text = "new_files_prefix_edit_box", size = { 178, 19 }, position = { 312, 544 } };
+   Label new_files_prefix_label { this, text = "New Files Prefix:", position = { 200, 544 } };
+   EditBox new_files_suffix_edit_box { this, text = "new_files_suffix_edit_box", size = { 132, 19 }, position = { 608, 544 } };
+   Label new_files_extra_extension_label { this, text = "New Files Extra Extension:", position = { 744, 544 } };
+   Label new_files_suffix_label { this, text = "New Files Suffix:", position = { 496, 544 } };
+   Button same_folder_as_files_radio 
+   {      
+      this, text = "Same Folder As Files", size = { 167, 15 }, position = { 200, 520 }, isRadio = true;
+
+      bool NotifyClicked(Button button, int x, int y, Modifiers mods)
+      {
+         output_folder_edit_box.disabled=true;
+         remake_folder_tree_check_box.disabled=true;
+         return true;
+      }
+   };
+   EditBox parameter_1_edit_box
     {
         this, text = "parameter_1_edit_box", size = { 440, 19 }, position = { 200, 584 }, maxNumLines = 1;
 
@@ -264,7 +278,7 @@ class tab_batch : Tab
             return true;
         }
     };
-    EditBox parameter_2_edit_box
+   EditBox parameter_2_edit_box
     {
         this, text = "parameter_2_edit_box", size = { 440, 19 }, position = { 640, 584 }, maxNumLines = 1;
 
@@ -276,7 +290,7 @@ class tab_batch : Tab
             return true;
         }
     };
-    Label parameter_2_label
+   Label parameter_2_label
     {
         this, text = "Parameter 2:", position = { 640, 568 };
 
@@ -286,7 +300,7 @@ class tab_batch : Tab
             return true;
         }
     };
-    Label parameter_1_label
+   Label parameter_1_label
     {
         this, text = "Parameter 1:", position = { 200, 568 };
 
@@ -297,12 +311,15 @@ class tab_batch : Tab
         }
     };
 
-    bool OnCreate(void)
+   bool OnCreate(void)
     {
         int i;
 
         same_folder_as_files_radio.checked=true;
         output_folder_radio.checked=false;
+
+        output_folder_edit_box.disabled=true;
+        remake_folder_tree_check_box.disabled=true;
 
         new_files_extra_extension_edit_box.contents = ".naji";
 
@@ -348,11 +365,11 @@ class tab_batch : Tab
 
         return true;
     }
-    EditBox help_edit_box
+   EditBox help_edit_box
     {
         this, text = "help_edit_box", font = { "Courier New", 8 }, size = { 878, 190 }, position = { 200, 608 }, hasHorzScroll = true, true, true, true, true, readOnly = true, true, noCaret = true
                                          };
-    Button process_button
+   Button process_button
     {
         this, text = "Process", size = { 80, 25 }, position = { 728, 808 };
 
@@ -606,7 +623,7 @@ class tab_batch : Tab
             return true;
         }
     };
-    DropBox category_drop_box
+   DropBox category_drop_box
     {
         this, text = "category_drop_box", size = { 184, 24 }, position = { 8, 232 };
 
@@ -1007,18 +1024,18 @@ class tab_batch : Tab
             return true;
         }
     };
-    BitmapResource najitool_logo_bitmap { ":res/najitool.pcx", window = this };
+   BitmapResource najitool_logo_bitmap { ":res/najitool.pcx", window = this };
 
-    void OnRedraw(Surface surface)
+   void OnRedraw(Surface surface)
     {
         ColorKey keys[2] = { {0x6EA1B4, 0.0f}, { white, 1.0f } };
         surface.Gradient(keys, sizeof(keys) / sizeof(ColorKey), 1, vertical, 1, 0, 1280-3, 1024 - 3);
         surface.Blit(najitool_logo_bitmap.bitmap, 8, 24, 0,0, najitool_logo_bitmap.bitmap.width, najitool_logo_bitmap.bitmap.height);
         Update(null);
     }
-    Label language_label { this, text = "Language:", position = { 8, 168 } };
-    FlagCollection flags { this };
-    SavingDataBox language_drop_box
+   Label language_label { this, text = "Language:", position = { 8, 168 } };
+   FlagCollection flags { this };
+   SavingDataBox language_drop_box
     {
         this, text = "language_drop_box", size = { 184, 24 }, position = { 8, 184 }, data = &lang, type = class(najitool_languages), fieldData = flags;;;
 
@@ -1149,7 +1166,7 @@ class tab_batch : Tab
         }
 
     };
-    DropBox cmd_drop_box
+   DropBox cmd_drop_box
     {
         this, text = "cmd_drop_box", size = { 184, 24 }, position = { 8, 280 };
 
@@ -1190,6 +1207,35 @@ class tab_batch : Tab
 
                         }
 
+                        if (! strcmp(najitool_command, "fillfile") )
+                        {
+                        output_folder_edit_box.disabled=true;
+                        remake_folder_tree_check_box.disabled=true;
+                        }
+
+                        else if (! strcmp(najitool_command, "randkill") )
+                        {
+                        output_folder_edit_box.disabled=true;
+                        remake_folder_tree_check_box.disabled=true;
+                        }
+
+                        else if (! strcmp(najitool_command, "rndffill") )
+                        {
+                        output_folder_edit_box.disabled=true;
+                        remake_folder_tree_check_box.disabled=true;
+                        }
+
+                        else if (! strcmp(najitool_command, "zerokill") )
+                        {
+                        output_folder_edit_box.disabled=true;
+                        remake_folder_tree_check_box.disabled=true;
+                        }
+
+                        else
+                        {
+                        output_folder_edit_box.disabled=false;
+                        remake_folder_tree_check_box.disabled=false;
+                        }
                         return true;
                     }
 
@@ -1200,7 +1246,7 @@ class tab_batch : Tab
 
     };
 
-    void cat_head(char *namein, int n_lines)
+   void cat_head(char *namein, int n_lines)
     {
         int a;
         int cnt=0;
@@ -1234,7 +1280,7 @@ class tab_batch : Tab
         najinclose();
     }
 
-    void cat_tail(char *namein, int n_lines)
+   void cat_tail(char *namein, int n_lines)
     {
         int a;
         int i=0;
@@ -1298,7 +1344,7 @@ class tab_batch : Tab
         najinclose();
     }
 
-    void repcat(char *namein, unsigned int repeat)
+   void repcat(char *namein, unsigned int repeat)
     {
         int a=0;
         unsigned int i=0;
@@ -1322,7 +1368,7 @@ class tab_batch : Tab
         najinclose();
     }
 
-    void repcatpp(char *namein, unsigned int start)
+   void repcatpp(char *namein, unsigned int start)
     {
         int a=0;
         unsigned int i=0;
@@ -1348,7 +1394,7 @@ class tab_batch : Tab
         najinclose();
     }
 
-    void skipcat(char *namein, char *toskip)
+   void skipcat(char *namein, char *toskip)
     {
         int skip = NAJI_FALSE;
         int a=0;
@@ -1378,7 +1424,7 @@ class tab_batch : Tab
         najinclose();
     }
 
-    void onlycat(char *namein, char *toshow)
+   void onlycat(char *namein, char *toshow)
     {
         int show = NAJI_TRUE;
         int a=0;
@@ -1408,7 +1454,7 @@ class tab_batch : Tab
         najinclose();
     }
 
-    void rndbsout(unsigned long int size)
+   void rndbsout(unsigned long int size)
     {
         unsigned long int i=0;
 
@@ -1418,7 +1464,7 @@ class tab_batch : Tab
             help_edit_box.AddCh((rand() % 255));
     }
 
-    void rndtsout(unsigned long int size)
+   void rndtsout(unsigned long int size)
     {
         unsigned long int i=0;
         help_edit_box.Clear();
@@ -1427,7 +1473,7 @@ class tab_batch : Tab
             help_edit_box.AddCh((rand() % 95)+' ');
     }
 
-    void hexicat(char *namein)
+   void hexicat(char *namein)
     {
         int counter = 0;
         int hexbuf[20];
@@ -1564,7 +1610,7 @@ class tab_batch : Tab
         najinclose();
     }
 
-    void revcat(char *namein)
+   void revcat(char *namein)
     {
         int a=0;
         long pos;
@@ -1588,7 +1634,7 @@ class tab_batch : Tab
         najinclose();
     }
 
-    void qpatch(char *named, char *patch_file)
+   void qpatch(char *named, char *patch_file)
     {
         char *end;
         char buffer[200];
@@ -1718,7 +1764,7 @@ class tab_batch : Tab
         najedclose();
     }
 
-    void mkpatch(char *original, char *patched, char *patchfile)
+   void mkpatch(char *original, char *patched, char *patchfile)
     {
         int a;
         int b;
@@ -1776,7 +1822,7 @@ class tab_batch : Tab
         najoutclose();
     }
 
-    void kitten(char *namein)
+   void kitten(char *namein)
     {
         int a=0;
 
@@ -1793,7 +1839,7 @@ class tab_batch : Tab
         najinclose();
     }
 
-    void cat_text(char *namein)
+   void cat_text(char *namein)
     {
         int a=0;
 
@@ -1815,7 +1861,7 @@ class tab_batch : Tab
         najinclose();
     }
 
-    void showline(char *namein, unsigned long line)
+   void showline(char *namein, unsigned long line)
     {
         int a;
         unsigned long cnt = 0;
@@ -1856,7 +1902,7 @@ class tab_batch : Tab
         najinclose();
     }
 
-    void catrandl(char *namein)
+   void catrandl(char *namein)
     {
         int a;
         unsigned long number_of_lines = 0;
@@ -1886,7 +1932,7 @@ class tab_batch : Tab
 
     }
 
-    void compfile(char *namein, char *namein2, bool cont_on_diff)
+   void compfile(char *namein, char *namein2, bool cont_on_diff)
     {
         int a;
         int b;
@@ -1944,7 +1990,7 @@ class tab_batch : Tab
 
     }
 
-    void compare(char *namein, char *namein2)
+   void compare(char *namein, char *namein2)
     {
         compfile(namein, namein2, false);
         najinclose();
@@ -1953,14 +1999,14 @@ class tab_batch : Tab
 
     /* continuous compare, does not stop comparing when files differ */
 
-    void ccompare(char *namein, char *namein2)
+   void ccompare(char *namein, char *namein2)
     {
         compfile(namein, namein2, true);
         najinclose();
         najin2close();
     }
 
-    int ::findi_line(const char *line, const char *str)
+   int ::findi_line(const char *line, const char *str)
     {
         char *straux;
         char *lineaux;
@@ -1981,7 +2027,7 @@ class tab_batch : Tab
         return 1;
     }
 
-    int ::find_line(const char *line, const char *str)
+   int ::find_line(const char *line, const char *str)
     {
 
         if (strstr(line, str) == NULL)
@@ -1991,7 +2037,7 @@ class tab_batch : Tab
         return 1;
     }
 
-    void find_basis(char *namein, char *str, bool sensitive, bool show_matches)
+   void find_basis(char *namein, char *str, bool sensitive, bool show_matches)
     {
         long pos;
         int i;
@@ -2048,27 +2094,27 @@ class tab_batch : Tab
         najinclose();
     }
 
-    void find(char *namein, char *str)
+   void find(char *namein, char *str)
     {
         find_basis(namein, str, true, false);
     }
 
-    void findi(char *namein, char *str)
+   void findi(char *namein, char *str)
     {
         find_basis(namein, str, false, false);
     }
 
-    void cfind(char *namein, char *str)
+   void cfind(char *namein, char *str)
     {
         find_basis(namein, str, true, true);
     }
 
-    void cfindi(char *namein, char *str)
+   void cfindi(char *namein, char *str)
     {
         find_basis(namein, str, false, true);
     }
 
-    void chchars(char *namein, char *nameout, char *original_chars, char *changed_chars)
+   void chchars(char *namein, char *nameout, char *original_chars, char *changed_chars)
     {
         int a;
         int i;
@@ -2120,7 +2166,7 @@ class tab_batch : Tab
         najoutclose();
     }
 
-    void coffset(char *namein, long startpos, long endpos)
+   void coffset(char *namein, long startpos, long endpos)
     {
         long filesize=0;
         long i;
@@ -2170,7 +2216,7 @@ class tab_batch : Tab
         najinclose();
     }
 
-    void copyoffs(char *namein, long startpos, long endpos, char *nameout)
+   void copyoffs(char *namein, long startpos, long endpos, char *nameout)
     {
         long filesize=0;
         long i;
@@ -2221,7 +2267,7 @@ class tab_batch : Tab
         najoutclose();
     }
 
-    void dumpoffs(char *namein, long startpos, long endpos)
+   void dumpoffs(char *namein, long startpos, long endpos)
     {
         long filesize=0;
         long i;
@@ -2271,7 +2317,7 @@ class tab_batch : Tab
         najinclose();
     }
 
-    void engnum(char *nameout)
+   void engnum(char *nameout)
     {
         char *units[10] =
         {
@@ -2421,7 +2467,7 @@ class tab_batch : Tab
         najoutclose();
     }
 
-    void turnum(char *nameout)
+   void turnum(char *nameout)
     {
         char *units[10] =
         {
@@ -2678,7 +2724,7 @@ class tab_batch : Tab
 
     }
 
-    void bremline(char *str, char *namein, char *nameout)
+   void bremline(char *str, char *namein, char *nameout)
     {
         char *tempbuf = NULL;
 
@@ -2796,7 +2842,7 @@ class tab_batch : Tab
        the buffer size by BLOCK_SIZE as and when required.
     */
 
-    void eremline(char *str, char *namein, char *nameout)
+   void eremline(char *str, char *namein, char *nameout)
     {
         const int BLOCK_SIZE = 100;
         char *line_buf = NULL;
@@ -2910,7 +2956,7 @@ class tab_batch : Tab
         najoutclose();
     }
 
-    void remline(char *str, char *namein, char *nameout)
+   void remline(char *str, char *namein, char *nameout)
     {
         long pos;
         int i;
@@ -2951,7 +2997,7 @@ class tab_batch : Tab
         najoutclose();
     }
 
-    void najisum(char *namein)
+   void najisum(char *namein)
     {
         unsigned long int najisum[256];
         unsigned long int chksum=0;
@@ -3036,7 +3082,7 @@ class tab_batch : Tab
         help_edit_box.Printf("\n\n\n");
     }
 
-    void hmaker(char *namein)
+   void hmaker(char *namein)
     {
         char buffer[402];
 
@@ -3092,7 +3138,7 @@ class tab_batch : Tab
         najinclose();
     }
 
-    void rcharvar(char *str)
+   void rcharvar(char *str)
     {
         int c;
         int x;
@@ -3153,7 +3199,7 @@ class tab_batch : Tab
         }
     }
 
-    void lcharvar(char *str)
+   void lcharvar(char *str)
     {
         int x;
         int y;
@@ -3214,7 +3260,7 @@ class tab_batch : Tab
 
     }
 
-    void elite_char_print(char a)
+   void elite_char_print(char a)
     {
         char b = a;
 
@@ -3319,7 +3365,7 @@ class tab_batch : Tab
         help_edit_box.AddCh(a);
     }
 
-    void leetstr(char *string)
+   void leetstr(char *string)
     {
         int i;
 
@@ -3330,15 +3376,15 @@ class tab_batch : Tab
 
     }
 
-    void mp3info_gui(char *namein)
+   void mp3info_gui(char *namein)
     {
         help_edit_box.Clear();
         help_edit_box.Printf("%s", mp3info(namein));
     }
 
-    char fnamebuf[100];
+   char fnamebuf[100];
 
-    void naji_unicode_html_header(int n)
+   void naji_unicode_html_header(int n)
     {
         int i;
 
@@ -3371,7 +3417,7 @@ class tab_batch : Tab
 
     }
 
-    void naji_unicode_html_end(void)
+   void naji_unicode_html_end(void)
     {
         int i;
 
@@ -3396,7 +3442,7 @@ class tab_batch : Tab
     /* please be careful when using it and */
     /* please dont abuse this system */
 
-    void naji_del_gen_unicode_html_pages(char *output_folder)
+   void naji_del_gen_unicode_html_pages(char *output_folder)
     {
         int i;
         int delete_errors=0;
@@ -3419,7 +3465,7 @@ class tab_batch : Tab
         exit(delete_errors);
     }
 
-    void naji_gen_unicode_html_pages(char *output_folder)
+   void naji_gen_unicode_html_pages(char *output_folder)
     {
         int i = 0;
         int unicode_max = 0xFFFF;  /* max is 65535 - 0xFFFF */
@@ -3472,7 +3518,7 @@ class tab_batch : Tab
 
     /* puts vowels inbetween every letter of a word except the first and last letter */
 
-    void vowelwrd(char *str)
+   void vowelwrd(char *str)
     {
 
         int len = 0;
@@ -3517,7 +3563,7 @@ class tab_batch : Tab
 
     }
 
-    void tothe(char *str)
+   void tothe(char *str)
     {
         int i;
         int l;
@@ -3541,18 +3587,18 @@ class tab_batch : Tab
 
     }
 
-    void howline(char *namein)
+   void howline(char *namein)
     {
 
         help_edit_box.Printf("\n%s\nTotal number of lines is: %lu\n", namein, howl(namein));
     }
 
-    void longline(char *namein)
+   void longline(char *namein)
     {
         help_edit_box.Printf("\n%s\nLongest line is: %lu\n", namein, longl(namein));
     }
 
-    bool batch_check(void)
+   bool batch_check(void)
     {
 
         if (! strcmp(najitool_command, "8bit256") )

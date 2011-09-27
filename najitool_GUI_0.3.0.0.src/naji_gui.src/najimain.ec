@@ -36,40 +36,43 @@ File najimainfile;
 
 class tab_main : Tab
 {
-    text = "Main";
-    background = { r = 110, g = 161, b = 180 };
-    font = { "Verdana", 8.25f, bold = true };
-    size = { 1111, 900 };
+   text = "Main";
+   background = { r = 110, g = 161, b = 180 };
+   font = { "Verdana", 8.25f, bold = true };
+   size = { 1111, 900 };
 
-    int ey;
-    char input_file_1_path[MAX_LOCATION];
-    char input_file_2_path[MAX_LOCATION];
-    char input_folder_path[MAX_LOCATION];
-    char output_file_1_path[MAX_LOCATION];
-    char output_file_2_path[MAX_LOCATION];
-    char output_folder_path[MAX_LOCATION];
-    char copyself_path[MAX_LOCATION];
-    char naji_buffer[4096];
-    char parameter_1_string[4096];
-    char parameter_2_string[4096];
-    char najitool_command[4096];
-    char najitool_category[4096];
-    char temp_edit_delete[4096+4096];
-    char msgbox_buffer[4096];
-    time_t time_value;
-    struct tm *date_time;
-    najitool_languages lang;
-    Bitmap najitempbmp;
+   int ey;
+   char input_file_1_path[MAX_LOCATION];
+   char input_file_2_path[MAX_LOCATION];
+   char input_folder_path[MAX_LOCATION];
+   char output_file_1_path[MAX_LOCATION];
+   char output_file_2_path[MAX_LOCATION];
+   char output_folder_path[MAX_LOCATION];
+   char copyself_path[MAX_LOCATION];
+   char naji_buffer[4096];
+   char parameter_1_string[4096];
+   char parameter_2_string[4096];
+   char najitool_command[4096];
+   char najitool_category[4096];
+   char temp_edit_delete[4096+4096];
+   char msgbox_buffer[4096];
+   time_t time_value;
+   struct tm *date_time;
+   najitool_languages lang;
+   Bitmap najitempbmp;
+   bool reverse_mode;
+   reverse_mode = false;
+
 
     /* Begin: System Date/Time Functions */
 
-    void get_datetime()
+   void get_datetime()
     {
         time(&time_value);
         date_time = localtime(&time_value);
     }
 
-    void systemdt()
+   void systemdt()
     {
         get_datetime();
         sprintf(naji_buffer, "Current System Date and Time: %s", asctime(date_time));
@@ -79,14 +82,14 @@ class tab_main : Tab
 
     /* Begin: English Date/Time Functions */
 
-    void telltime()
+   void telltime()
     {
         get_datetime();
         sprintf(naji_buffer, "%02i:%02i:%02i", date_time->tm_hour, date_time->tm_min, date_time->tm_sec);
         help_edit_box.contents = naji_buffer;
     }
 
-    char * s_today()
+   char * s_today()
     {
         int i;
         get_datetime();
@@ -94,7 +97,7 @@ class tab_main : Tab
         return ("(DAY ERROR)");
     }
 
-    char * s_month()
+   char * s_month()
     {
         int i;
         get_datetime();
@@ -102,31 +105,31 @@ class tab_main : Tab
         return ("(MONTH ERROR)");
     }
 
-    void today()
+   void today()
     {
         help_edit_box.contents = s_today();
     }
 
-    void dayofmon()
+   void dayofmon()
     {
         get_datetime();
         sprintf(naji_buffer, "%i", date_time->tm_mday);
         help_edit_box.contents = naji_buffer;
     }
 
-    void  month()
+   void  month()
     {
         help_edit_box.contents = s_month();
     }
 
-    void year()
+   void year()
     {
         get_datetime();
         sprintf(naji_buffer, "%i", ( (1900) + (date_time->tm_year) ) );
         help_edit_box.contents =  naji_buffer;
     }
 
-    void datetime(void)
+   void datetime(void)
     {
         char telltime_buf[100];
         char today_buf[100];
@@ -147,14 +150,14 @@ class tab_main : Tab
 
     /* Begin: Turkish Date/Time Functions */
 
-    void saat()
+   void saat()
     {
         get_datetime();
         sprintf(naji_buffer, "%02i:%02i:%02i", date_time->tm_hour, date_time->tm_min, date_time->tm_sec);
         help_edit_box.contents = naji_buffer;
     }
 
-    char * s_bugun()
+   char * s_bugun()
     {
         int i;
         get_datetime();
@@ -162,7 +165,7 @@ class tab_main : Tab
         return ("(GUN HATA)");
     }
 
-    char * s_ay()
+   char * s_ay()
     {
         int i;
         get_datetime();
@@ -170,31 +173,31 @@ class tab_main : Tab
         return ("(AY HATA)");
     }
 
-    void bugun()
+   void bugun()
     {
         help_edit_box.contents = s_bugun();
     }
 
-    void ay()
+   void ay()
     {
         help_edit_box.contents = s_ay();
     }
 
-    void ayinkaci()
+   void ayinkaci()
     {
         get_datetime();
         sprintf(naji_buffer, "%i", date_time->tm_mday);
         help_edit_box.contents = naji_buffer;
     }
 
-    void yil()
+   void yil()
     {
         get_datetime();
         sprintf(naji_buffer, "%i", ( (1900) + (date_time->tm_year) ) );
         help_edit_box.contents =  naji_buffer;
     }
 
-    void saatarih(void)
+   void saatarih(void)
     {
         char telltime_buf[100];
         char today_buf[100];
@@ -212,16 +215,66 @@ class tab_main : Tab
         help_edit_box.contents = naji_buffer;
     }
 
-    Button wav_of_bytes_button
-    {
-        this, text = "WAV Sound of Byte Pattern", font = { "Verdana", 6.85f, bold = true }, size = { 182, 21 }, position = { 8, 400 };
+   Button reverse_engineering_mode_on_check_box
+   {
+      this, text = "Reverse Engineering Mode On", background = white, font = { "Verdana", 6.85f, bold = true }, position = { 8, 368 }, isCheckbox = true;
 
-    };
-    Button bmp_of_bytes_button
-    {
-        this, text = "BMP Image of Byte Pattern", font = { "Verdana", 6.85f, bold = true }, size = { 182, 21 }, position = { 8, 376 };
+      bool NotifyClicked(Button button, int x, int y, Modifiers mods)
+      {
+   
+   if (reverse_mode == false)
+   {
+   help_edit_box.size = { 702, 154 };
+   
+   
+   wav_of_bytes_button.visible = true;
+   bmp_of_bytes_button.visible = true;
+   
+   hex_output_label.visible = true;
+   decimal_output_label.visible = true;
+   octal_output_label.visible = true;
+   binary_Output_label.visible = true;
+   hex_output_edit_box.visible = true;
+   decimal_output_edit_box.visible = true;
+   octal_output_edit_box.visible = true;
+   binary_output_edit_box.visible = true;
+   reverse_mode = true;
+   }
 
-        bool NotifyClicked(Button button, int x, int y, Modifiers mods)
+   else if (reverse_mode == true)
+   {
+   
+   
+   help_edit_box.size = { 702, 600 };
+
+   wav_of_bytes_button.visible = false;
+   bmp_of_bytes_button.visible = false;
+
+   hex_output_label.visible = false;
+   decimal_output_label.visible = false;
+   octal_output_label.visible = false;
+   binary_Output_label.visible = false;
+   hex_output_edit_box.visible = false;
+   decimal_output_edit_box.visible = false;
+   octal_output_edit_box.visible = false;
+   binary_output_edit_box.visible = false;
+   reverse_mode = false;
+   }
+
+
+
+         return true;
+      }
+   };
+   Button wav_of_bytes_button
+    {
+      this, text = "WAV Sound of Byte Pattern", font = { "Verdana", 6.85f, bold = true }, size = { 182, 21 }, position = { 8, 416 }, visible = false
+   };
+   Button bmp_of_bytes_button
+    {
+      this, text = "BMP Image of Byte Pattern", font = { "Verdana", 6.85f, bold = true }, size = { 182, 21 }, position = { 8, 392 }, visible = false;
+
+      bool NotifyClicked(Button button, int x, int y, Modifiers mods)
         {
 
             bump bumper {};
@@ -229,22 +282,22 @@ class tab_main : Tab
 
             return true;
         }
-    };
+   };
 
     /* End: Turkish Date/Time Functions */
-    ProgressBar najitool_main_progress_bar { this, text = "najitool_main_progress_bar", size = { 388, 24 }, position = { 432, 816 } };
-    Label help_label { this, text = "Help/Text Output:", size = { 129, 16 }, position = { 200, 344 } };
-    Label hex_output_label { this, text = "Hexadecimal Output:", size = { 144, 13 }, position = { 200, 464 } };
-    Label decimal_output_label { this, text = "Decimal Output:", size = { 112, 13 }, position = { 200, 584 } };
-    Label octal_output_label { this, text = "Octal Output:", size = { 96, 13 }, position = { 200, 688 } };
-    Label binary_Output_label { this, text = "Binary Output:", size = { 104, 13 }, position = { 200, 792 } };
-    EditBox hex_output_edit_box { this, size = { 702, 114 }, position = { 352, 368 }, hasHorzScroll = true, true, true, true, true, readOnly = true, true, noCaret = true };
-    EditBox decimal_output_edit_box { this, size = { 702, 114 }, position = { 352, 488 }, hasHorzScroll = true, true, true, true, true, readOnly = true, true, noCaret = true };
-    EditBox octal_output_edit_box { this, size = { 702, 96 }, position = { 352, 608 }, hasHorzScroll = true, true, true, true, true, readOnly = true, true, noCaret = true };
-    EditBox binary_output_edit_box { this, size = { 702, 96 }, position = { 352, 712 }, hasHorzScroll = true, true, true, true, true, readOnly = true, true, noCaret = true };
-    Button pause_button { this, text = "Pause", size = { 75, 25 }, position = { 824, 816 } };
-    Button stop_button { this, text = "Stop", size = { 75, 25 }, position = { 904, 816 } };
-    Label najitool_homepage_label
+   ProgressBar najitool_main_progress_bar { this, text = "najitool_main_progress_bar", size = { 388, 24 }, position = { 432, 816 } };
+   Label help_label { this, text = "Help/Text Output:", size = { 129, 16 }, position = { 200, 344 } };
+   Label hex_output_label { this, text = "Hexadecimal Output:", size = { 144, 13 }, position = { 200, 464 }, visible = false };
+   Label decimal_output_label { this, text = "Decimal Output:", size = { 112, 13 }, position = { 200, 584 }, visible = false };
+   Label octal_output_label { this, text = "Octal Output:", size = { 96, 13 }, position = { 200, 688 }, visible = false };
+   Label binary_Output_label { this, text = "Binary Output:", size = { 104, 13 }, position = { 200, 792 }, visible = false };
+   EditBox hex_output_edit_box { this, size = { 702, 114 }, position = { 352, 368 }, visible = false, hasHorzScroll = true, true, true, true, true, readOnly = true, true, noCaret = true };
+   EditBox decimal_output_edit_box { this, size = { 702, 114 }, position = { 352, 488 }, visible = false, hasHorzScroll = true, true, true, true, true, readOnly = true, true, noCaret = true };
+   EditBox octal_output_edit_box { this, size = { 702, 96 }, position = { 352, 608 }, visible = false, hasHorzScroll = true, true, true, true, true, readOnly = true, true, noCaret = true };
+   EditBox binary_output_edit_box { this, size = { 702, 96 }, position = { 352, 712 }, visible = false, hasHorzScroll = true, true, true, true, true, readOnly = true, true, noCaret = true };
+   Button pause_button { this, text = "Pause", size = { 75, 25 }, position = { 824, 816 } };
+   Button stop_button { this, text = "Stop", size = { 75, 25 }, position = { 904, 816 } };
+   Label najitool_homepage_label
     {
         this, text = "http://najitool.sf.net/", foreground = blue, font = { "Verdana", 8.25f, bold = true, underline = true }, position = { 16, 8 }, cursor = ((GuiApplication)__thisModule).GetCursor(hand);
 
@@ -256,9 +309,9 @@ class tab_main : Tab
             return Label::OnLeftButtonDown(x, y, mods);
         }
     };
-    Label command_label { this, text = "Command:", position = { 8, 320 } };
-    Label category_label { this, text = "Category:", position = { 8, 272 } };
-    Button credits_button
+   Label command_label { this, text = "Command:", position = { 8, 320 } };
+   Label category_label { this, text = "Category:", position = { 8, 272 } };
+   Button credits_button
     {
         this, text = "Credits", size = { 75, 25 }, position = { 120, 184 };
 
@@ -269,7 +322,7 @@ class tab_main : Tab
             return true;
         }
     };
-    Button license_button
+   Button license_button
     {
         this, text = "License", size = { 75, 25 }, position = { 8, 184 };
 
@@ -281,7 +334,7 @@ class tab_main : Tab
             return true;
         }
     };
-    Button close_button
+   Button close_button
     {
         this, text = "Close", size = { 75, 25 }, position = { 984, 816 };
 
@@ -291,7 +344,7 @@ class tab_main : Tab
             return true;
         }
     };
-    Button input_file_1_button
+   Button input_file_1_button
     {
         this, text = "Input File 1:", size = { 130, 20 }, position = { 200, 16 };
 
@@ -307,7 +360,7 @@ class tab_main : Tab
             return true;
         }
     };
-    Button input_file_2_button
+   Button input_file_2_button
     {
         this, text = "Input File 2:", size = { 130, 20 }, position = { 200, 40 };
 
@@ -322,7 +375,7 @@ class tab_main : Tab
             return true;
         }
     };
-    Button input_folder_button
+   Button input_folder_button
     {
         this, text = "Input Folder:", size = { 130, 20 }, position = { 200, 64 };
 
@@ -340,7 +393,7 @@ class tab_main : Tab
             return true;
         }
     };
-    Button output_file_1_button
+   Button output_file_1_button
     {
         this, text = "Output File 1:", size = { 130, 20 }, position = { 200, 88 };
 
@@ -357,7 +410,7 @@ class tab_main : Tab
             return true;
         }
     };
-    Button output_file_2_button
+   Button output_file_2_button
     {
         this, text = "Output File 2:", size = { 130, 20 }, position = { 200, 112 };
 
@@ -375,7 +428,7 @@ class tab_main : Tab
             return true;
         }
     };
-    Button output_folder_button
+   Button output_folder_button
     {
         this, text = "Output Folder:", size = { 130, 20 }, position = { 200, 136 };
 
@@ -393,7 +446,7 @@ class tab_main : Tab
             return true;
         }
     };
-    EditBox input_file_1_edit_box
+   EditBox input_file_1_edit_box
     {
         this, text = "input_file_1_edit_box", size = { 702, 19 }, position = { 352, 16 };
 
@@ -404,7 +457,7 @@ class tab_main : Tab
             return true;
         }
     };
-    EditBox input_file_2_edit_box
+   EditBox input_file_2_edit_box
     {
         this, text = "input_file_2_edit_box", size = { 702, 19 }, position = { 352, 40 };
 
@@ -415,7 +468,7 @@ class tab_main : Tab
             return true;
         }
     };
-    EditBox input_folder_edit_box
+   EditBox input_folder_edit_box
     {
         this, text = "input_folder_edit_box", size = { 702, 19 }, position = { 352, 64 };
 
@@ -427,7 +480,7 @@ class tab_main : Tab
             return true;
         }
     };
-    EditBox output_file_1_edit_box
+   EditBox output_file_1_edit_box
     {
         this, text = "output_file_1_edit_box", size = { 702, 19 }, position = { 352, 88 };
 
@@ -439,7 +492,7 @@ class tab_main : Tab
             return true;
         }
     };
-    EditBox output_file_2_edit_box
+   EditBox output_file_2_edit_box
     {
         this, text = "output_file_2_edit_box", size = { 702, 19 }, position = { 352, 112 };
 
@@ -451,7 +504,7 @@ class tab_main : Tab
             return true;
         }
     };
-    EditBox output_folder_edit_box
+   EditBox output_folder_edit_box
     {
         this, text = "output_folder_edit_box", size = { 702, 19 }, position = { 352, 136 };
 
@@ -461,7 +514,7 @@ class tab_main : Tab
             return true;
         }
     };
-    EditBox parameter_1_edit_box
+   EditBox parameter_1_edit_box
     {
         this, text = "parameter_1_edit_box", size = { 702, 19 }, position = { 352, 160 };
 
@@ -473,7 +526,7 @@ class tab_main : Tab
             return true;
         }
     };
-    EditBox parameter_2_edit_box
+   EditBox parameter_2_edit_box
     {
         this, text = "parameter_2_edit_box", size = { 702, 19 }, position = { 352, 184 };
 
@@ -485,7 +538,7 @@ class tab_main : Tab
             return true;
         }
     };
-    Label parameter_2_label
+   Label parameter_2_label
     {
         this, text = "Parameter 2:", position = { 224, 184 };
 
@@ -495,7 +548,7 @@ class tab_main : Tab
             return true;
         }
     };
-    Label parameter_1_label
+   Label parameter_1_label
     {
         this, text = "Parameter 1:", position = { 224, 160 };
 
@@ -506,10 +559,11 @@ class tab_main : Tab
         }
     };
 
-    bool OnCreate(void)
+   bool OnCreate(void)
     {
         int i;
 
+        help_edit_box.size = { 702, 600 };
 
         if (!strcmp(najitool_language, ""))
             strcpy(najitool_language, "English");
@@ -550,17 +604,12 @@ class tab_main : Tab
 
         return true;
     };
-    EditBox help_edit_box
+   EditBox help_edit_box
     {
         this, text = "help_edit_box", font = { "Courier New", 8 }, size = { 702, 154 }, position = { 352, 208 }, hasHorzScroll = true, true, true, true, true, readOnly = true, true, noCaret = true;
 
-        bool NotifyModified(EditBox editBox)
-        {
-
-            return true;
-        }
     };
-    Button process_button
+   Button process_button
     {
         this, text = "Process", size = { 75, 25 }, position = { 352, 816 };
 
@@ -718,7 +767,10 @@ class tab_main : Tab
                 najitool_gui_credits();
 
             else if (!strcmp(najitool_command, "database"))
+            {
                 tabdatabase.SelectTab();
+                return true;
+            }
 
             else if (!strcmp(najitool_command, "datetime"))
                 datetime();
@@ -849,6 +901,7 @@ class tab_main : Tab
             {
                 naji_db_html_selected = true;
                 tabdatabase.SelectTab();
+                return true;
             }
 
             else if (!strcmp(najitool_command, "html2txt"))
@@ -891,7 +944,10 @@ class tab_main : Tab
                 leetstr(parameter_1_string);
 
             else if (!strcmp(najitool_command, "length"))
+            {    
                 tablength.SelectTab();
+                return true;
+            }
 
             else if (!strcmp(najitool_command, "lensortl"))
                 lensortl(input_file_1_path, output_file_1_path);
@@ -930,7 +986,10 @@ class tab_main : Tab
                 makarray(input_file_1_path, output_file_1_path, parameter_1_string);
 
             else if (!strcmp(najitool_command, "mathgame"))
+            {
                 tabmathgame.SelectTab();
+                return true;
+            }
 
             else if (!strcmp(najitool_command, "maxxnewl"))
                 maxxnewl(input_file_1_path, output_file_1_path, atoi(parameter_1_string));
@@ -973,7 +1032,10 @@ class tab_main : Tab
                 n2str(parameter_1_string, input_file_1_path, output_file_1_path);
 
             else if (!strcmp(najitool_command, "najcrypt"))
+            {    
                 tabcrypt.SelectTab();
+                return true;
+            }
 
             else if (!strcmp(najitool_command, "naji_bmp"))
                 naji_bmp(output_folder_path);
@@ -1027,7 +1089,10 @@ class tab_main : Tab
                 onlychar(input_file_1_path, output_file_1_path, parameter_1_string);
 
             else if (!strcmp(najitool_command, "patch"))
+            {
                 tabpatch.SelectTab();
+                return true;
+            }
 
             else if (!strcmp(najitool_command, "printftx"))
                 printftx(input_file_1_path, output_file_1_path);
@@ -1303,6 +1368,9 @@ class tab_main : Tab
 
             }
 
+         if (reverse_mode == true)
+         {
+
             remove(".najiout.hex");
             remove(".najiout.dec");
             remove(".najiout.oct");
@@ -1338,6 +1406,9 @@ class tab_main : Tab
             delete najimainfile;
             }
 
+        }
+
+
             if (!strcmp(najitool_language, "English"))
                 sprintf(msgbox_buffer, "%s", "Processing complete.");
 
@@ -1349,7 +1420,7 @@ class tab_main : Tab
             return true;
         } // end of notify clicked
     } // end of process button
-    DropBox category_drop_box
+   DropBox category_drop_box
     {
         this, text = "category_drop_box", size = { 184, 24 }, position = { 8, 288 };
 
@@ -1750,18 +1821,18 @@ class tab_main : Tab
             return true;
         }
     };
-    BitmapResource najitool_logo_bitmap { ":res/najitool.pcx", window = this };
+   BitmapResource najitool_logo_bitmap { ":res/najitool.pcx", window = this };
 
-    void OnRedraw(Surface surface)
+   void OnRedraw(Surface surface)
     {
         ColorKey keys[2] = { {0x6EA1B4, 0.0f}, { white, 1.0f } };
         surface.Gradient(keys, sizeof(keys) / sizeof(ColorKey), 1, vertical, 1, 0, 1280-3, 1024 - 3);
         surface.Blit(najitool_logo_bitmap.bitmap, 8, 24, 0,0, najitool_logo_bitmap.bitmap.width, najitool_logo_bitmap.bitmap.height);
         Update(null);
     }
-    Label language_label { this, text = "Language:", position = { 8, 224 } };
-    FlagCollection flags { this };
-    SavingDataBox language_drop_box
+   Label language_label { this, text = "Language:", position = { 8, 224 } };
+   FlagCollection flags { this };
+   SavingDataBox language_drop_box
     {
         this, text = "language_drop_box", size = { 184, 24 }, position = { 8, 240 }, data = &lang, type = class(najitool_languages), fieldData = flags;;;
 
@@ -1888,7 +1959,7 @@ class tab_main : Tab
             return true;
         }
     };
-    DropBox cmd_drop_box
+   DropBox cmd_drop_box
     {
         this, text = "cmd_drop_box", size = { 184, 24 }, position = { 8, 336 };
 
@@ -1956,8 +2027,7 @@ class tab_main : Tab
         }
     };
 
-
-void nascii(char *character[], int how_many_lines, int line)
+   void nascii(char *character[], int how_many_lines, int line)
 {
 int i;
     
@@ -1966,7 +2036,7 @@ int i;
     help_edit_box.AddS(character[line]);
 }
 
-void naji_ascii(char *string, int i, int a)
+   void naji_ascii(char *string, int i, int a)
 {
 
     if (string[i] == ' ')
@@ -2370,8 +2440,7 @@ void naji_ascii(char *string, int i, int a)
 
 }
 
-
-void bigascii(char *string)
+   void bigascii(char *string)
 {
     int a=0;
     int i=0;
@@ -2391,7 +2460,7 @@ void bigascii(char *string)
 
 }
 
-  void cat_head(char *namein, int n_lines)
+   void cat_head(char *namein, int n_lines)
     {
         int a;
         int cnt=0;
@@ -2425,7 +2494,7 @@ void bigascii(char *string)
         najinclose();
     }
 
-    void cat_tail(char *namein, int n_lines)
+   void cat_tail(char *namein, int n_lines)
     {
         int a;
         int i=0;
@@ -2489,7 +2558,7 @@ void bigascii(char *string)
         najinclose();
     }
 
-    void repcat(char *namein, unsigned int repeat)
+   void repcat(char *namein, unsigned int repeat)
     {
         int a=0;
         unsigned int i=0;
@@ -2513,7 +2582,7 @@ void bigascii(char *string)
         najinclose();
     }
 
-    void repcatpp(char *namein, unsigned int start)
+   void repcatpp(char *namein, unsigned int start)
     {
         int a=0;
         unsigned int i=0;
@@ -2539,7 +2608,7 @@ void bigascii(char *string)
         najinclose();
     }
 
-    void skipcat(char *namein, char *toskip)
+   void skipcat(char *namein, char *toskip)
     {
         int skip = NAJI_FALSE;
         int a=0;
@@ -2569,7 +2638,7 @@ void bigascii(char *string)
         najinclose();
     }
 
-    void onlycat(char *namein, char *toshow)
+   void onlycat(char *namein, char *toshow)
     {
         int show = NAJI_TRUE;
         int a=0;
@@ -2599,7 +2668,7 @@ void bigascii(char *string)
         najinclose();
     }
 
-    void rndbsout(unsigned long int size)
+   void rndbsout(unsigned long int size)
     {
         unsigned long int i=0;
 
@@ -2609,7 +2678,7 @@ void bigascii(char *string)
             help_edit_box.AddCh((rand() % 255));
     }
 
-    void rndtsout(unsigned long int size)
+   void rndtsout(unsigned long int size)
     {
         unsigned long int i=0;
         help_edit_box.Clear();
@@ -2618,7 +2687,7 @@ void bigascii(char *string)
             help_edit_box.AddCh((rand() % 95)+' ');
     }
 
-    void hexicat(char *namein)
+   void hexicat(char *namein)
     {
         int counter = 0;
         int hexbuf[20];
@@ -2755,7 +2824,7 @@ void bigascii(char *string)
         najinclose();
     }
 
-    void revcat(char *namein)
+   void revcat(char *namein)
     {
         int a=0;
         long pos;
@@ -2779,7 +2848,7 @@ void bigascii(char *string)
         najinclose();
     }
 
-    void gigabyte(unsigned long i)
+   void gigabyte(unsigned long i)
     {
         unsigned long gb2bytes = 1073741824;
         unsigned long gb2kb    = 1048576;
@@ -2803,7 +2872,7 @@ void bigascii(char *string)
 
     }
 
-    void qpatch(char *named, char *patch_file)
+   void qpatch(char *named, char *patch_file)
     {
         char *end;
         char buffer[200];
@@ -2933,7 +3002,7 @@ void bigascii(char *string)
         najedclose();
     }
 
-    void mkpatch(char *original, char *patched, char *patchfile)
+   void mkpatch(char *original, char *patched, char *patchfile)
     {
         int a;
         int b;
@@ -2991,7 +3060,7 @@ void bigascii(char *string)
         najoutclose();
     }
 
-    void kitten(char *namein)
+   void kitten(char *namein)
     {
         int a=0;
 
@@ -3008,7 +3077,7 @@ void bigascii(char *string)
         najinclose();
     }
 
-    void cat_text(char *namein)
+   void cat_text(char *namein)
     {
         int a=0;
 
@@ -3030,7 +3099,7 @@ void bigascii(char *string)
         najinclose();
     }
 
-    void showline(char *namein, unsigned long line)
+   void showline(char *namein, unsigned long line)
     {
         int a;
         unsigned long cnt = 0;
@@ -3071,7 +3140,7 @@ void bigascii(char *string)
         najinclose();
     }
 
-    void catrandl(char *namein)
+   void catrandl(char *namein)
     {
         int a;
         unsigned long number_of_lines = 0;
@@ -3101,7 +3170,7 @@ void bigascii(char *string)
 
     }
 
-    void compfile(char *namein, char *namein2, bool cont_on_diff)
+   void compfile(char *namein, char *namein2, bool cont_on_diff)
     {
         int a;
         int b;
@@ -3159,7 +3228,7 @@ void bigascii(char *string)
 
     }
 
-    void compare(char *namein, char *namein2)
+   void compare(char *namein, char *namein2)
     {
         compfile(namein, namein2, false);
         najinclose();
@@ -3168,14 +3237,14 @@ void bigascii(char *string)
 
     /* continuous compare, does not stop comparing when files differ */
 
-    void ccompare(char *namein, char *namein2)
+   void ccompare(char *namein, char *namein2)
     {
         compfile(namein, namein2, true);
         najinclose();
         najin2close();
     }
 
-    int ::findi_line(const char *line, const char *str)
+   int ::findi_line(const char *line, const char *str)
     {
         char *straux;
         char *lineaux;
@@ -3196,7 +3265,7 @@ void bigascii(char *string)
         return 1;
     }
 
-    int ::find_line(const char *line, const char *str)
+   int ::find_line(const char *line, const char *str)
     {
 
         if (strstr(line, str) == NULL)
@@ -3206,7 +3275,7 @@ void bigascii(char *string)
         return 1;
     }
 
-    void find_basis(char *namein, char *str, bool sensitive, bool show_matches)
+   void find_basis(char *namein, char *str, bool sensitive, bool show_matches)
     {
         long pos;
         int i;
@@ -3263,27 +3332,27 @@ void bigascii(char *string)
         najinclose();
     }
 
-    void find(char *namein, char *str)
+   void find(char *namein, char *str)
     {
         find_basis(namein, str, true, false);
     }
 
-    void findi(char *namein, char *str)
+   void findi(char *namein, char *str)
     {
         find_basis(namein, str, false, false);
     }
 
-    void cfind(char *namein, char *str)
+   void cfind(char *namein, char *str)
     {
         find_basis(namein, str, true, true);
     }
 
-    void cfindi(char *namein, char *str)
+   void cfindi(char *namein, char *str)
     {
         find_basis(namein, str, false, true);
     }
 
-    void chchars(char *namein, char *nameout, char *original_chars, char *changed_chars)
+   void chchars(char *namein, char *nameout, char *original_chars, char *changed_chars)
     {
         int a;
         int i;
@@ -3335,7 +3404,7 @@ void bigascii(char *string)
         najoutclose();
     }
 
-    void coffset(char *namein, long startpos, long endpos)
+   void coffset(char *namein, long startpos, long endpos)
     {
         long filesize=0;
         long i;
@@ -3385,7 +3454,7 @@ void bigascii(char *string)
         najinclose();
     }
 
-    void copyoffs(char *namein, long startpos, long endpos, char *nameout)
+   void copyoffs(char *namein, long startpos, long endpos, char *nameout)
     {
         long filesize=0;
         long i;
@@ -3436,7 +3505,7 @@ void bigascii(char *string)
         najoutclose();
     }
 
-    void dumpoffs(char *namein, long startpos, long endpos)
+   void dumpoffs(char *namein, long startpos, long endpos)
     {
         long filesize=0;
         long i;
@@ -3486,7 +3555,7 @@ void bigascii(char *string)
         najinclose();
     }
 
-    void engnum(char *nameout)
+   void engnum(char *nameout)
     {
         char *units[10] =
         {
@@ -3636,7 +3705,7 @@ void bigascii(char *string)
         najoutclose();
     }
 
-    void turnum(char *nameout)
+   void turnum(char *nameout)
     {
         char *units[10] =
         {
@@ -3893,7 +3962,7 @@ void bigascii(char *string)
 
     }
 
-    void bremline(char *str, char *namein, char *nameout)
+   void bremline(char *str, char *namein, char *nameout)
     {
         char *tempbuf = NULL;
 
@@ -4011,7 +4080,7 @@ void bigascii(char *string)
        the buffer size by BLOCK_SIZE as and when required.
     */
 
-    void eremline(char *str, char *namein, char *nameout)
+   void eremline(char *str, char *namein, char *nameout)
     {
         const int BLOCK_SIZE = 100;
         char *line_buf = NULL;
@@ -4125,7 +4194,7 @@ void bigascii(char *string)
         najoutclose();
     }
 
-    void remline(char *str, char *namein, char *nameout)
+   void remline(char *str, char *namein, char *nameout)
     {
         long pos;
         int i;
@@ -4166,7 +4235,7 @@ void bigascii(char *string)
         najoutclose();
     }
 
-    void najisum(char *namein)
+   void najisum(char *namein)
     {
         unsigned long int najisum[256];
         unsigned long int chksum=0;
@@ -4251,7 +4320,7 @@ void bigascii(char *string)
         help_edit_box.Printf("\n\n\n");
     }
 
-    void najitool_gui_genhelp(char *nameout)
+   void najitool_gui_genhelp(char *nameout)
     {
         int i;
 
@@ -4325,7 +4394,7 @@ void bigascii(char *string)
 
     }
 
-    void najitool_gui_generate_htmlhelp(char *nameout)
+   void najitool_gui_generate_htmlhelp(char *nameout)
     {
         int i;
         int j;
@@ -4462,7 +4531,7 @@ void bigascii(char *string)
 
     }
 
-    void gplus(char *nameout, int start, int end)
+   void gplus(char *nameout, int start, int end)
     {
         int x;
         int y;
@@ -4493,7 +4562,7 @@ void bigascii(char *string)
         najoutclose();
     }
 
-    void gminus(char *nameout, int start, int end)
+   void gminus(char *nameout, int start, int end)
     {
         int x;
         int y;
@@ -4523,7 +4592,7 @@ void bigascii(char *string)
 
     }
 
-    void gtimes(char *nameout, int start, int end)
+   void gtimes(char *nameout, int start, int end)
     {
         int x;
         int y;
@@ -4554,7 +4623,7 @@ void bigascii(char *string)
 
     }
 
-    void gdivide(char *nameout, float start, float end)
+   void gdivide(char *nameout, float start, float end)
     {
         float x;
         float y;
@@ -4594,7 +4663,7 @@ void bigascii(char *string)
         najoutclose();
     }
 
-    void hmaker(char *namein)
+   void hmaker(char *namein)
     {
         char buffer[402];
 
@@ -4650,7 +4719,7 @@ void bigascii(char *string)
         najinclose();
     }
 
-    void rcharvar(char *str)
+   void rcharvar(char *str)
     {
         int c;
         int x;
@@ -4711,7 +4780,7 @@ void bigascii(char *string)
         }
     }
 
-    void lcharvar(char *str)
+   void lcharvar(char *str)
     {
         int x;
         int y;
@@ -4772,7 +4841,7 @@ void bigascii(char *string)
 
     }
 
-    void elite_char_print(char a)
+   void elite_char_print(char a)
     {
         char b = a;
 
@@ -4877,7 +4946,7 @@ void bigascii(char *string)
         help_edit_box.AddCh(a);
     }
 
-    void leetstr(char *string)
+   void leetstr(char *string)
     {
         int i;
 
@@ -4888,15 +4957,15 @@ void bigascii(char *string)
 
     }
 
-    void mp3info_gui(char *namein)
+   void mp3info_gui(char *namein)
     {
         help_edit_box.Clear();
         help_edit_box.Printf("%s", mp3info(namein));
     }
 
-    char fnamebuf[100];
+   char fnamebuf[100];
 
-    void naji_unicode_html_header(int n)
+   void naji_unicode_html_header(int n)
     {
         int i;
 
@@ -4929,7 +4998,7 @@ void bigascii(char *string)
 
     }
 
-    void naji_unicode_html_end(void)
+   void naji_unicode_html_end(void)
     {
         int i;
 
@@ -4954,7 +5023,7 @@ void bigascii(char *string)
     /* please be careful when using it and */
     /* please dont abuse this system */
 
-    void naji_del_gen_unicode_html_pages(char *output_folder)
+   void naji_del_gen_unicode_html_pages(char *output_folder)
     {
         int i;
         int delete_errors=0;
@@ -4977,7 +5046,7 @@ void bigascii(char *string)
         exit(delete_errors);
     }
 
-    void naji_gen_unicode_html_pages(char *output_folder)
+   void naji_gen_unicode_html_pages(char *output_folder)
     {
         int i = 0;
         int unicode_max = 0xFFFF;  /* max is 65535 - 0xFFFF */
@@ -5030,7 +5099,7 @@ void bigascii(char *string)
 
     /* puts vowels inbetween every letter of a word except the first and last letter */
 
-    void vowelwrd(char *str)
+   void vowelwrd(char *str)
     {
 
         int len = 0;
@@ -5075,7 +5144,7 @@ void bigascii(char *string)
 
     }
 
-    void tothe(char *str)
+   void tothe(char *str)
     {
         int i;
         int l;
@@ -5099,20 +5168,18 @@ void bigascii(char *string)
 
     }
 
-
-void howline(char *namein)
+   void howline(char *namein)
 {
     help_edit_box.Clear();
     help_edit_box.Printf("Total number of lines is: %lu\n", howl(namein));
-}                                                                     
-          
-void longline(char *namein)
+}
+
+   void longline(char *namein)
 {   help_edit_box.Clear();
     help_edit_box.Printf("Longest line is: %lu\n", longl(namein));
-}                                                            
+}
 
-
-void main_spyramid(char *str)
+   void main_spyramid(char *str)
 {
     unsigned long i=0;
     unsigned long x=0;
@@ -5141,7 +5208,4 @@ void main_spyramid(char *str)
     }
 
 }
-
-
-
 }
