@@ -122,30 +122,21 @@ class HexEditor : Window
 
                 if (i >= buffer_size)
                 break;
-
-                //scrollArea.h = ( (buffer_size) + (y) + (yy) * (12) -24 );
-
-                
-                
-                
+              
                 surface.WriteTextf(scroll.x + (x-24), scroll.y + ( (y) + (yy) * (12) -24 ), "%08X ", (offset * 16));
 
-                ;
 
                 surface.WriteTextf(scroll.x + ( (x) + (xx) * (24)  + 60 ), scroll.y + ( (y) + (yy) * (12) -24 ), "%02X ", read_buffer[i]);
 
 
                 if ( ( (read_buffer[i] >= ' ') && (read_buffer[i] <= '~') ) )
                 {
-                    
-
-                    surface.WriteTextf(scroll.x + ( ( (x) + (xx) * (12)) + 455), scroll.y + ( (y) + (yy) * (12) -24 ), "%c", read_buffer[i]);
+                surface.WriteTextf(scroll.x + ( ( (x) + (xx) * (12)) + 455), scroll.y + ( (y) + (yy) * (12) -24 ), "%c", read_buffer[i]);
                 }
+
                 else
                 {
-                    
-
-                    surface.WriteTextf(scroll.x + ( ( (x) + (xx) * (12)) + 455), scroll.y + ( (y) + (yy) * (12) -24 ), ".");
+                surface.WriteTextf(scroll.x + ( ( (x) + (xx) * (12)) + 455), scroll.y + ( (y) + (yy) * (12) -24 ), ".");
                 }
 
 
@@ -322,8 +313,6 @@ class HexEditor : Window
 
    void OnVScroll(ScrollBarAction action, int position, Key key)
    {
-   
-   
    if (action == down)
    scroll_down();
    
@@ -335,9 +324,6 @@ class HexEditor : Window
    
    else if (action == wheelUp)
    scroll_up();
-   
-
-   //position = scroll_pos;
    }
 }
 

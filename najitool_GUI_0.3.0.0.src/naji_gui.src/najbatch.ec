@@ -505,19 +505,44 @@ class tab_batch : Tab
 
 
 
-
                 }
 
+
+                memset(processing_output_file_path, '\0', 4096);
+
+                if (same_folder_as_files_radio.checked == true)
+                {
+                
                 if (!strcmp(newfileprefix, "") &&
                         !strcmp(newfilesuffix, "") &&
                         !strcmp(newfileextrax, ""))
                 {
                     msgbox("najitool GUI batch mode error:",
-                           "Error, new files must contain either a prefix, suffix, or extra extension.");
+                           "Error, new files must contain either a prefix, suffix, or extra extension;\nor be in a different Output Folder.");
                     return true;
                 }
+                
 
-                memset(processing_output_file_path, '\0', 4096);
+
+                }
+                else if (output_folder_radio.checked == true)
+                {
+
+                if (!strcmp(newfileprefix, "") &&
+                        !strcmp(newfilesuffix, "") &&
+                        !strcmp(newfileextrax, ""))
+                {
+                    strcat(processing_output_file_path, temp_path);
+                    strcat(processing_output_file_path, DIR_SEPS);
+                    strcat(processing_output_file_path, temp_filename_no_extension);
+                    strcat(processing_output_file_path, ".");
+                    strcat(processing_output_file_path, temp_extension);
+                }
+
+
+
+
+                }
 
                 if (strcmp(newfileprefix, "") &&
                         strcmp(newfilesuffix, "") &&
