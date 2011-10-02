@@ -62,52 +62,8 @@ class HexEditor : Window
    a = 0;
    scroll_pos = 0;
    offset = 0;
-   scroll_pos_start = 0;
 
-   void scroll_down(void)
-    {
 
-            scroll_pos-=1;
-
-            if (scroll_pos < 0)
-                scroll_pos = 0;
-
-            Scroll(0, scroll_pos);
-            Update(null);
-    }
-
-   void scroll_up(void)
-    {
-
-            if (scroll_pos > 0)
-                scroll_pos += 1;
-            
-
-            Scroll(0, scroll_pos);
-            Update(null);
-
-    }
-
-   Button scroll_down_button
-    {
-        this, text = "Scroll Down", size = { 104, 21 }, position = { 8, 184 };
-
-        bool NotifyClicked(Button button, int x, int y, Modifiers mods)
-        {
-            scroll_down();
-            return true;
-        }
-    };
-   Button scroll_up_button
-    {
-        this, text = "Scroll Up", size = { 104, 21 }, position = { 8, 152 };
-
-        bool NotifyClicked(Button button, int x, int y, Modifiers mods)
-        {
-            scroll_up();
-            return true;
-        }
-    };
 
    void OnRedraw(Surface surface)
     {
@@ -123,20 +79,20 @@ class HexEditor : Window
                 if (i >= buffer_size)
                 break;
               
-                surface.WriteTextf(scroll.x + (x-24), scroll.y + ( (y) + (yy) * (12) -24 ), "%08X ", (offset * 16));
+                surface.WriteTextf((x-24) + scroll.x, ( (y) + (yy) * (12) -24 ) - scroll.y, "%08X ", (offset * 16));
 
 
-                surface.WriteTextf(scroll.x + ( (x) + (xx) * (24)  + 60 ), scroll.y + ( (y) + (yy) * (12) -24 ), "%02X ", read_buffer[i]);
+                surface.WriteTextf(( (x) + (xx) * (24)  + 60 ) + scroll.x, ( (y) + (yy) * (12) -24 ) - scroll.y, "%02X ", read_buffer[i]);
 
 
                 if ( ( (read_buffer[i] >= ' ') && (read_buffer[i] <= '~') ) )
                 {
-                surface.WriteTextf(scroll.x + ( ( (x) + (xx) * (12)) + 455), scroll.y + ( (y) + (yy) * (12) -24 ), "%c", read_buffer[i]);
+                surface.WriteTextf(( ( (x) + (xx) * (12)) + 455) + scroll.x, ( (y) + (yy) * (12) -24 ) - scroll.y, "%c", read_buffer[i]);
                 }
 
                 else
                 {
-                surface.WriteTextf(scroll.x + ( ( (x) + (xx) * (12)) + 455), scroll.y + ( (y) + (yy) * (12) -24 ), ".");
+                surface.WriteTextf( (((x) + (xx) * (12)) + 455) + scroll.x, ( (y) + (yy) * (12) -24 ) - scroll.y, ".");
                 }
 
 
@@ -313,17 +269,7 @@ class HexEditor : Window
 
    void OnVScroll(ScrollBarAction action, int position, Key key)
    {
-   if (action == down)
-   scroll_down();
-   
-   else if (action == up)
-   scroll_up();
- 
-   else if (action == wheelDown)
-   scroll_down();
-   
-   else if (action == wheelUp)
-   scroll_up();
+   Update(null);
    }
 }
 
