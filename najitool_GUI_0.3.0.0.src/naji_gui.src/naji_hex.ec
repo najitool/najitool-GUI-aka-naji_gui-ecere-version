@@ -79,20 +79,20 @@ class HexEditor : Window
                 if (i >= buffer_size)
                 break;
               
-                surface.WriteTextf((x-24) + scroll.x, ( (y) + (yy) * (12) -24 ) - scroll.y, "%08X ", (offset * 16));
+                surface.WriteTextf( (x-24) + scroll.x, ( (y) + (yy) * (12) -24 ) - scroll.y, "%08X ", (offset * 16));
 
 
-                surface.WriteTextf(( (x) + (xx) * (24)  + 60 ) + scroll.x, ( (y) + (yy) * (12) -24 ) - scroll.y, "%02X ", read_buffer[i]);
+                surface.WriteTextf( ( (x) + (xx) * (24)  + 60 ) + scroll.x, ( (y) + (yy) * (12) -24 ) - scroll.y, "%02X ", read_buffer[i]);
 
 
                 if ( ( (read_buffer[i] >= ' ') && (read_buffer[i] <= '~') ) )
                 {
-                surface.WriteTextf(( ( (x) + (xx) * (12)) + 455) + scroll.x, ( (y) + (yy) * (12) -24 ) - scroll.y, "%c", read_buffer[i]);
+                surface.WriteTextf( ( ( (x) + (xx) * (12)) + 455) + scroll.x, ( (y) + (yy) * (12) -24 ) - scroll.y, "%c", read_buffer[i]);
                 }
 
                 else
                 {
-                surface.WriteTextf( (((x) + (xx) * (12)) + 455) + scroll.x, ( (y) + (yy) * (12) -24 ) - scroll.y, ".");
+                surface.WriteTextf( ( ((x) + (xx) * (12)) + 455) + scroll.x, ( (y) + (yy) * (12) -24 ) - scroll.y, ".");
                 }
 
 
@@ -154,8 +154,8 @@ class HexEditor : Window
 
                 patch_load_file.Close();
             
-          
-            scrollArea.h += buffer_size;
+            if ( (scrollArea.h != 0) && (buffer_size != 0) )
+            scrollArea.h = buffer_size/1.333;
             }
             return true;
         }
