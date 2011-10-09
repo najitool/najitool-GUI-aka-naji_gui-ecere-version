@@ -38,8 +38,8 @@ class HexEditor : Window
    unsigned long long ii;
    unsigned long long buffer_size;
    unsigned long long offset;
-   int left_double;
-   int right_double;
+   bool left_nibble;
+   bool right_nibble;
    uint patch_load_file_size;
    uint x;
    uint y;
@@ -47,13 +47,13 @@ class HexEditor : Window
    uint yy;
    uint xxx;
    uint yyy;
-   uint scroll_pos_start;
    byte * read_buffer;
    uint scroll_pos;
+
    BufferedFile patch_load_file;
    File patch_save_as_hex_file;
-   left_double = 0;
-   right_double = 0;
+   left_nibble = true;
+   right_nibble = false;
    i=0;
    buffer_size=0;
    x = 340;
@@ -62,8 +62,6 @@ class HexEditor : Window
    a = 0;
    scroll_pos = 0;
    offset = 0;
-
-
 
    void OnRedraw(Surface surface)
     {
@@ -81,9 +79,7 @@ class HexEditor : Window
               
                 surface.WriteTextf( (x-24) + scroll.x, ( (y) + (yy) * (12) -24 ) - scroll.y, "%08X ", (offset * 16));
 
-
                 surface.WriteTextf( ( (x) + (xx) * (24)  + 60 ) + scroll.x, ( (y) + (yy) * (12) -24 ) - scroll.y, "%02X ", read_buffer[i]);
-
 
                 if ( ( (read_buffer[i] >= ' ') && (read_buffer[i] <= '~') ) )
                 {
@@ -94,12 +90,16 @@ class HexEditor : Window
                 {
                 surface.WriteTextf( ( ((x) + (xx) * (12)) + 455) + scroll.x, ( (y) + (yy) * (12) -24 ) - scroll.y, ".");
                 }
-
-
-            SetCaret(400+xxx, ((y+yyy)-24), 12);
+           
             
             i++;
             }
+
+            if (yyy >= 780)
+            SetCaret(400+xxx, ((y+780)-24), 12);
+
+            else
+            SetCaret(400+xxx, ((y+yyy)-24), 12);
 
             if (i >= buffer_size)
                 return;
@@ -107,6 +107,7 @@ class HexEditor : Window
         }
 
     }
+
    Button save_button { this, text = "Save", size = { 106, 21 }, position = { 8, 56 } };
    Button save_as_button { this, text = "Save As...", size = { 106, 21 }, position = { 8, 88 } };
    Button save_as_hex_button { this, text = "Save As Hex...", size = { 106, 21 }, position = { 8, 120 } };
@@ -183,37 +184,62 @@ class HexEditor : Window
         return true;
     }
 
-   bool OnKeyHit(Key key, unichar ch)
+
+   void scroll_down(void)
     {
+
+            scroll_pos--;
+
+            if (scroll_pos < 0)
+                scroll_pos = 0;
+
+            Scroll(0, scroll_pos);
+            Update(null);
+    }
+
+   void scroll_up(void)
+    {
+
+            if (scroll_pos > 0)
+                scroll_pos++;
+            
+
+            Scroll(0, scroll_pos);
+            Update(null);
+
+    }
+
+
+
+   bool OnKeyHit(Key key, unichar ch)
+   {        
 
         if (key == left)
         {
-
-            if (xxx >= 8)
+            if (xxx > 0)
             {
 
-                if (left_double == 2)
+                if (left_nibble == true)
                 {
-                    xxx-=16;
-                    left_double = 0;
-                    right_double = 1;
+                xxx-=16;
+                left_nibble = false;
+                right_nibble = true;
                 }
-                else
+ 
+                else if (right_nibble == true)
                 {
-                    xxx-=8;
+                xxx-=8;
+                right_nibble = false;
+                left_nibble = true;
                 }
 
-                SetCaret(400+xxx, ((y+yyy)-24), 12);
-                left_double++;
             }
 
             else
             {
-                xxx = 368;
-                SetCaret(400+xxx, ((y+yyy)-24), 12);
-
-                left_double = 1;
-                right_double = 0;
+            xxx = 368;
+            left_nibble = false;
+            right_nibble = true;
             }
 
         }
@@ -223,52 +249,59 @@ class HexEditor : Window
             if (xxx < 368)
             {
 
-                if (right_double == 2)
+                if (right_nibble == true)
                 {
-                    xxx+=16;
-                    left_double = 1;
-                    right_double = 0;
+                xxx+=16;
+                left_nibble = true;
+                right_nibble = false;
                 }
-                else
+ 
+                else if (left_nibble == true)
                 {
-                    xxx+=8;
+                xxx+=8;
+                right_nibble = true;
+                left_nibble = false;
                 }
-                SetCaret(400+xxx, ((y+yyy)-24), 12);
-                right_double++;
+
             }
 
             else
             {
-                xxx = 0;
-                SetCaret(400+xxx, ((y+yyy)-24), 12);
-                left_double = 0;
-                right_double = 1;
+            xxx = 0;
+            left_nibble = true;
+            right_nibble = false;
             }
 
         }
 
-        else if (yyy >= 12)
-        {
-
-            if (key == up)
+         else if (key == up)
+         {
+            
+            if (yyy >= 12)
             {
-                yyy-=12;
-                SetCaret(400+xxx, ((y+yyy)-24), 12);
+            yyy-=12;
+            scroll_up();
             }
+         }
 
-        }
-
-        else if (key == down)
-        {
+         else if (key == down)
+         {
             yyy+=12;
-            SetCaret(400+xxx, ((y+yyy)-24), 12);
-        }
+            if (yyy >= 780)
+            {
+            scroll_down();
+            }
+         }
 
-        return false;
+         SetCaret(400+xxx, ((y+yyy)-24), 12);
+         Update(null);
+
+        return true;
     }
 
    void OnVScroll(ScrollBarAction action, int position, Key key)
    {
+
    Update(null);
    }
 }
