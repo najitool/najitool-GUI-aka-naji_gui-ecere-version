@@ -49,11 +49,13 @@ class HexEditor : Window
    uint yyy;
    byte * read_buffer;
    uint scroll_pos;
-
+   bool area_selected;
+   
    BufferedFile patch_load_file;
    File patch_save_as_hex_file;
    left_nibble = true;
    right_nibble = false;
+   area_selected = false;
    i=0;
    buffer_size=0;
    x = 340;
@@ -66,6 +68,9 @@ class HexEditor : Window
    void OnRedraw(Surface surface)
     {
 
+
+
+
         i=0;
 
         for (offset=0, yy=scroll_pos; ;yy++, offset++)
@@ -76,7 +81,18 @@ class HexEditor : Window
 
                 if (i >= buffer_size)
                 break;
-              
+
+
+                surface.foreground.color=black;
+                surface.background.color=blue;
+                
+                if (area_selected == false)
+                {
+                surface.Area( ( (x) + (xx) * (24) + (60) ), ( (y) + (yy) * (12) - (24) ), (((x+xx)*24)+60), 100);
+                area_selected = true;
+                }
+
+                
                 surface.WriteTextf( (x-24) + scroll.x, ( (y) + (yy) * (12) -24 ) - scroll.y, "%08X ", (offset * 16));
 
                 surface.WriteTextf( ( (x) + (xx) * (24)  + 60 ) + scroll.x, ( (y) + (yy) * (12) -24 ) - scroll.y, "%02X ", read_buffer[i]);
@@ -184,7 +200,6 @@ class HexEditor : Window
         return true;
     }
 
-
    void scroll_down(void)
     {
 
@@ -208,8 +223,6 @@ class HexEditor : Window
             Update(null);
 
     }
-
-
 
    bool OnKeyHit(Key key, unichar ch)
    {        
@@ -304,6 +317,16 @@ class HexEditor : Window
 
    Update(null);
    }
+
+   bool OnLeftButtonDown(int x, int y, Modifiers mods)
+   {
+
+      xxx=x+340;
+      yyy=y+24;
+            
+      return true;
+   }
+
 }
 
 class tab_patch : Tab

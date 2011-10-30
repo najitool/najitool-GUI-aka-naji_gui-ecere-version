@@ -1828,7 +1828,7 @@ class tab_main : Tab
         ColorKey keys[2] = { {0x6EA1B4, 0.0f}, { white, 1.0f } };
         surface.Gradient(keys, sizeof(keys) / sizeof(ColorKey), 1, vertical, 1, 0, 1280-3, 1024 - 3);
         surface.Blit(najitool_logo_bitmap.bitmap, 8, 24, 0,0, najitool_logo_bitmap.bitmap.width, najitool_logo_bitmap.bitmap.height);
-        Update(null);
+        //Update(null);
     }
    Label language_label { this, text = "Language:", position = { 8, 224 } };
    FlagCollection flags { this };
